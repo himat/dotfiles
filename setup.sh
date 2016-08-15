@@ -10,13 +10,13 @@ backupdir=~/dotfiles_OLD
 # Choose which dotfiles you want to link
 files="bashrc vimrc tmux.conf" 
 
-echo "Creating backup directory to store any existing dotfiles in ~"
+echo "Creating backup directory $backupdir to store any existing dotfiles in ~"
 mkdir "$backupdir"
 
 
 for file in $files; do
     if [[ -f ~/.$file ]]; then
-	echo "Moving existing dotfiles"
+	echo "Moving existing dotfile"
 	mv ~/.$file $backupdir
     fi
 
@@ -25,3 +25,5 @@ for file in $files; do
 done
 
 echo "Finished linking everything!"
+
+echo "Remember to source your ~/.bashrc"
