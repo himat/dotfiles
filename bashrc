@@ -1,8 +1,4 @@
-# Great Practical Ideas for Computer Scientists
-# Sample .bashrc file
-
-# We provide a few (useful) aliases and scripts for you to get started:
-
+# ----- Andrew server special commands courtesy of GPI ----------------------
 ### afsperms <arguments to fs sa> -- Recursively runs fs sa on a directory
 ### cc <arguments to gcc> -- Invokes gcc with the flags you will usually use
 ### valgrind-leak <arguments to valgrind> -- Invokes valgrind in the mode to show all leaks
@@ -11,17 +7,17 @@
 ### shell -- Displays the name of the shell being used
 ### get_cs_afs_access -- Sets up cross-realm authentication with CS.CMU.EDU so you can access files stored there.
 
-# More features may be added later as thought of or requested.
-
-
 # ----- guard against non-interactive logins ---------------------------------
+[ -z "$PS1" ] && return
+
+
+# ----- Start in the last directory you were in ------------------------------
+
 # Move to the last saved working directory if one exists
 if [ -e ~/.last_cd ]
 then
     cd $(cat ~/.last_cd)
 fi
-
-[ -z "$PS1" ] && return
 
 # Saves current directory between sessions
 logged_cd() {
@@ -30,15 +26,11 @@ logged_cd() {
 }
 
 alias "cd"="logged_cd" # keep track of most recent directory 
+
 # ----- convenient alias and function definitions ----------------------------
 
 # color support for ls and grep
 alias grep='grep --color=auto'
-#if [[ `uname` = "Darwin" || `uname` = "FreeBSD" ]]; then
-#  alias ls='ls -G'
-#else
-#  alias ls='ls --color=auto'
-#fi
 
 alias killz='killall -9 '
 alias hidden='ls -a | grep "^\..*"'
@@ -72,6 +64,7 @@ get_cs_afs_access() {
 function runrm(){
 python /afs/cs.cmu.edu/academic/class/15251-s16/rmprogramming/runrm.pyc $@
 }
+
 # ----- shell settings and completion -------------------------------------
 
 # Make .bash_history store more and not store duplicates
@@ -149,12 +142,10 @@ function parse_git_dirty {
 }
 
 export PS1="\[\e[32m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[33m\]\`parse_git_branch\`\[\e[m\]\[\e[37;40m\]\\$\[\e[m\] "
-# It's really fun to customize your prompt.
-# Give it a try! See man bash for help
 # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 
-# ----- GPI-specific configuration -------------------------------------------
+# ----- Course-specific configuration -------------------------------------------
 source ~/.bashrc_gpi
 export PATH=$PATH:'/afs/andrew/course/15/122/bin'
 export PATH=$PATH:'~/bin'
