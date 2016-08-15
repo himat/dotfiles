@@ -31,7 +31,6 @@ Plugin 'altercation/vim-colors-solarized'
 
 Plugin 'scrooloose/nerdTree'
 " Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'chriskempson/base16-vim'
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -76,8 +75,8 @@ set autochdir "Changes vim's internal dir to that of current file's
 
 syntax enable
 set background=dark
-" syntax enable
 let g:solarized_termcolors=256
+let g:solarized_contrast="high"
 colorscheme solarized
 
 
@@ -88,7 +87,7 @@ colorscheme solarized
 " syntax enable
 "set background=dark
 " colorscheme base16-twilight
-"let base16colorspace=256
+" let base16colorspace=256
 
 " vim airline
 set laststatus=2
