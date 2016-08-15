@@ -33,7 +33,8 @@ Plugin 'scrooloose/nerdTree'
 " Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'chriskempson/base16-vim'
 
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'scrooloose/syntastic'
 
