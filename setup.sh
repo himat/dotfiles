@@ -26,4 +26,7 @@ done
 
 echo "Finished linking everything!"
 
+echo "Installing vim plugins"
+vim +PluginInstall +qall
+
 echo "Remember to source your ~/.bashrc"
