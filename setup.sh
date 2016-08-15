@@ -1,0 +1,27 @@
+#!/bin/bash
+
+########
+# This script sets up symlinks from the home directory (~) to the dotfiles in this repo
+########
+
+dir=$(pwd)
+backupdir=~/dotfiles_OLD
+
+# Choose which dotfiles you want to link
+files="bashrc vimrc tmux.conf" 
+
+echo "Creating backup directory to store any existing dotfiles in ~"
+mkdir "$backupdir"
+
+
+for file in $files; do
+    if [[ -f ~/.$file ]]; then
+	echo "Moving existing dotfiles"
+	mv ~/.$file $backupdir
+    fi
+
+    echo "Symlinking $file"
+    ln -s $dir/$file ~/.$file
+done
+
+echo "Finished linking everything!"
