@@ -89,10 +89,6 @@ bind "set completion-ignore-case on"
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe.sh ] && export LESSOPEN="|/usr/bin/lesspipe.sh %s"
 
-# Turn off the ability for other people to message your terminal using wall
-mesg n
-
-
 # ----- change the prompt ----------------------------------------------------
 # get current branch in git repo
 function parse_git_branch() {
