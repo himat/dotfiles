@@ -71,6 +71,10 @@ set autochdir "Changes vim's internal dir to that of current file's
 " set mouse=n
 " set ttymouse=xterm
 
+" Synchronizes vim's default register and the system clipboard so you can just
+" use y and p to copy and paste the same text anywhere on your computer 
+set clipboard^=unnamed
+
 " ----------------- PLUGIN SETTINGS START HERE -----------------
 
 syntax enable
