@@ -147,7 +147,7 @@ export PS1="\[\e[32m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[33m\]\`parse_git_branc
 # ----- local configuration ----------------------------------------------------
 # Put settings that should be there for each local machine in ~/.bashrc.extra
     # so that local preferences aren't pushed to the git repo 
-if [[ -z ~/.bashrc.extra ]]; then
+if [[ -f ~/.bashrc.extra ]]; then
     source ~/.bashrc.extra
 fi
 
