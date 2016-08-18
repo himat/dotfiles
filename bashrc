@@ -151,11 +151,6 @@ if [[ -z ~/.bashrc.extra ]]; then
     source ~/.bashrc.extra
 fi
 
-# ----- Course-specific configuration -------------------------------------------
-source ~/.bashrc_gpi
-export PATH=$PATH:'/afs/andrew/course/15/122/bin'
-export PATH=$PATH:'~/bin'
-export PATH=${PATH}:'/afs/andrew/course/15/150/bin'
 
 #BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 #[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
