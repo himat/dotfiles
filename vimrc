@@ -68,6 +68,7 @@ set cursorline "Highlight current line
 set colorcolumn=80 "Highlight 80 char col 
 set autochdir "Changes vim's internal dir to that of current file's
 
+set mouse=a
 " set mouse=n
 " set ttymouse=xterm
 
