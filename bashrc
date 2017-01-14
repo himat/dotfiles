@@ -27,6 +27,17 @@ logged_cd() {
 
 alias "cd"="logged_cd" # keep track of most recent directory 
 
+
+tmux_clear() {
+    if [ -n "$TMUX" ]; then
+        clear
+        tmux clear-history
+    else
+        clear
+    fi
+}
+alias "clear"="tmux_clear"
+
 # ----- convenient alias and function definitions ----------------------------
 
 # color support for ls and grep
@@ -44,6 +55,9 @@ alias coin='rlwrap coin'
 
 alias cc='gcc -Wall -W -ansi -pedantic -O2 '
 alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
+
+# connects to existing session if one exists, else creates a new one
+alias tm='tmux attach || tmux' 
 
 afsperms(){ find $1 -type d -exec fs sa {} $2 $3 \; ; }
 get_cs_afs_access() {
