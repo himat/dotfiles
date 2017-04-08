@@ -33,6 +33,8 @@ Plugin 'scrooloose/nerdTree'
 " Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdcommenter'
 
+Plugin 'haya14busa/incsearch.vim'
+
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
@@ -61,6 +63,8 @@ set expandtab
 " Show multicharacter commands as they are being typed
 set showcmd
 
+"set incsearch "Moves cursor to matched string while typing
+"set hlsearch "Highlights all search matches
 set ignorecase "Search ignoring case
 set smartcase "Search using smart casing
 
@@ -110,18 +114,22 @@ let g:airline#extensions#tabline#enabled = 1
 " makes the display update faster when switching out of insert mode
 set ttimeoutlen=50
 
-" nerdtree tabs
+" NERDTREE TABS SETTINGS
 " Open/close NERDTree Tabs with \t
 " nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
 
-" nerdcommenter
+" NERDCOMMENTER SETTINGS 
 " nmap <silent> <leader>
 let g:NERDCompactSexyComs = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" syntastic settings
+" INCSEARCH SETTINGS 
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
+
+" SYNTASTIC SETTINGS 
 let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "▲"
 augroup mySyntastic
