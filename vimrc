@@ -31,6 +31,7 @@ Plugin 'altercation/vim-colors-solarized'
 
 Plugin 'scrooloose/nerdTree'
 " Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -115,6 +116,11 @@ set ttimeoutlen=50
 " have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
 
+" nerdcommenter
+" nmap <silent> <leader>
+let g:NERDCompactSexyComs = 1
+let g:NERDTrimTrailingWhitespace = 1
+
 " syntastic settings
 let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "▲"
@@ -143,5 +149,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
 " let g:syntastic_debug = 1 
+
+"let g:syntastic_python_pylint_args = '-E'

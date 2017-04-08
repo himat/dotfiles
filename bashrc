@@ -41,6 +41,7 @@ alias "clear"="tmux_clear"
 # ----- convenient alias and function definitions ----------------------------
 
 # color support for ls and grep
+export CLICOLOR=1
 alias grep='grep --color=auto'
 
 alias killz='killall -9 '
@@ -151,7 +152,7 @@ function parse_git_dirty {
     fi
 }
 # '\n\e[0;34m\u@\h:\w$ \e[m'
-export PS1="\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[33m\]\[\e[m\]\[\e[37;40m\]\\$\[\e[m\] "
+export PS1="\n\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[33m\]\[\e[m\]\[\e[37;40m\]\\$\[\e[m\] "
 # export PS1="\[\e[32m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[33m\]\`parse_git_branch\`\[\e[m\]\[\e[37;40m\]\\$\[\e[m\] "
 # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
@@ -167,3 +168,4 @@ fi
 #[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 export TERM=screen-256color
+
