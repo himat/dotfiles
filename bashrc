@@ -60,6 +60,10 @@ alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 # connects to existing session if one exists, else creates a new one
 alias tm='tmux attach || tmux' 
 
+# Shows the diff from before a pull and after
+# Can also do things like master@{10 minutes ago} and such
+alias gitdiffpull='git diff master@{1} master'
+
 afsperms(){ find $1 -type d -exec fs sa {} $2 $3 \; ; }
 get_cs_afs_access() {
     # Script to give a user with an andrew.cmu.edu account access to cs.cmu.edu
