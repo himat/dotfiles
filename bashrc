@@ -73,11 +73,35 @@ alias tm='tmux attach || tmux'
 # Can also do things like master@{10 minutes ago} and such
 alias gitdiffpull='git diff master@{1} master'
 
-if [[ ${OS_NAME} == "Mac" ]]; then
-    alias mods="find . -exec stat -f '%m%t%Sm %N' {} + | sort -n | cut -f2- | head -n10"
-elif [[ ${OS_NAME} == "Linux" ]]; then
-    alias mods="find . -type f -print0 | xargs -0 stat --format '%Y :%y %n' | sort -nr | cut -d: -f2- | head"
-fi
+find_recent_modified_files() {
+
+    if [[ -z $1 ]]; then
+        IGNORE_HIDDEN_FILES=false
+    elif [[ $1 == "--ignore-hidden" ]]; then
+        IGNORE_HIDDEN_FILES=true
+    else
+        echo "Invalid argument. Supported options are: '--ignore-hidden'."
+        return 1
+    fi
+
+    if [[ ${OS_NAME} == "Mac" ]]; then
+        if [[ ${IGNORE_HIDDEN_FILES} == "true" ]]; then
+            find . -not -path '*/\.*' -exec stat -f '%m%t%Sm %N' {} + | sort -nr | cut -f2- | head -n10
+        else
+            find . -exec stat -f '%m%t%Sm %N' {} + | sort -nr | cut -f2- | head -n10
+        fi
+
+    elif [[ ${OS_NAME} == "Linux" ]]; then
+        if [[ ${IGNORE_HIDDEN_FILES} == "true" ]]; then
+            find . -type f -not -path '*/\.*' -print0 | xargs -0 stat --format '%Y :%y %n' | sort -nr | cut -d: -f2- | head
+        else
+            find . -type f -print0 | xargs -0 stat --format '%Y :%y %n' | sort -nr | cut -d: -f2- | head
+        fi
+
+    fi
+}
+
+alias mods="find_recent_modified_files"
 
 afsperms(){ find $1 -type d -exec fs sa {} $2 $3 \; ; }
 get_cs_afs_access() {
