@@ -17,7 +17,7 @@ mkdir "$backupdir"
 for file in $files; do
     if [[ -f ~/.$file ]]; then
 	echo "Moving existing dotfile"
-	mv ~/.$file $backupdir
+	mv ~/.$file $backupdir/$file
     fi
 
     echo "Symlinking $file"

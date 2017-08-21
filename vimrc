@@ -79,7 +79,8 @@ set autochdir "Changes vim's internal dir to that of current file's
 
 " Synchronizes vim's default register and the system clipboard so you can just
 " use y and p to copy and paste the same text anywhere on your computer 
-set clipboard^=unnamed
+"set clipboard^=unnamed
+set clipboard=unnamed
 
 " ----------------- PLUGIN SETTINGS START HERE -----------------
 
@@ -155,7 +156,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 " let g:syntastic_debug = 1 
 
