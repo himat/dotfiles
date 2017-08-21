@@ -27,6 +27,15 @@ logged_cd() {
 
 alias "cd"="logged_cd" # keep track of most recent directory 
 
+# Get OS type for OS specific commands
+OS_RAW_NAME=$(uname)
+if [[ ${OS_RAW_NAME} == "Darwin" ]]; then
+    OS_NAME="Mac"
+elif [[ ${OS_RAW_NAME} == "Linux" ]]; then
+    OS_NAME="Linux"
+else
+    echo "~/.bashrc error: unknown OS type: ${OS_RAW_NAME}"
+fi
 
 tmux_clear() {
     if [ -n "$TMUX" ]; then
@@ -63,6 +72,12 @@ alias tm='tmux attach || tmux'
 # Shows the diff from before a pull and after
 # Can also do things like master@{10 minutes ago} and such
 alias gitdiffpull='git diff master@{1} master'
+
+if [[ ${OS_NAME} == "Mac" ]]; then
+    alias mods="find . -exec stat -f '%m%t%Sm %N' {} + | sort -n | cut -f2- | head -n10"
+elif [[ ${OS_NAME} == "Linux" ]]; then
+    alias mods="find . -type f -print0 | xargs -0 stat --format '%Y :%y %n' | sort -nr | cut -d: -f2- | head"
+fi
 
 afsperms(){ find $1 -type d -exec fs sa {} $2 $3 \; ; }
 get_cs_afs_access() {
