@@ -1,4 +1,3 @@
-
 " Ensure that we are in modern vim mode, not backwards-compatible vi mode
 set nocompatible
 set backspace=indent,eol,start
@@ -13,6 +12,15 @@ nnoremap <C-L> :noh<CR><C-L>
 nnoremap <esc> :noh<return><esc>
 " maps escape key back bc vim uses it for special keys internally
 nnoremap <esc>^[ <esc>^[ 
+
+" Set shift tab to tab backwards (to the left)
+inoremap <S-Tab> <C-d>
+
+" Set Y to copy to end of line like C and D do
+nmap Y y$
+
+" Cold folding on
+set foldmethod=indent
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
