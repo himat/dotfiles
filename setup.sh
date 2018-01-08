@@ -29,4 +29,4 @@ echo "Finished linking everything!"
 echo "Installing vim plugins"
 vim +PluginInstall +qall
 
-echo "Remember to source your ~/.bashrc"
+echo "Remember to source your ~/.bashrc and :PluginInstall after installing Vundle"

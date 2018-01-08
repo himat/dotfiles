@@ -16,10 +16,11 @@
 # Move to the last saved working directory if one exists
 if [ -e ~/.last_cd ]
 then
-    cd $(cat ~/.last_cd)
+    cd "$(cat ~/.last_cd)"
 fi
 
 # Saves current directory between sessions
+unalias cd # Prevent infinite loops if sourcing this file again in the same session
 logged_cd() {
     cd "$@"
     pwd > ~/.last_cd
