@@ -20,7 +20,7 @@ then
 fi
 
 # Saves current directory between sessions
-unalias cd # Prevent infinite loops if sourcing this file again in the same session
+unalias cd 2>/dev/null # Prevent infinite loops if sourcing this file again in the same session
 logged_cd() {
     cd "$@"
     pwd > ~/.last_cd
