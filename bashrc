@@ -27,6 +27,7 @@ logged_cd() {
 }
 
 alias "cd"="logged_cd" # keep track of most recent directory 
+alias "cdb"="cd ~-" # cd to previous directory
 
 # Get OS type for OS specific commands
 OS_RAW_NAME=$(uname)
