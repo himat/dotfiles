@@ -69,6 +69,7 @@ alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 
 # connects to existing session if one exists, else creates a new one
 alias tm='tmux attach || tmux' 
+alias tmls='tmux ls'
 
 # Shows the diff from before a pull and after
 # Can also do things like master@{10 minutes ago} and such
