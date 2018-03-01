@@ -3,6 +3,9 @@ set nocompatible
 set backspace=indent,eol,start
 filetype off " required for Vundle plugin manager
 
+" highlight occurrences from searches
+set hlsearch
+
 " clears highlighting till next search
 " ctrl L - it also normally redraws the vim screen
 " NOTE: broken because of vim tmux navigator using C-l
