@@ -53,7 +53,9 @@ alias "clear"="tmux_clear"
 
 # color support for ls and grep
 export CLICOLOR=1
-alias ls='ls --color=auto'
+if [[ ${OS_NAME} == "Linux" ]]; then 
+    alias ls='ls --color=auto'
+fi
 alias grep='grep --color=auto'
 
 alias killz='killall -9 '
