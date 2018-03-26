@@ -8,7 +8,7 @@ dir=$(pwd)
 backupdir=~/dotfiles_OLD
 
 # Choose which dotfiles you want to link
-files="bashrc vimrc tmux.conf" 
+files="bashrc vimrc tmux.conf inputrc" 
 
 echo "Creating backup directory $backupdir to store any existing dotfiles in ~"
 mkdir "$backupdir"

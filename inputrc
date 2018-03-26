@@ -1,0 +1,5 @@
+set completion-ignore-case on
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+# Shows all tab completion options instead of choosing the first one automatically
+# set show-all-if-ambiguous on 
