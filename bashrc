@@ -75,6 +75,9 @@ alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 alias tm='tmux attach || tmux' 
 alias tmls='tmux ls'
 
+# Usage: sa <venv>
+alias sa='source activate'
+
 # Shows the diff from before a pull and after
 # Can also do things like master@{10 minutes ago} and such
 alias gitdiffpull='git diff master@{1} master'
