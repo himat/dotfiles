@@ -66,7 +66,7 @@ filetype indent on
 filetype plugin on
 
 " Indent as intelligently as vim knows how
-set smartindent
+"set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
