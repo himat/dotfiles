@@ -127,6 +127,7 @@ let g:airline#extensions#tabline#enabled = 1
 set ttimeoutlen=50
 
 " NERDTREE TABS SETTINGS
+map <C-n> :NERDTreeToggle<CR>
 " Open/close NERDTree Tabs with \t
 " nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " have NERDTree always open on startup
