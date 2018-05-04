@@ -77,6 +77,7 @@ alias tmls='tmux ls'
 
 # Usage: sa <venv>
 alias sa='source activate'
+alias sd='source deactivate'
 
 # Shows the diff from before a pull and after
 # Can also do things like master@{10 minutes ago} and such
