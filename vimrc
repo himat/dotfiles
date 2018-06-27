@@ -25,35 +25,6 @@ nmap Y y$
 " Cold folding on
 set foldmethod=indent
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'kristijanhusak/vim-hybrid-material'
-
-" vim-c0 plugin on Github repo
-" Plugin 'cmugpi/vim-c0'
-Plugin 'christoomey/vim-tmux-navigator'
-
-Plugin 'altercation/vim-colors-solarized'
-
-Plugin 'scrooloose/nerdTree'
-" Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'scrooloose/nerdcommenter'
-
-Plugin 'haya14busa/incsearch.vim'
-
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-Plugin 'scrooloose/syntastic'
-
-Plugin 'jez/vim-better-sml'
-call vundle#end()
-
 " Helpful information: cursor position in bottom right, line numbers on
 " left
 set ruler
@@ -93,12 +64,47 @@ set autochdir "Changes vim's internal dir to that of current file's
 "set clipboard^=unnamed
 set clipboard=unnamed
 
+" Buffers for switching between files
+" Press F5 to show all open files and type the number to switch to
+nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'kristijanhusak/vim-hybrid-material'
+
+" vim-c0 plugin on Github repo
+" Plugin 'cmugpi/vim-c0'
+Plugin 'christoomey/vim-tmux-navigator'
+
+Plugin 'altercation/vim-colors-solarized'
+
+Plugin 'scrooloose/nerdTree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'haya14busa/incsearch.vim'
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'scrooloose/syntastic'
+
+Plugin 'Valloric/YouCompleteMe'
+call vundle#end()
+
+
 " ----------------- PLUGIN SETTINGS START HERE -----------------
 
 syntax enable
 set background=dark
-" let g:solarized_termcolors=256
-" let g:solarized_contrast="high"
+set t_Co=256
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
 colorscheme solarized
 
 
@@ -113,7 +119,6 @@ colorscheme solarized
 
 " vim airline
 set laststatus=2
-" set t_Co=256
 
 let g:airline_theme='badwolf'
 
@@ -129,7 +134,7 @@ set ttimeoutlen=50
 " NERDTREE TABS SETTINGS
 map <C-n> :NERDTreeToggle<CR>
 " Open/close NERDTree Tabs with \t
-" nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
 
@@ -166,10 +171,19 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_auto_loc_list = 1
 " let g:syntastic_debug = 1 
 
 "let g:syntastic_python_pylint_args = '-E'
+
+" Syntastic {
+    let g:syntastic_enable_signs=1
+    let g:syntastic_python_checkers=['flake8']
+    let g:syntastic_python_flake8_args = "--max-line-length=120"
+    let g:syntastic_cpp_include_dirs = ['source', 'build/source', '/usr/include']
+    let g:syntastic_cpp_compiler = 'clang++-3.5'
+    let g:syntastic_cpp_compiler_options = ' -std=c++11'
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_check_on_open = 0
+    let g:syntastic_check_on_wq = 0
+" }
