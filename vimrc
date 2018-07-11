@@ -95,6 +95,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
 
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'ctrlpvim/ctrlp.vim'
 call vundle#end()
 
 
@@ -137,6 +138,8 @@ map <C-n> :NERDTreeToggle<CR>
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
+" Close current tab if there is only one window in it and it's NERDTree (default 1)
+let g:nerdtree_tabs_autoclose=0
 
 " NERDCOMMENTER SETTINGS 
 " nmap <silent> <leader>
