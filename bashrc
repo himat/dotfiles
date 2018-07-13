@@ -49,6 +49,9 @@ tmux_clear() {
 }
 alias "clear"="tmux_clear"
 
+# Use vim keybindings in the terminal!
+set -o vi 
+
 # ----- convenient alias and function definitions ----------------------------
 
 # color support for ls and grep
