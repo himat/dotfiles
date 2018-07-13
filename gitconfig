@@ -1,0 +1,24 @@
+[include]
+    path = ~/.gitconfig.private
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = /usr/bin/vim
+[alias]
+    aliases = config --get-regexp alias 
+    st = status
+    s = status -s # Short status
+    di = diff
+    pl = pull
+    ps = push
+    ci = commit
+    co = checkout
+    br = branch
+    bra = branch -av
+    df = diff
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+    logdiffs = log -p
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
+    tree = log --graph --decorate --pretty=format:\"%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s\" --abbrev-commit --all
+    root = rev-parse --show-toplevel # Return repo's root dir, useful for shell prompts
+
