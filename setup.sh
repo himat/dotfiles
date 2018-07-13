@@ -8,7 +8,9 @@ dir=$(pwd)
 backupdir=~/dotfiles_OLD
 
 # Choose which dotfiles you want to link
-files="bashrc vimrc tmux.conf inputrc" 
+# TODO: Add cmd line required arg which is either "all" or list of dotfiles to setup
+# TODO: add check to make sure that there is no dotfile in this repo called "all"
+files="bashrc vimrc tmux.conf inputrc gitconfig gitignore_global" 
 
 echo "Creating backup directory $backupdir to store any existing dotfiles in ~"
 mkdir "$backupdir"
