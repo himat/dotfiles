@@ -24,13 +24,15 @@ nmap Y y$
 
 " Cold folding on
 set foldmethod=indent
+" Enable fold toggling with the spacebar
+nnoremap <space> za 
 
 " Helpful information: cursor position in bottom right, line numbers on
 " left
 set ruler
 set number
 
-"Enable filetype detection and syntax hilighting
+"Enable filetype detection and syntax highlighting 
 syntax on
 filetype on
 filetype indent on
@@ -56,7 +58,7 @@ set colorcolumn=80 "Highlight 80 char col
 set autochdir "Changes vim's internal dir to that of current file's
 
 " set mouse=a
-" set mouse=n
+set mouse=n
 " set ttymouse=xterm
 
 " Synchronizes vim's default register and the system clipboard so you can just
@@ -67,6 +69,16 @@ set clipboard=unnamed
 " Buffers for switching between files
 " Press F5 to show all open files and type the number to switch to
 nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" Change position of new splits to open below and to the right by default
+set splitbelow
+set splitright
+
+" =============================================================================
+" =============================================================================
+" =============================================================================
+" =============================================================================
+" Plugin settings below
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -149,6 +161,11 @@ let g:NERDTrimTrailingWhitespace = 1
 " INCSEARCH SETTINGS 
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
+
+" ctrlp settings
+" Need these two for very large projects
+"let g:ctrlp_max_files=0
+"let g:ctrlp_max_depth=40
 
 " SYNTASTIC SETTINGS 
 let g:syntastic_error_symbol = '✘'
