@@ -61,14 +61,20 @@ set autochdir "Changes vim's internal dir to that of current file's
 set mouse=n
 " set ttymouse=xterm
 
+" leader shift-P to insert a pdb line
+nnoremap <leader><S-p> oimport pdb; pdb.set_trace()<Esc>
+
 " Synchronizes vim's default register and the system clipboard so you can just
 " use y and p to copy and paste the same text anywhere on your computer 
 "set clipboard^=unnamed
-set clipboard=unnamed
+"set clipboard=unnamed
 
 " Buffers for switching between files
 " Press F5 to show all open files and type the number to switch to
 nnoremap <F5> :buffers<CR>:buffer<Space>
+" Close current buffer by switching to previous buff (so that the current
+" split doesn't get closed which is what happens when you use just :bd)
+nnoremap <silent> <leader>d :b#\|bd #<CR>
 
 " Change position of new splits to open below and to the right by default
 set splitbelow
@@ -106,7 +112,9 @@ Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'scrooloose/syntastic'
 
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'tmhedberg/SimpylFold' " Python folding
+
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
 call vundle#end()
 
