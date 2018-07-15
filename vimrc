@@ -55,7 +55,8 @@ set smartcase "Search using smart casing
 " Random things
 set cursorline "Highlight current line
 set colorcolumn=80 "Highlight 80 char col 
-set autochdir "Changes vim's internal dir to that of current file's
+"Changes vim's internal dir to that of current file's
+"set autochdir " Disabled since it was interfering with my autosaving sessions
 
 " set mouse=a
 set mouse=n
@@ -74,7 +75,7 @@ nnoremap <leader><S-p> oimport pdb; pdb.set_trace()<Esc>
 nnoremap <F5> :buffers<CR>:buffer<Space>
 " Close current buffer by switching to previous buff (so that the current
 " split doesn't get closed which is what happens when you use just :bd)
-nnoremap <silent> <leader>d :b#\|bd #<CR>
+nnoremap <silent> <leader>d :bp\|bd #<CR>
 " tab to switch to previously used buffer
 nnoremap <tab> :b#<CR>
 " H and L for prev and next buffers
@@ -84,6 +85,52 @@ nnoremap L :bn<CR>
 " Change position of new splits to open below and to the right by default
 set splitbelow
 set splitright
+
+" Sessions 
+" Do not store options (overrides vimrc updates)
+set ssop-=options  
+nnoremap <leader>ms :call MakeSession()<cr>
+" If you omit 'options' from 'sessionoptions', you might want to use nested 
+" flag from VimEnter autocmd. Syntax highlighting and mappings 
+" might not be restored otherwise. Enable this if you see this problem
+" autocmd VimEnter * nested call RestoreSession()  
+
+"" Make and load method to save session per dir
+function! MakeSession()
+    let b:sessiondir = $HOME . "/.vim_sessions" . getcwd()
+    if (filewritable(b:sessiondir) != 2)
+        exe 'silent !mkdir -p ' b:sessiondir
+        redraw!
+    endif
+    let b:sessionfile = b:sessiondir . "/session.vim"
+    exe "mksession! " . b:sessionfile
+endfunction
+function! UpdateSession() " Only saves session if it already exists
+    let b:sessiondir = $HOME . "/.vim_sessions" . getcwd()
+    let b:sessionfile = b:sessiondir . "/session.vim"
+    if (filereadable(b:sessionfile))
+        exe "mksession! " . b:sessionfile
+        echo "Updating session"
+    endif
+endfunction
+function! LoadSession()
+    let b:sessiondir = $HOME . "/.vim_sessions" . getcwd()
+    let b:sessionfile = b:sessiondir . "/session.vim"
+    if (filereadable(b:sessionfile))
+        exe 'source ' b:sessionfile
+    else
+        echo "No session loaded."
+    endif
+endfunction
+
+" Auto-commands 
+augroup autosourcing
+    if(argc() == 0) " Only run if vim started in dir with no args
+        au VimEnter * nested :call LoadSession() " Automatically load session
+        au VimLeave * :call UpdateSession() " Auto saves session if exists 
+    endif
+augroup END
+
 
 " =============================================================================
 " =============================================================================
@@ -110,7 +157,7 @@ Plugin 'scrooloose/nerdTree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdcommenter'
 
-Plugin 'haya14busa/incsearch.vim'
+Plugin 'haya14busa/incsearch.vim' " Better jump to search as you type
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
