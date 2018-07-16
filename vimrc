@@ -166,7 +166,7 @@ Plugin 'scrooloose/syntastic'
 
 Plugin 'tmhedberg/SimpylFold' " Python folding
 
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
 call vundle#end()
 
