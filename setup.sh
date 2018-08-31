@@ -74,15 +74,12 @@ do
     done
 done
 
-exit 
-
-
 # Choose which dotfiles you want to link
 echo "Creating backup directory $backupdir to store any existing dotfiles in ~"
 mkdir "$backupdir"
 
 # Performing the copying and symlinking
-for file in $files; do
+for file in "${files_to_link[@]}"; do
     if [[ -f ~/.$file ]]; then
         echo "Moving existing dotfile $file"
         mv ~/.$file $backupdir/$file
