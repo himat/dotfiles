@@ -168,6 +168,8 @@ Plugin 'tmhedberg/SimpylFold' " Python folding
 
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
+
+Plugin 'chaoren/vim-wordmotion'
 call vundle#end()
 
 
