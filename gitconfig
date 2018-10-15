@@ -1,8 +1,8 @@
 [include]
     path = ~/.gitconfig.private
 [core]
-	excludesfile = ~/.gitignore_global
-	editor = /usr/bin/vim
+    excludesfile = ~/.gitignore_global
+    editor = /usr/bin/vim
 [alias]
     aliases = config --get-regexp alias 
     st = status
