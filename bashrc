@@ -207,10 +207,41 @@ function parse_git_dirty {
         echo ""
     fi
 }
+RESET="\[\033[0m\]"
+RED="\[\033[0;31m\]"
+GREEN="\[\033[01;32m\]"
+WHITE="\[\033[01;34m\]"
+DARK_YELLOW="\[\033[0;33m\]"
+YELLOW="\e[32m\]"
+BLUE="\[\e[34m\]"
+MAGENTA="\[\e[35m\]"
+
+function parse_git_branch_simple {
+  PS_BRANCH=''
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  PS_BRANCH="(git ${ref#refs/heads/}) "
+} 
+
+# Prints a newline before the prompt in order to put virtualenvs above the 
+#   actual prompt.
+function needs_extra_NL() {
+    if [[ -n $VIRTUAL_ENV ]] || [[ -n $CONDA_DEFAULT_ENV ]]; then
+        echo -e "\n\r"
+    fi
+}
+
+# Easier way to add the newline before the bash promopt instead of having
+#   to modify virtualenv things
+PROMPT_COMMAND="printf '\n';parse_git_branch_simple;"
+PS_EXTRA_NL="\$(needs_extra_NL)"
+PS_INFO="$YELLOW\u$RESET@$BLUE\h$RESET:\w"
+PS_GIT="$DARK_YELLOW\$PS_BRANCH"
+PS_TIME="\[\033[\$((COLUMNS-10))G\] $RED[\t]"
+export PS1="${PS_EXTRA_NL}${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
+
 # '\n\e[0;34m\u@\h:\w$ \e[m'
-export PS1="\n\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[33m\]\[\e[m\]\[\e[37;40m\]\\$\[\e[m\] "
+#export PS1="\n\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[33m\]\[\e[m\]\[\e[37;40m\]\\$\[\e[m\] "
 # export PS1="\[\e[32m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[33m\]\`parse_git_branch\`\[\e[m\]\[\e[37;40m\]\\$\[\e[m\] "
-# PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # ----- local configuration ----------------------------------------------------
 # Put settings that should be there for each local machine in ~/.bashrc.extra
