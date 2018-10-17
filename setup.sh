@@ -3,7 +3,8 @@
 ########
 # This script sets up symlinks from the home directory (~) to the dotfiles in this repo
 # Run ./setup.sh <list of space separated files> or ./setup.sh all
-# Or just run ./setup.sh to be prompted for which files you want to symlink
+# Or just run ./setup.sh to be prompted for which files you want to symlink 
+#   - It also shows which files are not yet linked
 ########
 
 dir=$(pwd)
@@ -22,14 +23,28 @@ for f_ind in "${!all_files[@]}"; do
     done
 done
 
-dotfiles="${all_files[@]}"
+dotfiles=("${all_files[@]}")
 
 files_to_link=("$@")
 
+# Determine which files are not linked yet
+function get_unlinked_files {
+    unlinked_files=()
+    
+    for file in "${dotfiles[@]}"; do
+        if [ ! -f ~/."${file}" ]; then
+            unlinked_files+=("${file}")    
+        fi
+    done
+}
+
 function ask_for_files {
+    get_unlinked_files
+
     echo -e "\n"
-    echo "Write a space separated list of all dotfiles you want linked (press Enter with an empty line for all files to be used)"
+    echo "Write a space separated list of all dotfiles you want linked (press Enter without typing anything for all files to be used)"
     echo "Found these possible dotfiles: ${dotfiles[@]}"
+    echo "Found these dotfiles that are not linked yet: ${unlinked_files[@]}"
 
     read -p "> " -a files_to_link
 
