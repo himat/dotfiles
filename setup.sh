@@ -49,7 +49,7 @@ function ask_for_files {
     read -p "> " -a files_to_link
 
     if [ "${files_to_link}" == "" ]; then
-        files_to_link="${dotfiles[@]}"
+        files_to_link=("${dotfiles[@]}")
     fi
 }
 
@@ -62,7 +62,7 @@ elif [[ "$#" == 1 && "$1" == "all" ]]; then
         echo -e "${RED}Can't use the _all_ argument and have a dotfile named _all_"
         exit
     fi
-    files_to_link="${dotfiles[@]}"
+    files_to_link=("${dotfiles[@]}")
 fi
 
 # Confirm these files
