@@ -27,13 +27,19 @@ dotfiles=("${all_files[@]}")
 
 files_to_link=("$@")
 
-# Determine which files are not linked yet
+# Determine which files are not linked yet 
+# Specifically checks if they aren't linked to the dotfiles in this dir since
+#   they could be linked to some other files elsewhere
 function get_unlinked_files {
     unlinked_files=()
     
     for file in "${dotfiles[@]}"; do
-        if [ ! -f ~/."${file}" ]; then
+        # File doesn't exist at all
+        if [ ! -f ~/".${file}" ]; then 
             unlinked_files+=("${file}")    
+        # Check if existing file is not symlinked to the dotfile in this dir
+        elif [ ! ~/".${file}" -ef "${file}" ]; then
+            unlinked_files+=("${file}")
         fi
     done
 }
@@ -90,21 +96,22 @@ do
 done
 
 # Choose which dotfiles you want to link
-echo "Creating backup directory $backupdir to store any existing dotfiles in ~"
+echo "Creating backup directory $backupdir to store any already existing dotfiles"
 mkdir "$backupdir"
 
+echo ""
 # Performing the copying and symlinking
 for file in "${files_to_link[@]}"; do
     if [[ -f ~/.$file ]]; then
-        echo "Moving existing dotfile $file"
+        echo "***Moving existing dotfile $file"
         mv ~/.$file $backupdir/$file
     fi
 
-    echo "Symlinking $file"
+    echo "-Symlinking $file"
     ln -s $dir/$file ~/.$file
 done
 
-echo "Finished linking everything!"
+echo -e "\nFinished linking everything!"
 
 echo "Installing vim plugins"
 vim +PluginInstall +qall
