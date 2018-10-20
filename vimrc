@@ -26,6 +26,7 @@ nmap Y y$
 set foldmethod=indent
 " Enable fold toggling with the spacebar
 nnoremap <space> za 
+vnoremap <space> za 
 
 " Helpful information: cursor position in bottom right, line numbers on
 " left
