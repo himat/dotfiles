@@ -76,7 +76,7 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 " Close current buffer by switching to previous buff (so that the current
 " split doesn't get closed which is what happens when you use just :bd)
 nnoremap <silent> <leader>d :bp\|bd #<CR>
-" tab to switch to previously used buffer
+" Switch to previously used buffer
 nnoremap <leader><leader>b :b#<CR>
 " H and L for prev and next buffers
 nnoremap H :bp<CR>

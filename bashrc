@@ -230,7 +230,7 @@ MAGENTA="\[\e[35m\]"
 function parse_git_branch_simple {
   PS_BRANCH=''
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  PS_BRANCH="(git ${ref#refs/heads/}) "
+  PS_BRANCH="(${ref#refs/heads/}) "
 } 
 
 # Prints a newline before the prompt in order to put virtualenvs above the 
