@@ -76,11 +76,13 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 " Close current buffer by switching to previous buff (so that the current
 " split doesn't get closed which is what happens when you use just :bd)
 nnoremap <silent> <leader>d :bp\|bd #<CR>
-" Switch to previously used buffer
-nnoremap <leader><leader>b :b#<CR>
 " H and L for prev and next buffers
 nnoremap H :bp<CR>
 nnoremap L :bn<CR>
+" List all buffers and just enter the number you want to easily switch to it
+nnoremap <leader>b :ls<CR>:b<Space>
+" Switch to previously used buffer
+nnoremap <leader><leader>b :b#<CR>
 
 " Change position of new splits to open below and to the right by default
 set splitbelow
