@@ -53,9 +53,7 @@ set showcmd
 set ignorecase "Search ignoring case
 set smartcase "Search using smart casing
 
-" Random things
-set cursorline "Highlight current line
-set colorcolumn=80 "Highlight 80 char col 
+
 "Changes vim's internal dir to that of current file's
 "set autochdir " Disabled since it was interfering with my autosaving sessions
 
@@ -274,3 +272,11 @@ set statusline+=%*
     let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
 " }
+
+" Cursor settings
+set cursorline "Highlight current line
+set colorcolumn=80 "Highlight 80 char col 
+"Highlight current line number
+highlight CursorLineNR cterm=bold ctermfg=black ctermbg=green guifg=black guibg=green 
+
+
