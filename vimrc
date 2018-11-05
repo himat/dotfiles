@@ -64,6 +64,13 @@ set mouse=n
 " leader shift-P to insert a pdb line
 nnoremap <leader><S-p> oimport pdb; pdb.set_trace()<Esc>
 
+" In visual mode, you can paste over something without the deleted text 
+"   overwriting the text in the unnamed register. So now you can easily past 
+"   a yanked text multiple places just using the default unnamed register.
+"   The deleted text here goes to the black hole register "_
+vnoremap p "_dp
+vnoremap P "_dP
+
 " Synchronizes vim's default register and the system clipboard so you can just
 " use y and p to copy and paste the same text anywhere on your computer 
 "set clipboard^=unnamed
