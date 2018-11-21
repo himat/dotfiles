@@ -248,7 +248,7 @@ PROMPT_COMMAND="printf '\n';parse_git_branch_simple;"
 PS_EXTRA_NL="\$(needs_extra_NL)"
 PS_INFO="$YELLOW\u$RESET@$BLUE\h$RESET:\w"
 PS_GIT="$DARK_YELLOW\$PS_BRANCH"
-PS_TIME="\[\033[\$((COLUMNS-10))G\] $RED[\t]"
+PS_TIME="\[\033[\$((COLUMNS-16))G\] $RED[\D{%m/%d} \t]"
 export PS1="${PS_EXTRA_NL}${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
 
 # '\n\e[0;34m\u@\h:\w$ \e[m'
