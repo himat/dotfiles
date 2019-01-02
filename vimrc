@@ -63,6 +63,8 @@ set mouse=n
 
 " leader shift-P to insert a pdb line
 nnoremap <leader><S-p> oimport pdb; pdb.set_trace()<Esc>
+" leader shift-I to insert an interactive prompt in the script
+nnoremap <leader><S-i> oimport IPython; IPython.embed(); import sys; sys.exit(0)<Esc>
 
 " In visual mode, you can paste over something without the deleted text 
 "   overwriting the text in the unnamed register. So now you can easily past 
