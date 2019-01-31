@@ -1,6 +1,15 @@
 $include /etc/inputrc
-set completion-ignore-case on
+set completion-ignore-case on # Ignore case when completing
+set completion-map-case on # Treat hyphens and underscores as equivalent when completing
+
+# Incremental history navigation with up/down keys using already typed text
+#   as a prefix
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+set menu-complete-display-prefix on
+#TAB: menu-complete
 # Shows all tab completion options instead of choosing the first one automatically
-# set show-all-if-ambiguous on 
+#set show-all-if-ambiguous on
+
+set colored-stats on # For bash auto completion colors, doesn't seem to be working for me though
+set colored-completion-prefix on # Shows colored prefixes when multiple items match a completion

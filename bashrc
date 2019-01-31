@@ -68,9 +68,14 @@ alias "clear"="tmux_clear"
 
 # color support for ls and grep
 export CLICOLOR=1
+# ls uses colors, shows human-readable file sizes, shows indicators to classify file types
 if [[ ${OS_NAME} == "Linux" ]]; then 
-    alias ls='ls --color=auto'
+    alias ls='ls --color=auto --human-readable --classify'
+elif [[ ${OS_NAME} == "Mac" ]]; then
+    alias ls='ls -G -h -F'
 fi
+alias ll='ls -l'
+alias llt='ls -lt'
 alias grep='grep --color=auto'
 
 alias killz='killall -9 '
@@ -151,7 +156,7 @@ python /afs/cs.cmu.edu/academic/class/15251-s16/rmprogramming/runrm.pyc $@
 # ----- shell settings and completion -------------------------------------
 
 # Make .bash_history store more and not store duplicates
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoredups
 export HISTSIZE=250000
 export HISTFILESIZE=250000
 
@@ -162,12 +167,24 @@ shopt -s histappend
 # Update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Type a directory name by itself to auto cd into it 
+shopt -s autocd
+
+# Enable recursive file/directory expansion
+shopt -s globstar
+
+# Enable immediate history expansion by pressing space
+# ex. !-2<space> will immediately expand to two commands ago
+bind Space:magic-space
+
+# These didn't work in inputrc, but work in bashrc. Something is amiss.
+bind 'set completion-ignore-case on'
+bind 'set colored-stats on'
+
 # Enable programmable completion features
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
-
-bind "set completion-ignore-case on"
 
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe.sh ] && export LESSOPEN="|/usr/bin/lesspipe.sh %s"
@@ -244,12 +261,17 @@ function needs_extra_NL() {
 
 # Easier way to add the newline before the bash promopt instead of having
 #   to modify virtualenv things
-PROMPT_COMMAND="printf '\n';parse_git_branch_simple;"
+# history -a appends the history from this shell, which is useful if you 
+#   have multiple shells open, so that a new shell will then have access to 
+#   all of the previous multiple shell's commands
+PROMPT_COMMAND="printf '\n';history -a;parse_git_branch_simple;"
 PS_EXTRA_NL="\$(needs_extra_NL)"
 PS_INFO="$YELLOW\u$RESET@$BLUE\h$RESET:\w"
 PS_GIT="$DARK_YELLOW\$PS_BRANCH"
 PS_TIME="\[\033[\$((COLUMNS-16))G\] $RED[\D{%m/%d} \t]"
 export PS1="${PS_EXTRA_NL}${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
+
+
 
 # '\n\e[0;34m\u@\h:\w$ \e[m'
 #export PS1="\n\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[33m\]\[\e[m\]\[\e[37;40m\]\\$\[\e[m\] "
