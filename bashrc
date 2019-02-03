@@ -66,8 +66,6 @@ alias "clear"="tmux_clear"
 
 # ----- convenient alias and function definitions ----------------------------
 
-# color support for ls and grep
-export CLICOLOR=1
 # ls uses colors, shows human-readable file sizes, shows indicators to classify file types
 if [[ ${OS_NAME} == "Linux" ]]; then 
     alias ls='ls --color=auto --human-readable --classify'
@@ -160,6 +158,13 @@ export HISTCONTROL=ignoredups
 export HISTSIZE=250000
 export HISTFILESIZE=250000
 
+# Color support for ls and grep
+# LSCOLORS is the Mac env variable that is used for color definitions
+# LS_COLORS needs to be defined for linux tools like readline to look for colors there
+export CLICOLOR=1
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS="di=34:ln=35:so=33;4:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+
 # Append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -178,8 +183,10 @@ shopt -s globstar
 bind Space:magic-space
 
 # These didn't work in inputrc, but work in bashrc. Something is amiss.
-bind 'set completion-ignore-case on'
-bind 'set colored-stats on'
+bind 'set completion-ignore-case on'  # Ignore case when completing
+bind 'set completion-map-case on'  # Treat hyphens and underscores as equivalent when completing
+bind 'set colored-stats on' # Show colored file names on tab completion
+bind 'set colored-completion-prefix on' # Color the prefix of the tab completion match so far (uses socket color def)
 
 # Enable programmable completion features
 if [ -f /etc/bash_completion ]; then
@@ -284,11 +291,8 @@ if [[ -f ~/.bashrc.extra ]]; then
     source ~/.bashrc.extra
 fi
 
-
-#BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
-export TERM=screen-256color
+#export TERM=screen-256color
+export TERM=xterm-256color
 
 
 # The next line updates PATH for the Google Cloud SDK.
