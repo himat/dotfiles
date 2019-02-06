@@ -10,7 +10,6 @@
 # ----- guard against non-interactive logins ---------------------------------
 [ -z "$PS1" ] && return
 
-
 # ----- Start in the last directory you were in ------------------------------
 
 # Move to the last saved working directory if one exists
@@ -301,6 +300,8 @@ if [ -f '/Library/google-cloud-sdk/path.bash.inc' ]; then source '/Library/googl
 # The next line enables shell command completion for gcloud.
 if [ -f '/Library/google-cloud-sdk/completion.bash.inc' ]; then source '/Library/google-cloud-sdk/completion.bash.inc'; fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Using eval bc it makes nvm load faster
+export NVM_DIR="~/.nvm"
+eval [ -s "$NVM_DIR/nvm.sh" ] && eval \. "$NVM_DIR/nvm.sh"  # This loads nvm
+eval [ -s "$NVM_DIR/bash_completion" ] && eval \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
