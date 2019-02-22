@@ -96,6 +96,12 @@ nnoremap <leader><leader>b :b#<CR>
 set splitbelow
 set splitright
 
+" Resize split panes by more sane amounts than just the default 1 row/col
+nnoremap <C-w>- :exe "resize " . (winheight(0) * 5/6)<CR>
+nnoremap <C-w>+ :exe "resize " . (winheight(0) * 6/5)<CR>
+nnoremap <C-w>< :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+nnoremap <C-w>> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+
 " Sessions 
 " Do not store options (overrides vimrc updates)
 set ssop-=options  
