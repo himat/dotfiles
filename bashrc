@@ -91,7 +91,21 @@ alias cc='gcc -Wall -W -ansi -pedantic -O2 '
 alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 
 # connects to existing session if one exists, else creates a new one
-alias tm='tmux attach || tmux' 
+
+tm() {
+    num_sess=$(tmux list-session | wc -l)
+    if [[ ${num_sess} -gt 1 && $# -ne 1 ]]; then
+        echo "ERR: There are multiple tmux sessions, so call this function with an argument choosing the session number"
+        echo "$(tmux list-session)"
+        return 1
+    elif [[ ${num_sess} -gt 1 && $# -eq 1 ]]; then
+        tmux attach -t $1
+    elif [[ ${num_sess} -eq 1 ]]; then
+        tmux attach # Connect to existing session 
+    else
+        tmux # Make new session
+    fi
+}
 alias tmls='tmux ls'
 
 # Usage: sa <venv>
