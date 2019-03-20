@@ -62,9 +62,9 @@ set mouse=n
 " set ttymouse=xterm
 
 " leader shift-P to insert a pdb line
-nnoremap <leader><S-p> oimport pdb; pdb.set_trace()<Esc>
+au FileType python nnoremap <leader><S-p> oimport pdb; pdb.set_trace()<Esc>
 " leader shift-I to insert an interactive prompt in the script
-nnoremap <leader><S-i> oimport IPython; IPython.embed(); import sys; sys.exit(0)<Esc>
+au FileType python nnoremap <leader><S-i> oimport IPython; IPython.embed(); import sys; sys.exit(0)<Esc>
 
 " In visual mode, you can paste over something without the deleted text 
 "   overwriting the text in the unnamed register. So now you can easily past 
@@ -77,6 +77,10 @@ vnoremap P "_dP
 " use y and p to copy and paste the same text anywhere on your computer 
 "set clipboard^=unnamed
 "set clipboard=unnamed
+
+" Shows a horizontal menu of file names that provide tab completion
+set wildmenu
+set wildmode=full
 
 " Buffers for switching between files
 " Press F5 to show all open files and type the number to switch to
