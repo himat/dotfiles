@@ -81,8 +81,9 @@ vnoremap P "_dP
 " Shows a horizontal menu of file names that provide tab completion
 set wildmenu
 set wildmode=full
+set wildignorecase
 
-" Buffers for switching between files
+"" Buffer bindings 
 " Press F5 to show all open files and type the number to switch to
 nnoremap <F5> :buffers<CR>:buffer<Space>
 " Close current buffer by switching to previous buff (so that the current
@@ -95,6 +96,29 @@ nnoremap L :bn<CR>
 nnoremap <leader>b :ls<CR>:b<Space>
 " Switch to previously used buffer
 nnoremap <leader><leader>b :b#<CR>
+
+"" Tab bindings
+" Better left and right tab switching
+nnoremap gh gT
+nnoremap gl gt
+" Switch to previously used tab
+if !exists('g:lasttab') " Handles if last tab is gone
+  let g:lasttab = 1
+endif
+nnoremap <leader><leader>g :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+" Easier numbered tab switching
+noremap <leader>1g 1gt
+noremap <leader>2g 2gt
+noremap <leader>3g 3gt
+noremap <leader>4g 4gt
+noremap <leader>5g 5gt
+noremap <leader>6g 6gt
+noremap <leader>7g 7gt
+noremap <leader>8g 8gt
+noremap <leader>9g 9gt
+" rightmost tab
+noremap <leader>0g :tablast<CR> 
 
 " Change position of new splits to open below and to the right by default
 set splitbelow
