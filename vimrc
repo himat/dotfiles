@@ -134,10 +134,6 @@ nnoremap <C-w>> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
 " Do not store options (overrides vimrc updates)
 set ssop-=options  
 nnoremap <leader>ms :call MakeSession()<cr>
-" If you omit 'options' from 'sessionoptions', you might want to use nested 
-" flag from VimEnter autocmd. Syntax highlighting and mappings 
-" might not be restored otherwise. Enable this if you see this problem
-" autocmd VimEnter * nested call RestoreSession()  
 
 "" Make and load method to save session per dir
 function! MakeSession()
@@ -213,7 +209,11 @@ Plugin 'tmhedberg/SimpylFold' " Python folding
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
 
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
 Plugin 'chaoren/vim-wordmotion'
+
 call vundle#end()
 
 
@@ -221,9 +221,9 @@ call vundle#end()
 
 syntax enable
 set background=dark
-set t_Co=256
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
+"set t_Co=256
+"let g:solarized_termcolors=256
+"let g:solarized_contrast="high"
 colorscheme solarized
 
 
@@ -235,6 +235,9 @@ colorscheme solarized
 "set background=dark
 " colorscheme base16-twilight
 " let base16colorspace=256
+
+" UltiSnips
+let g:UltiSnipsEditSplit="vertical"
 
 " vim airline
 set laststatus=2
