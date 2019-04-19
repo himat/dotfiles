@@ -10,6 +10,9 @@
 # ----- guard against non-interactive logins ---------------------------------
 [ -z "$PS1" ] && return
 
+# Set default editor
+export EDITOR="$(command -v vim)"
+
 # ----- Start in the last directory you were in ------------------------------
 
 # Move to the last saved working directory if one exists

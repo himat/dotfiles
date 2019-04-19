@@ -12,7 +12,7 @@ backupdir=~/dotfiles_OLD
 RED="\033[0;31m"
 
 all_files=($(ls))
-exclude_files=("README.md" "setup.sh")
+exclude_files=("README.md" "setup.sh" "eg-examples")
 
 # Get list of all dotfiles without the excluded files
 for f_ind in "${!all_files[@]}"; do
@@ -116,4 +116,7 @@ echo -e "\nFinished linking everything!"
 echo "Installing vim plugins"
 vim +PluginInstall +qall
 
-echo "Remember to source your ~/.bashrc and :PluginInstall if you haven't installed Vundle yet"
+echo -e "\n\n"
+echo "** Remember to source your ~/.bashrc"
+echo "** Install Vundle, and run :PluginInstall in vim (if Vundle not installed yet)"
+echo "-- Optionally perform 'pip install eg'"
