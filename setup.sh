@@ -118,5 +118,5 @@ vim +PluginInstall +qall
 
 echo -e "\n\n"
 echo "** Remember to source your ~/.bashrc"
-echo "** Install Vundle, and run :PluginInstall in vim (if Vundle not installed yet)"
+echo "** Install Vundle with 'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim', and run :PluginInstall in vim (if Vundle not installed yet)"
 echo "-- Optionally perform 'pip install eg'"
