@@ -83,6 +83,9 @@ set wildmenu
 set wildmode=full
 set wildignorecase
 
+" Keybinding for toggling paste mode
+set pastetoggle=<F2>
+
 "" Buffer bindings 
 " Press F5 to show all open files and type the number to switch to
 nnoremap <F5> :buffers<CR>:buffer<Space>
