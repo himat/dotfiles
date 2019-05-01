@@ -191,11 +191,12 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'kristijanhusak/vim-hybrid-material'
 
-" vim-c0 plugin on Github repo
-" Plugin 'cmugpi/vim-c0'
 Plugin 'christoomey/vim-tmux-navigator'
 
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'mhartington/oceanic-next'
+"Plugin 'tyrannicaltoucan/vim-deep-space'
+"Plugin 'YorickPeterse/happy_hacking.vim'
 
 Plugin 'scrooloose/nerdTree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -224,32 +225,47 @@ call vundle#end()
 " ----------------- PLUGIN SETTINGS START HERE -----------------
 
 syntax enable
-set background=dark
-"set t_Co=256
-"let g:solarized_termcolors=256
-"let g:solarized_contrast="high"
-colorscheme solarized
+set t_Co=256
 
-
-"hi Normal ctermbg=NONE "Need this so text doesn't have bg
-
-
-" base 16 theme
-" syntax enable
 "set background=dark
+"set termguicolors
+"colorscheme deep-space
+
+"set background=dark
+"colorscheme solarized
+
+let g:oceanic_next_terminal_bold = 1
+"let g:oceanic_next_terminal_italic = 1
+colorscheme OceanicNext
+
+"colorscheme happy_hacking
+
+" set background=dark
 " colorscheme base16-twilight
 " let base16colorspace=256
+
+"hi Normal ctermbg=NONE "Need this so text doesn't have bg
 
 """ UltiSnips -----------------------------
 let g:UltiSnipsEditSplit="vertical"
 
 """ vim airline -----------------------------
-set laststatus=2
+set laststatus=2 " Always show status bar
 
 " Auto find powerline symbols to display airline bar properly
 let g:airline_powerline_fonts = 1 
 
 let g:airline_theme='cobalt2'
+
+" Defining a patch function lets us override pieces of an existing theme
+" Look at ~/.vim/bundle/vim-airline-themes/autoload/airline/themes to see what
+"   each color scheme has defined. Look at the dark vim color file for basics.
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+function! AirlineThemePatch(palette) 
+    if g:airline_theme == 'cobalt2'
+      let a:palette['tabline']['airline_tabsel'] = ['#ffffff', '#46dd3c', 0, 11, '']
+    endif
+endfunction
 
 "let g:airline_left_sep='>'
 " let g:airline_right_sep='<'
@@ -326,6 +342,7 @@ set statusline+=%*
     let g:syntastic_check_on_wq = 0
 " }
 
+
 " ----------------- PLUGIN SETTINGS END HERE -----------------
 
 
@@ -336,4 +353,9 @@ set colorcolumn=80 "Highlight 80 char col
 "Highlight current line number
 highlight CursorLineNR cterm=bold ctermfg=black ctermbg=green guifg=black guibg=green
 
-
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " from: https://sunaku.github.io/vim-256color-bce.html
+  set t_ut=
+endif
