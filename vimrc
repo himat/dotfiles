@@ -244,6 +244,11 @@ colorscheme OceanicNext
 " colorscheme base16-twilight
 " let base16colorspace=256
 
+if g:colors_name == 'OceanicNext'
+    " Make folded text fg whiter
+    hi Folded ctermfg=248
+endif
+
 "hi Normal ctermbg=NONE "Need this so text doesn't have bg
 
 """ UltiSnips -----------------------------
@@ -273,6 +278,7 @@ endfunction
 let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 " Show tab numbers
+let g:airline#extensions#whitespace#enabled = 0 " Don't show trailing whitespace warnings
 
 " makes the display update faster when switching out of insert mode
 set ttimeoutlen=50
