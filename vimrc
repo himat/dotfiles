@@ -98,6 +98,7 @@ nnoremap <leader>b :ls<CR>:b<Space>
 nnoremap <leader><leader>b :b#<CR>
 
 "" Tab bindings
+nnoremap gc :tabnew<CR>
 " Better left and right tab switching
 nnoremap gh gT
 nnoremap gl gt
@@ -236,24 +237,28 @@ colorscheme solarized
 " colorscheme base16-twilight
 " let base16colorspace=256
 
-" UltiSnips
+""" UltiSnips -----------------------------
 let g:UltiSnipsEditSplit="vertical"
 
-" vim airline
+""" vim airline -----------------------------
 set laststatus=2
 
-let g:airline_theme='badwolf'
+" Auto find powerline symbols to display airline bar properly
+let g:airline_powerline_fonts = 1 
 
-let g:airline_left_sep='>'
+let g:airline_theme='cobalt2'
+
+"let g:airline_left_sep='>'
 " let g:airline_right_sep='<'
 "
 let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " Show tab numbers
 
 " makes the display update faster when switching out of insert mode
 set ttimeoutlen=50
 
-" NERDTREE TABS SETTINGS
+""" NERDTREE TABS -----------------------------
 map <C-n> :NERDTreeToggle<CR>
 " Open/close NERDTree Tabs with \t
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
@@ -264,21 +269,21 @@ let g:nerdtree_tabs_autoclose=0
 " Open dir/file with space
 let NERDTreeMapActivateNode='<space>'
 
-" NERDCOMMENTER SETTINGS 
+" NERDCOMMENTER settings
 " nmap <silent> <leader>
 let g:NERDCompactSexyComs = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" INCSEARCH SETTINGS 
+" INCSEARCH settings -----------------------------
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 
-" ctrlp settings
+" ctrlp settings -----------------------------
 " Need these two for very large projects
 "let g:ctrlp_max_files=0
 "let g:ctrlp_max_depth=40
 
-" SYNTASTIC SETTINGS 
+" SYNTASTIC settings -----------------------------
 let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "▲"
 augroup mySyntastic
@@ -296,7 +301,6 @@ augroup END
 nnoremap <Leader>S :SyntasticToggleMode<CR>
 
 " type :lclose to close vim's loation list -- useful
-
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -319,10 +323,14 @@ set statusline+=%*
     let g:syntastic_check_on_wq = 0
 " }
 
-" Cursor settings
+" ----------------- PLUGIN SETTINGS END HERE -----------------
+
+
+""" Cursor settings 
+" (needed to put after plugins since something was interfering with the colors)
 set cursorline "Highlight current line
-set colorcolumn=80 "Highlight 80 char col 
+set colorcolumn=80 "Highlight 80 char col
 "Highlight current line number
-highlight CursorLineNR cterm=bold ctermfg=black ctermbg=green guifg=black guibg=green 
+highlight CursorLineNR cterm=bold ctermfg=black ctermbg=green guifg=black guibg=green
 
 
