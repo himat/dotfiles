@@ -180,7 +180,7 @@ augroup END
 " =============================================================================
 " =============================================================================
 " =============================================================================
-" Plugin settings below
+" Plugins settings below
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -188,8 +188,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'kristijanhusak/vim-hybrid-material'
 
 Plugin 'christoomey/vim-tmux-navigator'
 
@@ -217,6 +215,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
+Plugin 'tpope/vim-surround' " Easily enclose text in parens and tags
 Plugin 'chaoren/vim-wordmotion'
 
 call vundle#end()
