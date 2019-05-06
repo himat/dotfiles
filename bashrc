@@ -312,7 +312,7 @@ if [[ -d ~/.local/ok-bash/ ]]; then
 fi
 
 #export TERM=screen-256color
-export TERM=xterm-256color
+#export TERM=xterm-256color
 
 
 # The next line updates PATH for the Google Cloud SDK.
