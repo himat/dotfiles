@@ -307,6 +307,10 @@ if [[ -f ~/.bashrc.extra ]]; then
     source ~/.bashrc.extra
 fi
 
+if [[ -d ~/.local/ok-bash/ ]]; then
+    source ~/.local/ok-bash/ok.sh prompt prompt_default
+fi
+
 #export TERM=screen-256color
 export TERM=xterm-256color
 
@@ -321,4 +325,6 @@ if [ -f '/Library/google-cloud-sdk/completion.bash.inc' ]; then source '/Library
 export NVM_DIR="~/.nvm"
 eval [ -s "$NVM_DIR/nvm.sh" ] && eval \. "$NVM_DIR/nvm.sh"  # This loads nvm
 eval [ -s "$NVM_DIR/bash_completion" ] && eval \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
 
