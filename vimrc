@@ -303,6 +303,16 @@ map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 
 " ctrlp settings -----------------------------
+" Auto-exclude files from being indexed in the current dir if they are 
+"   excluded from git. This will make CtrlP much faster for when you have 
+"   large data/ directories in a project.
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others'],
+    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ },
+  \ 'fallback': 'find %s -type f'
+  \ }
 " Need these two for very large projects
 "let g:ctrlp_max_files=0
 "let g:ctrlp_max_depth=40
