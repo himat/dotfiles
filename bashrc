@@ -289,9 +289,9 @@ function needs_extra_NL() {
 #   all of the previous multiple shell's commands
 PROMPT_COMMAND="printf '\n';history -a;parse_git_branch_simple;"
 PS_EXTRA_NL="\$(needs_extra_NL)"
-PS_INFO="$YELLOW\u$RESET@$BLUE\h$RESET:\w"
-PS_GIT="$DARK_YELLOW\$PS_BRANCH"
-PS_TIME="\[\033[\$((COLUMNS-16))G\] $RED[\D{%m/%d} \t]"
+PS_INFO="${YELLOW}\u${RESET}@${BLUE}\h${RESET}:\w"
+PS_GIT="${DARK_YELLOW}\${PS_BRANCH}"
+PS_TIME="\[\033[\$((COLUMNS-16))G\] ${RED}[\D{%m/%d} \t]"
 export PS1="${PS_EXTRA_NL}${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
 
 
@@ -314,6 +314,11 @@ fi
 #export TERM=screen-256color
 #export TERM=xterm-256color
 
+# Call from cmdline as 'aws_profile <prof_name>' to switch the current aws cli profile
+#   Profile names are found in ~/.aws/config
+function aws_profile() {
+    export AWS_PROFILE=$1
+}
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Library/google-cloud-sdk/path.bash.inc' ]; then source '/Library/google-cloud-sdk/path.bash.inc'; fi
