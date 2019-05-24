@@ -320,6 +320,21 @@ function aws_profile() {
     export AWS_PROFILE=$1
 }
 
+# AWS CLI utility functions
+function hostname_from_instance() {
+    aws ec2 describe-instances --filters "{\"Name\":\"tag:Name\", \"Values\":[\"$1\"]}" --query='Reservations[0].Instances[0].PublicDnsName' | tr -d '"'
+}
+function ip_from_instance() {
+    name="$1"
+    shift # Remove name from args list
+    aws ec2 describe-instances --filters "{\"Name\":\"tag:Name\", \"Values\":[\"$name\"]}" --query='Reservations[0].Instances[0].PublicIpAddress' "$@" | tr -d '"'
+}
+# Call as 'ssh-aws <name>' with ' --region <reg-name>' if default region not set in aws-cli
+#   Region can be anything like us-west-2 (don't put any sub-region letters since it won't work)
+function ssh-aws() { 
+    ssh "ubuntu@$(ip_from_instance "$@")"
+}
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Library/google-cloud-sdk/path.bash.inc' ]; then source '/Library/google-cloud-sdk/path.bash.inc'; fi
 
