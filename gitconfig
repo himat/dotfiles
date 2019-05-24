@@ -2,7 +2,7 @@
     path = ~/.gitconfig.private
 [core]
     excludesfile = ~/.gitignore_global
-    editor = /usr/bin/vim
+    editor = vim
 [alias]
     aliases = config --get-regexp alias 
     st = status
