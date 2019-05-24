@@ -53,6 +53,11 @@ set showcmd
 set ignorecase "Search ignoring case
 set smartcase "Search using smart casing
 
+" For commands like buffer switching and page up/down, vim moves the cursor to
+"   the start of line by default. This is not useful when moving somewhere and
+"   then coming back since your old cursor position is now gone. This fixes
+"   that.
+set nostartofline
 
 "Changes vim's internal dir to that of current file's
 "set autochdir " Disabled since it was interfering with my autosaving sessions
