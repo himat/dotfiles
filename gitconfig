@@ -8,8 +8,10 @@
     st = status
     s = status -s # Short status
     di = diff
+    dis = diff --staged
     pl = pull
     ps = push
+    psh = push
     ci = commit
     co = checkout
     br = branch
