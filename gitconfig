@@ -1,22 +1,30 @@
 [include]
     path = ~/.gitconfig.private
+
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
+
 [alias]
     aliases = config --get-regexp alias 
     st = status
     s = status -s # Short status
+
     di = diff
     dis = diff --staged
+    # Shows the diff from before the latest pull/commit/reflog change and now
+    #   Can also do things like master@{10 minutes ago} and such
+    diffpull = diff master@{1} master 
+
     pl = pull
     ps = push
     psh = push
+
     ci = commit
     co = checkout
     br = branch
     bra = branch -av
-    df = diff
+
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
     logdiffs = log -p
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -24,3 +32,9 @@
     tree = log --graph --decorate --pretty=format:\"%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s\" --abbrev-commit --all
     root = rev-parse --show-toplevel # Return repo's root dir, useful for shell prompts
 
+[diff]
+    # Automatically detect renames/moves of files in git diffs, so that it 
+    #   doesn't show the full text of the diff as long as the similarity 
+    #   between the files in a detected add/delete pair is at least 50%. 
+    #   Will just show the actual changes between the files.
+    renames = true 
