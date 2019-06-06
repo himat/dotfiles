@@ -59,6 +59,19 @@ function ask_for_files {
     fi
 }
 
+function print_gitconfig_info {
+    gitconfig_linked="${1}"
+
+    if [ "${gitconfig_linked}" = true ]; then
+        echo -e "** Set up your git info, make a ~/.gitconfig.private and add the following:"
+
+        printf "%s\n" \
+            "[user]" \
+            "   name = <name>" \
+            "   email = <email>" 
+    fi
+}
+
 # If no args given, then ask user what files they want to sync
 if [ "$#" -eq 0 ]; then 
     ask_for_files
@@ -93,6 +106,10 @@ do
             echo -e "\n${RED}ERROR: ${file} is an excluded file"
         fi
     done
+
+    if [ "${file}" == "gitconfig" ]; then
+        gitconfig_linked=true
+    fi
 done
 
 # Choose which dotfiles you want to link
@@ -103,7 +120,7 @@ echo ""
 # Performing the copying and symlinking
 for file in "${files_to_link[@]}"; do
     if [[ -f ~/.$file ]]; then
-        echo "***Moving existing dotfile $file"
+        echo "!Moving existing dotfile to backup dir: $file"
         mv ~/.$file $backupdir/$file
     fi
 
@@ -120,3 +137,5 @@ echo -e "\n\n"
 echo "** Remember to source your ~/.bashrc"
 echo "** Install Vundle with 'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim', and run :PluginInstall in vim (if Vundle not installed yet)"
 echo "-- Optionally perform 'pip install eg'"
+print_gitconfig_info "${gitconfig_linked}"
+
