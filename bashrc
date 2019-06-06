@@ -117,6 +117,8 @@ alias tmls='tmux ls'
 alias sa='source activate'
 alias sd='source deactivate'
 
+alias tb='tensorboard --logdir'
+
 # Shows the diff from before a pull and after
 # Can also do things like master@{10 minutes ago} and such
 alias gitdiffpull='git diff master@{1} master'
