@@ -311,6 +311,11 @@ map ? <Plug>(incsearch-backward)
 " Auto-exclude files from being indexed in the current dir if they are 
 "   excluded from git. This will make CtrlP much faster for when you have 
 "   large data/ directories in a project.
+" TODO: Problem with this is that if a file is deleted in the dir, but it was
+"   commited in git before, then the file will still appear in the CtrlP list
+"   So should also call 'find' and then perform an intersection of the two
+"   commands' outputs using 'comm'. Will need to write this as a separate
+"   function since can't do this in one line nicely.
 let g:ctrlp_user_command = {
   \ 'types': {
     \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others'],

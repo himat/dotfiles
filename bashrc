@@ -85,9 +85,13 @@ alias lgrep="ls -AF | grep"
 
 alias killz='killall -9 '
 alias hidden='ls -a | grep "^\..*"'
+
+# Use \command to run the unaliased version of any command
+#   such as if you want to rm a large dir without it printing everything, use \rm
 alias rm='rm -v'
 alias cp='cp -v'
 alias mv='mv -v'
+
 alias shell='ps -p $$ -o comm='
 
 alias cc='gcc -Wall -W -ansi -pedantic -O2 '
@@ -113,15 +117,11 @@ tm() {
 alias tma="tmux attach" # Connect to default (last) session
 alias tmls='tmux ls'
 
-# Usage: sa <venv>
-alias sa='source activate'
-alias sd='source deactivate'
+# Usage: CA <venv>
+alias CA='conda activate'
+alias CD='conda deactivate'
 
 alias tb='tensorboard --logdir'
-
-# Shows the diff from before a pull and after
-# Can also do things like master@{10 minutes ago} and such
-alias gitdiffpull='git diff master@{1} master'
 
 find_recent_modified_files() {
 
@@ -333,8 +333,51 @@ function ip_from_instance() {
 }
 # Call as 'ssh-aws <name>' with ' --region <reg-name>' if default region not set in aws-cli
 #   Region can be anything like us-west-2 (don't put any sub-region letters since it won't work)
+# TODO: Figure out how to pass ssh options like -Y and -L 6006:localhost:6006
 function ssh-aws() { 
     ssh "ubuntu@$(ip_from_instance "$@")"
+
+    if [[ $? == 255 ]]; then
+        echo "If the machine name could not be resolved, verify that your aws cli profile is set to the correct user"
+        return 255
+    fi
+}
+
+# TODO: Figure out how a scp function from an ec2 name would be possible
+# Maybe just parse for the string before a colon to find the name, and check that there is only one colon in the passed args
+function scp-aws() {
+    orig_cmd="$*"
+    # Count NumFields with colons
+    num_colons=$(echo "$orig_cmd" | awk -F: '{print NF-1}')
+
+    if [[ $num_colons != 1 ]]; then
+        echo "ERR: You must only have 1 colon in this scp command. Found: $num_colons."
+        return 1
+    fi
+    echo "|$orig_cmd|"
+   
+    # TODO: region extraction doesn't work. 
+    region=$(echo "$orig_cmd" | sed -E 's@^(.).*\s--region\s([\w,-]*).*$@\1\2@')
+    #region=$(echo "$orig_cmd" | sed -E 's@^(.*\s|)(.*)(:.*$)@\1\2@')
+    echo "r:$region"
+
+    return 1
+
+    # Extract word before the colon
+    name_match_str='^(.*\s|)(.*)(:.*$)'
+    name=$(echo "$orig_cmd" | sed -E 's/'"$name_match_str"'/\2/')
+
+    echo "$name"
+
+    ip=$(ip_from_instance "$name")
+
+    echo "$ip"
+    ip="43433"
+
+
+
+    final_cmd=$(echo "$orig_cmd" | sed -E 's/'"$name_match_str"'/scp \1'"$ip"'\3/')
+    echo "$final_cmd"
 }
 
 # The next line updates PATH for the Google Cloud SDK.
