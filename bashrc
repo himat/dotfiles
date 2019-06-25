@@ -392,4 +392,5 @@ eval [ -s "$NVM_DIR/nvm.sh" ] && eval \. "$NVM_DIR/nvm.sh"  # This loads nvm
 eval [ -s "$NVM_DIR/bash_completion" ] && eval \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-
+# Load fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

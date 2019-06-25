@@ -14,7 +14,7 @@ nnoremap <C-L> :noh<CR><C-L>
 " Clear highlighting on escape in normal mode
 nnoremap <esc> :noh<return><esc>
 " maps escape key back bc vim uses it for special keys internally
-nnoremap <esc>^[ <esc>^[ 
+nnoremap <esc>^[ <esc>^[
 
 " Set shift tab to tab backwards (to the left)
 inoremap <S-Tab> <C-d>
@@ -25,15 +25,15 @@ nmap Y y$
 " Cold folding on
 set foldmethod=indent
 " Enable fold toggling with the spacebar
-nnoremap <space> za 
-vnoremap <space> za 
+nnoremap <space> za
+vnoremap <space> za
 
 " Helpful information: cursor position in bottom right, line numbers on
 " left
 set ruler
 set number
 
-"Enable filetype detection and syntax highlighting 
+"Enable filetype detection and syntax highlighting
 syntax on
 filetype on
 filetype indent on
@@ -71,15 +71,15 @@ au FileType python nnoremap <leader><S-p> oimport pdb; pdb.set_trace()<Esc>
 " leader shift-I to insert an interactive prompt in the script
 au FileType python nnoremap <leader><S-i> oimport IPython; IPython.embed(); import sys; sys.exit(0)<Esc>
 
-" In visual mode, you can paste over something without the deleted text 
-"   overwriting the text in the unnamed register. So now you can easily past 
+" In visual mode, you can paste over something without the deleted text
+"   overwriting the text in the unnamed register. So now you can easily past
 "   a yanked text multiple places just using the default unnamed register.
 "   The deleted text here goes to the black hole register "_
 vnoremap p "_dp
 vnoremap P "_dP
 
 " Synchronizes vim's default register and the system clipboard so you can just
-" use y and p to copy and paste the same text anywhere on your computer 
+" use y and p to copy and paste the same text anywhere on your computer
 "set clipboard^=unnamed
 "set clipboard=unnamed
 
@@ -91,7 +91,7 @@ set wildignorecase
 " Keybinding for toggling paste mode
 set pastetoggle=<F2>
 
-"" Buffer bindings 
+"" Buffer bindings
 " Press F5 to show all open files and type the number to switch to
 nnoremap <F5> :buffers<CR>:buffer<Space>
 " Close current buffer by switching to previous buff (so that the current
@@ -127,7 +127,7 @@ noremap <leader>7g 7gt
 noremap <leader>8g 8gt
 noremap <leader>9g 9gt
 " rightmost tab
-noremap <leader>0g :tablast<CR> 
+noremap <leader>0g :tablast<CR>
 
 " Change position of new splits to open below and to the right by default
 set splitbelow
@@ -139,9 +139,19 @@ nnoremap <C-w>+ :exe "resize " . (winheight(0) * 6/5)<CR>
 nnoremap <C-w>< :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 nnoremap <C-w>> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
 
-" Sessions 
+" Removes trailing whitespace from all lines in file
+function! TrimTrailingWhitespace()
+    let l:save = winsaveview() " Save window cursor info to restore
+    " keeppatterns executes command without adding to history
+    " 'e' doesn't err on if match not found
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+noremap <Leader>tr :call TrimTrailingWhitespace()<CR>
+
+" Sessions
 " Do not store options (overrides vimrc updates)
-set ssop-=options  
+set ssop-=options
 nnoremap <leader>ms :call MakeSession()<cr>
 
 "" Make and load method to save session per dir
@@ -172,11 +182,11 @@ function! LoadSession()
     endif
 endfunction
 
-" Auto-commands 
+" Auto-commands
 augroup autosourcing
     if(argc() == 0) " Only run if vim started in dir with no args
         au VimEnter * nested :call LoadSession() " Automatically load session
-        au VimLeave * :call UpdateSession() " Auto saves session if exists 
+        au VimLeave * :call UpdateSession() " Auto saves session if exists
     endif
 augroup END
 
@@ -262,7 +272,7 @@ let g:UltiSnipsEditSplit="vertical"
 set laststatus=2 " Always show status bar
 
 " Auto find powerline symbols to display airline bar properly
-let g:airline_powerline_fonts = 1 
+let g:airline_powerline_fonts = 1
 
 let g:airline_theme='cobalt2'
 
@@ -270,7 +280,7 @@ let g:airline_theme='cobalt2'
 " Look at ~/.vim/bundle/vim-airline-themes/autoload/airline/themes to see what
 "   each color scheme has defined. Look at the dark vim color file for basics.
 let g:airline_theme_patch_func = 'AirlineThemePatch'
-function! AirlineThemePatch(palette) 
+function! AirlineThemePatch(palette)
     if g:airline_theme == 'cobalt2'
       let a:palette['tabline']['airline_tabsel'] = ['#ffffff', '#46dd3c', 0, 11, '']
     endif
@@ -308,8 +318,8 @@ map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 
 " ctrlp settings -----------------------------
-" Auto-exclude files from being indexed in the current dir if they are 
-"   excluded from git. This will make CtrlP much faster for when you have 
+" Auto-exclude files from being indexed in the current dir if they are
+"   excluded from git. This will make CtrlP much faster for when you have
 "   large data/ directories in a project.
 " TODO: Problem with this is that if a file is deleted in the dir, but it was
 "   commited in git before, then the file will still appear in the CtrlP list
@@ -333,7 +343,7 @@ let g:syntastic_warning_symbol = "▲"
 augroup mySyntastic
     au!
     au FileType tex let b:syntastic_mode = "passive"
-    
+
     " tell syntastic to always stick any detected errors into the
     " location-list
     au FileType sml let g:syntastic_always_populate_loc_list = 1
@@ -350,28 +360,26 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_debug = 1 
-
-"let g:syntastic_python_pylint_args = '-E'
-
 " Syntastic {
     let g:syntastic_enable_signs=1
     let g:syntastic_python_checkers=['flake8']
     let g:syntastic_python_flake8_args = "--max-line-length=120"
+    " let g:syntastic_python_pylint_args = '-E'
     let g:syntastic_cpp_include_dirs = ['source', 'build/source', '/usr/include']
     let g:syntastic_cpp_compiler = 'clang++-3.5'
     let g:syntastic_cpp_compiler_options = ' -std=c++11'
     let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
+    " let g:syntastic_debug = 1
 " }
 
 
 " ----------------- PLUGIN SETTINGS END HERE -----------------
 
 
-""" Cursor settings 
+""" Cursor settings
 " (needed to put after plugins since something was interfering with the colors)
 set cursorline "Highlight current line
 set colorcolumn=80 "Highlight 80 char col
