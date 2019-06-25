@@ -6,7 +6,7 @@
     editor = vim
 
 [alias]
-    aliases = config --get-regexp alias 
+    aliases = config --get-regexp alias
     st = status
     s = status -s # Short status
 
@@ -14,7 +14,7 @@
     dis = diff --staged
     # Shows the diff from before the latest pull/commit/reflog change and now
     #   Can also do things like master@{10 minutes ago} and such
-    diffpull = diff master@{1} master 
+    diffpull = diff master@{1} master
 
     pl = pull
     ps = push
@@ -33,8 +33,10 @@
     root = rev-parse --show-toplevel # Return repo's root dir, useful for shell prompts
 
 [diff]
-    # Automatically detect renames/moves of files in git diffs, so that it 
-    #   doesn't show the full text of the diff as long as the similarity 
-    #   between the files in a detected add/delete pair is at least 50%. 
+    # Automatically detect renames/moves of files in git diffs, so that it
+    #   doesn't show the full text of the diff as long as the similarity
+    #   between the files in a detected add/delete pair is at least 50%.
     #   Will just show the actual changes between the files.
-    renames = true 
+    renames = true
+
+    wsErrorHighlight = all # Shows removed whitespace in diffs
