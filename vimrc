@@ -181,6 +181,13 @@ function! LoadSession()
         echo "No session loaded."
     endif
 endfunction
+function! DeleteSession()
+    let b:sessiondir = $HOME . "/.vim_sessions" . getcwd()
+    if (filewritable(b:sessiondir) == 2) " 2: is a writable dir
+        exe 'silent !rm -r ' b:sessiondir
+        redraw!
+    endif
+endfunction
 
 " Auto-commands
 augroup autosourcing
