@@ -39,4 +39,5 @@
     #   Will just show the actual changes between the files.
     renames = true
 
-    wsErrorHighlight = all # Shows removed whitespace in diffs
+    # Shows removed whitespace in diffs
+    wsErrorHighlight = all
