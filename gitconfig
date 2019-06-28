@@ -22,6 +22,7 @@
 
     ci = commit
     co = checkout
+    b = branch
     br = branch
     bra = branch -av
 
