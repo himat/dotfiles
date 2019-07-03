@@ -19,6 +19,8 @@
     pl = pull
     ps = push
     psh = push
+    shinratensei = push # The almighty
+    banshotenin = pull # The universal
 
     ci = commit
     co = checkout
