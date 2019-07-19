@@ -66,6 +66,9 @@ set nostartofline
 set mouse=n
 " set ttymouse=xterm
 
+" Press enter twice to insert a newline below without going into insert mode
+nnoremap <CR><CR> o<ESC>
+
 " leader shift-P to insert a pdb line
 au FileType python nnoremap <leader><S-p> oimport pdb; pdb.set_trace()<Esc>
 " leader shift-I to insert an interactive prompt in the script
