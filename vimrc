@@ -243,6 +243,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-surround' " Easily enclose text in parens and tags
 Plugin 'chaoren/vim-wordmotion'
 
+Plugin 'zxqfl/tabnine-vim' " Autocomplete
+
 call vundle#end()
 
 
