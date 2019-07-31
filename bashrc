@@ -380,6 +380,45 @@ function scp-aws() {
     echo "$final_cmd"
 }
 
+# Report port forwarding functions from https://superuser.com/questions/248389/list-open-ssh-tunnels/1437366#1437366
+function ports_local_forwardings() {
+
+  echo 
+  echo "LOCAL PORT FORWARDING"
+  echo
+  echo "You set up the following local port forwardings:"
+  echo
+
+  lsof -a -i4 -P -c '/^ssh$/' -u$USER -s TCP:LISTEN
+
+  echo
+  echo "The processes that set up these forwardings are:"
+  echo
+
+  # -a ands the selection criteria (default is or)
+  # -i4 limits to ipv4 internet files
+  # -P inhibits the conversion of port numbers to port names
+  # -c /regex/ limits to commands matching the regex
+  # -u$USER limits to processes owned by $USER
+  # http://man7.org/linux/man-pages/man8/lsof.8.html
+  # https://stackoverflow.com/q/34032299
+  ps -f -p $(lsof -t -a -i4 -P -c '/^ssh$/' -u$USER -s TCP:LISTEN)
+
+}
+
+function ports_remote_forwardings() {
+
+  echo 
+  echo "REMOTE PORT FORWARDING"
+  echo
+  echo "You set up the following remote port forwardings:"
+  echo
+
+  ps -f -p $(lsof -t -a -i -c '/^ssh$/' -u$USER -s TCP:ESTABLISHED) | awk '
+  NR == 1 || /R [[:digit:]]+:\S+:[[:digit:]]+.*/
+  '
+}
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Library/google-cloud-sdk/path.bash.inc' ]; then source '/Library/google-cloud-sdk/path.bash.inc'; fi
 
