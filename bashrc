@@ -1,11 +1,9 @@
-# ----- Andrew server special commands courtesy of GPI ----------------------
-### afsperms <arguments to fs sa> -- Recursively runs fs sa on a directory
 ### cc <arguments to gcc> -- Invokes gcc with the flags you will usually use
 ### valgrind-leak <arguments to valgrind> -- Invokes valgrind in the mode to show all leaks
 ### hidden <arguments to ls> -- Displays ONLY the hidden files
 ### killz <program name> -- Kills all programs with the given program name
 ### shell -- Displays the name of the shell being used
-### get_cs_afs_access -- Sets up cross-realm authentication with CS.CMU.EDU so you can access files stored there.
+### + more that need to be undocumented
 
 # ----- guard against non-interactive logins ---------------------------------
 [ -z "$PS1" ] && return
@@ -152,22 +150,6 @@ find_recent_modified_files() {
 }
 
 alias mods="find_recent_modified_files"
-
-afsperms(){ find $1 -type d -exec fs sa {} $2 $3 \; ; }
-get_cs_afs_access() {
-    # Script to give a user with an andrew.cmu.edu account access to cs.cmu.edu
-    # See https://www.cs.cmu.edu/~help/afs/cross_realm.html for information.
-
-    # Get tokens. This might create the user, but I'm not sure that that's
-    # reliable, so we'll also try to do pts createuser.
-    aklog cs.cmu.edu
-
-    pts createuser $(whoami)@ANDREW.CMU.EDU -cell cs.cmu.edu 2>&1 | grep -v "Entry for name already exists"
-
-    aklog cs.cmu.edu
-
-    echo "Be sure to add aklog cs.cmu.edu & to your ~/.bashrc"
-}
 
 # ----- shell settings and completion -------------------------------------
 
