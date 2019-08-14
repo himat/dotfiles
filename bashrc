@@ -401,6 +401,22 @@ function ports_remote_forwardings() {
   '
 }
 
+#### Better grep that excludes directories from the .gitignore file in the current repo
+function grep_ignore() {
+    if [ -r .gitignore ]; then
+        while read -r line; do
+            if [[ "$line" =~ '#' ]] || [[ "$line" =~ ^$ ]]; then
+                continue
+            fi
+            EXCLUDE="$EXCLUDE --exclude-dir=\"$line\""
+        done < .gitignore
+    fi
+
+    # Recursive, Display line number of match in file, Ignore case
+    eval grep -rni "$EXCLUDE" '"$@"'
+}
+alias grepignore='grep_ignore'
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Library/google-cloud-sdk/path.bash.inc' ]; then source '/Library/google-cloud-sdk/path.bash.inc'; fi
 
