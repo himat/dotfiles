@@ -16,9 +16,6 @@ nnoremap <esc> :noh<return><esc>
 " maps escape key back bc vim uses it for special keys internally
 nnoremap <esc>^[ <esc>^[
 
-" Set shift tab to tab backwards (to the left)
-inoremap <S-Tab> <C-d>
-
 " Set Y to copy to end of line like C and D do
 nmap Y y$
 
@@ -44,6 +41,9 @@ filetype plugin on
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" JS files should only indent by 2 spaces
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
 " Show multicharacter commands as they are being typed
 set showcmd
@@ -108,7 +108,7 @@ nnoremap <leader>b :ls<CR>:b<Space>
 " Switch to previously used buffer
 nnoremap <leader><leader>b :b#<CR>
 
-"" Tab bindings
+"" Vim tab bindings
 nnoremap gc :tabnew<CR>
 " Better left and right tab switching
 nnoremap gh gT
@@ -200,7 +200,6 @@ augroup autosourcing
     endif
 augroup END
 
-
 " =============================================================================
 " =============================================================================
 " =============================================================================
@@ -216,6 +215,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'christoomey/vim-tmux-navigator'
 
+" Themes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'mhartington/oceanic-next'
 "Plugin 'tyrannicaltoucan/vim-deep-space'
@@ -233,17 +233,23 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
 
 Plugin 'tmhedberg/SimpylFold' " Python folding
+Plugin 'JavaScript-Indent' " JS/html better indenting
 
-"Plugin 'Valloric/YouCompleteMe'
+""Plugin 'Valloric/YouCompleteMe'
+
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'alvan/vim-closetag' " Auto closes HTML tags
+Plugin 'jiangmiao/auto-pairs' " Auto completing brackets
 
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
 
 Plugin 'tpope/vim-surround' " Easily enclose text in parens and tags
 Plugin 'chaoren/vim-wordmotion'
 
-Plugin 'zxqfl/tabnine-vim' " Autocomplete
+" Autocomplete. Uses YCM as its base
+Plugin 'zxqfl/tabnine-vim' 
+
 
 call vundle#end()
 
@@ -278,7 +284,59 @@ endif
 "hi Normal ctermbg=NONE "Need this so text doesn't have bg
 
 """ UltiSnips -----------------------------
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" TODO: Doesn't work for some reason
+let g:UltiSnipsExpandTrigger="<c-y>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+
+""" YCM ----------------------------------
+" Set shift tab to tab backwards (to the left)
+"inoremap <S-Tab> <C-d> " Would use this normally when YCM is not installed
+" Removes <S-Tab> from the default key list
+let g:ycm_key_list_previous_completion = ['<Up>'] 
+" Redefine so that in insert mode if the YCM list is visible, 
+" it scrolls up, otherwise, it unindents 
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-d>" 
+
+
+" Vim closetag ----------------------------
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.ts'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+
+" Shortcut for closing tags, default is '>'
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+let g:closetag_close_shortcut = '<leader>>'
 
 """ vim airline -----------------------------
 set laststatus=2 " Always show status bar
