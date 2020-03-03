@@ -41,6 +41,12 @@ alias cd....="cd ../../.."
 alias cd.....="cd ../../../.."
 alias cd......="cd ../../../../.."
 
+# Make a dir and immediately cd into it
+function mkdircd(){
+    mkdir "$1" && cd "$1"
+}
+alias mkdirc="mkdircd"
+
 # Get OS type for OS specific commands
 OS_RAW_NAME=$(uname)
 if [[ ${OS_RAW_NAME} == "Darwin" ]]; then
@@ -121,6 +127,7 @@ alias CD='conda deactivate'
 
 alias tb='tensorboard --logdir'
 
+# Shows the 10 most recently modifed files from most recent descending
 find_recent_modified_files() {
 
     if [[ -z $1 ]]; then
@@ -148,8 +155,13 @@ find_recent_modified_files() {
 
     fi
 }
-
 alias mods="find_recent_modified_files"
+
+# Find files that are modified n minutes ago, where n is the argument 
+# Ex. lastmod 5 # Lists all files modified within the past 5 minutes
+function lastmod() {
+    find -type f -mmin -$1 -exec ls -l {} +
+}
 
 # ----- shell settings and completion -------------------------------------
 
