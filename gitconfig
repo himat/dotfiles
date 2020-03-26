@@ -26,6 +26,7 @@
     co = checkout
     b = branch
     br = branch
+    ba = branch -av
     bra = branch -av
 
     l = log --pretty=oneline -n 20 --graph --abbrev-commit

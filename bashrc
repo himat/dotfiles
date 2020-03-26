@@ -163,6 +163,9 @@ function lastmod() {
     find -type f -mmin -$1 -exec ls -l {} +
 }
 
+# Find the largest files in this directory
+alias largest="find . -printf '%s %p\n' | sort -nr | head"
+
 # ----- shell settings and completion -------------------------------------
 
 # Make .bash_history store more and not store duplicates
@@ -443,3 +446,4 @@ eval [ -s "$NVM_DIR/bash_completion" ] && eval \. "$NVM_DIR/bash_completion"  # 
 
 # Load fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. /home/ubuntu/anaconda3/etc/profile.d/conda.sh
