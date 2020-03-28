@@ -7,6 +7,12 @@
 # List all packages installed in this conda env
     conda list
 
+# Install a package (in the current env)
+    conda install <package-name>
+
+# Uninstall a package (in the current env)
+    conda remove <package-name>
+
 # List all conda envs on this system
     conda env list
 
