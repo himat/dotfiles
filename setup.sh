@@ -133,9 +133,15 @@ echo -e "\nFinished linking everything!"
 echo "Installing vim plugins"
 vim +PluginInstall +qall
 
+echo "Installing eg"
+{
+    pip install eg
+} || {
+    echo "-- 'pip install eg' failed, please try re-running it yourself"
+}
+
 echo -e "\n\n"
 echo "** Remember to source your ~/.bashrc"
 echo "** Install Vundle with 'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim', and run :PluginInstall in vim (if Vundle not installed yet)"
-echo "-- Optionally perform 'pip install eg'"
 print_gitconfig_info "${gitconfig_linked}"
 
