@@ -132,6 +132,18 @@ noremap <leader>9g 9gt
 " rightmost tab
 noremap <leader>0g :tablast<CR>
 
+" Alternate easier numbered tab switching
+noremap g1 1gt
+noremap g2 2gt
+noremap g3 3gt
+noremap g4 4gt
+noremap g5 5gt
+noremap g6 6gt
+noremap g7 7gt
+noremap g8 8gt
+noremap g9 9gt
+noremap g0 :tablast<CR>
+
 " Change position of new splits to open below and to the right by default
 set splitbelow
 set splitright
@@ -155,6 +167,13 @@ noremap <Leader>tr :call TrimTrailingWhitespace()<CR>
 " Sessions
 " Do not store options (overrides vimrc updates)
 set ssop-=options
+" Set session file to not save/restore empty windows in vim (had to do this 
+" because nerdtree plugin would always give me errors when reopening a session 
+" since nerdtree does not actually save the tree to disk so they are seen as 
+" blank windows, so it doesn't work with vim sessions)
+set sessionoptions-=blank
+
+" Make a session from the current vim layout
 nnoremap <leader>ms :call MakeSession()<cr>
 
 "" Make and load method to save session per dir
