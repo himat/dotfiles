@@ -250,6 +250,7 @@ Plugin 'chaoren/vim-wordmotion'
 " Autocomplete. Uses YCM as its base
 Plugin 'zxqfl/tabnine-vim' 
 
+Plugin 'junegunn/fzf'
 
 call vundle#end()
 
