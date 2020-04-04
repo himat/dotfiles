@@ -453,6 +453,7 @@ set statusline+=%*
 " Syntastic {
     let g:syntastic_enable_signs=1
     let g:syntastic_python_checkers=['flake8']
+    let g:syntastic_javascript_checkers=['eslint']
     let g:syntastic_python_flake8_args = "--max-line-length=120"
     " let g:syntastic_python_pylint_args = '-E'
     let g:syntastic_cpp_include_dirs = ['source', 'build/source', '/usr/include']
