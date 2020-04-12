@@ -271,6 +271,9 @@ Plugin 'zxqfl/tabnine-vim'
 
 Plugin 'junegunn/fzf'
 
+" Language/framework tools
+Plugin 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
+
 call vundle#end()
 
 

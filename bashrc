@@ -101,9 +101,12 @@ alias shell='ps -p $$ -o comm='
 alias cc='gcc -Wall -W -ansi -pedantic -O2 '
 alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 
+alias g='git'
+alias v='vim'
+
 alias pdb='python -m pdb'
 
-# Connect to existing session if one exists, else create a new one
+# Connect to existing tmux session if one exists, else create a new one
 tm() {
     num_sess=$(tmux list-session | wc -l)
     if [[ ${num_sess} -gt 1 && $# -ne 1 ]]; then

@@ -10,6 +10,9 @@
     st = status
     s = status -s # Short status
 
+    a = add
+    aa = add --all
+
     di = diff
     dis = diff --staged
     # Shows the diff from before the latest pull/commit/reflog change and now
@@ -23,6 +26,7 @@
     banshotenin = pull # The universal
 
     ci = commit
+    cia = commit --amend
     co = checkout
     b = branch
     br = branch
