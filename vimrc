@@ -30,12 +30,6 @@ vnoremap <space> za
 set ruler
 set number
 
-"Enable filetype detection and syntax highlighting
-syntax on
-filetype on
-filetype indent on
-filetype plugin on
-
 " Indent as intelligently as vim knows how
 "set smartindent
 set tabstop=4
@@ -226,6 +220,7 @@ augroup END
 " Plugins settings below
 
 " set the runtime path to include Vundle and initialize
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -276,11 +271,16 @@ Plugin 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
 
 call vundle#end()
 
+"Enable filetype detection and syntax highlighting
+"Must put after vundle block so that plugins can detect their own filetypes
+syntax enable
+filetype on
+filetype indent on
+filetype plugin on
+
+set t_Co=256
 
 " ----------------- PLUGIN SETTINGS START HERE -----------------
-
-syntax enable
-set t_Co=256
 
 "set background=dark
 "set termguicolors
