@@ -104,8 +104,10 @@ alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 alias g='git'
 alias gi='git'
 alias v='vim'
+alias s='source'
 
 alias pdb='python -m pdb'
+alias jup='jupyter'
 
 # Connect to existing tmux session if one exists, else create a new one
 tm() {
