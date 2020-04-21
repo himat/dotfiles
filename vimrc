@@ -252,6 +252,7 @@ Plugin 'JavaScript-Indent' " JS/html better indenting
 ""Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'alvan/vim-closetag' " Auto closes HTML tags
 Plugin 'jiangmiao/auto-pairs' " Auto completing brackets
 
@@ -429,6 +430,7 @@ let g:ctrlp_user_command = {
 " Need these two for very large projects
 "let g:ctrlp_max_files=0
 "let g:ctrlp_max_depth=40
+nnoremap <leader>. :CtrlPTag<cr>
 
 " SYNTASTIC settings -----------------------------
 let g:syntastic_error_symbol = '✘'
@@ -468,6 +470,9 @@ set statusline+=%*
     let g:syntastic_check_on_wq = 0
     " let g:syntastic_debug = 1
 " }
+
+" Gutentags settings --------------------------
+set statusline+=%{gutentags#statusline()} " Prints when Gutentags is generating tags in the background
 
 
 " ----------------- PLUGIN SETTINGS END HERE -----------------
