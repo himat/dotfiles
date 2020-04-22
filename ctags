@@ -3,8 +3,9 @@
 --exclude=.git
 --exclude=vendor/*
 --exclude=gulp
---exclude=node_modules/*
---exclude=**/node_modules/*
+/*--exclude=node_modules/**/
+/*--exclude=*<]node_modules[>*/
+--exclude=.chunk.js
 --exclude=log/*
 --exclude=.pyc
 --exclude=.sln
@@ -16,7 +17,6 @@
 --exclude=bower_components
 --exclude=*.min.*
 --exclude=.dll
-
 
 --langmap=javascript:.js.es6.es.jsx
 --javascript-kinds=-c-f-m-p-v
