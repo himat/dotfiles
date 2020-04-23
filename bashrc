@@ -321,18 +321,24 @@ fi
 
 # Call from cmdline as 'aws_profile <prof_name>' to switch the current aws cli profile
 #   Profile names are found in ~/.aws/config
-function aws_profile() {
-    export AWS_PROFILE=$1
+function aws-profile() {
+    if [[ $# -eq 0 ]]; then
+        echo -e "\nErr: Call this with a profile name"
+        echo -e "Your profiles (~/.aws/config):\n"
+        cat ~/.aws/config
+    else 
+        export AWS_PROFILE=$1
+    fi
 }
 
 # AWS CLI utility functions
 function hostname_from_instance() {
-    aws ec2 describe-instances --filters "{\"Name\":\"tag:Name\", \"Values\":[\"$1\"]}" --query='Reservations[0].Instances[0].PublicDnsName' | tr -d '"'
+    aws ec2 describe-instances --filters "{\"Name\":\"tag:Name\", \"Values\":[\"$1\"]}" --query='Reservations[0].Instances[0].PublicDnsName' --output text | tr -d '"'
 }
 function ip_from_instance() {
     name="$1"
     shift # Remove name from args list
-    aws ec2 describe-instances --filters "{\"Name\":\"tag:Name\", \"Values\":[\"$name\"]}" --query='Reservations[0].Instances[0].PublicIpAddress' "$@" | tr -d '"'
+    aws ec2 describe-instances --filters "{\"Name\":\"tag:Name\", \"Values\":[\"$name\"]}" --query='Reservations[0].Instances[0].PublicIpAddress' "$@" --output text | tr -d '"'
 }
 # Call as 'ssh-aws <name>' with ' --region <reg-name>' if default region not set in aws-cli
 #   Region can be anything like us-west-2 (don't put any sub-region letters since it won't work)

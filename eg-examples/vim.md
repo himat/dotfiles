@@ -17,3 +17,6 @@
     - cw | Change this word until start of next word
     - ce | Change this word until the end of this word (a lot more useful than cw)
 
+### Misc
+    - <C-a> | Increment the next number (increment and decrement are so fun to use!)
+    - <C-x> | Decrement the next number
