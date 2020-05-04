@@ -4,3 +4,4 @@
 __pycache__/
 # Ignore ctags generated tags file
 tags
+tags.*

@@ -83,6 +83,7 @@ alias la='ls -A'
 alias ll='ls -l'
 alias llt='ls -lt'
 alias l.="ls -A | egrep '^\.'" # List only hidden files
+alias sl='ls'
 
 alias grep='grep --color=auto'
 alias lgrep="ls -AF | grep"
