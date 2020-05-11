@@ -430,7 +430,12 @@ let g:ctrlp_user_command = {
 " Need these two for very large projects
 "let g:ctrlp_max_files=0
 "let g:ctrlp_max_depth=40
+
+
+" Search for tags (globally) with ctrlp
 nnoremap <leader>. :CtrlPTag<cr>
+" Search for tags (in current buffer) with ctrlp
+nnoremap <leader>> :CtrlPBufTag<cr>
 
 " SYNTASTIC settings -----------------------------
 let g:syntastic_error_symbol = '✘'
