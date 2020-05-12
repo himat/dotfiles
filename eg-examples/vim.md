@@ -12,6 +12,8 @@
 ### Text movement
     - w | Go to next character of the next word
     - e | Go to last character of this word 
+    - [m | Go to top of current method 
+    - ]m | Go to next method after current one
 
 ### Change text
     - cw | Change this word until start of next word
