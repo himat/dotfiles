@@ -253,6 +253,8 @@ Plugin 'JavaScript-Indent' " JS/html better indenting
 
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'majutsushi/tagbar' " Shows a side panel of the current file's tags (class/methods)
+
 Plugin 'alvan/vim-closetag' " Auto closes HTML tags
 Plugin 'jiangmiao/auto-pairs' " Auto completing brackets
 
@@ -479,6 +481,14 @@ set statusline+=%*
 " Gutentags settings --------------------------
 set statusline+=%{gutentags#statusline()} " Prints when Gutentags is generating tags in the background
 
+
+" Tagbar settings -----------------------------
+" Main benefit of tagbar for me is that with airline, it auto-shows the
+"   current tag (class/method/etc) that my cursor is currently in 
+"   on the airline status bar
+
+" Opens the tagbar side pane, and auto-closes it once you go to a tag
+nmap <leader>g :TagbarOpenAutoClose<CR> 
 
 " ----------------- PLUGIN SETTINGS END HERE -----------------
 

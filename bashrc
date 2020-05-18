@@ -183,9 +183,9 @@ export HISTFILESIZE=250000
 # Color support for ls and grep
 # LSCOLORS is the Mac env variable that is used for color definitions
 # LS_COLORS needs to be defined for linux tools like readline to look for colors there
-export CLICOLOR=1
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS="di=34:ln=35:so=33;4:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+#export CLICOLOR=1
+#export LSCOLORS=exfxcxdxbxegedabagacad
+#export LS_COLORS="di=34:ln=35:so=33;4:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 
 # Append to the history file, don't overwrite it
 shopt -s histappend

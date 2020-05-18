@@ -19,6 +19,8 @@
     #   Can also do things like master@{10 minutes ago} and such
     diffpull = diff master@{1} master
 
+    show-names = show --name-status # Only show files changed in the latest commit instead of all the diffs too
+
     pl = pull
     ps = push
     psh = push
