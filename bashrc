@@ -171,7 +171,11 @@ function lastmod() {
 }
 
 # Find the largest files in this directory
-alias largest="find . -printf '%s %p\n' | sort -nr | head"
+alias largest-files="find . -printf '%s %p\n' | sort -nr | head"
+
+
+# Displays top processes by memory usage
+alias largest-mem="ps -eo size,pid,user,command --sort -size | awk '{ hr=\$1/1024 ; printf(\"%13.2f Mb \",hr)  } { for ( x=4 ; x<=NF ; x++  ) { printf(\"%s \",\$x)  } print \"\"  }' | head -n 15"
 
 # ----- shell settings and completion -------------------------------------
 
