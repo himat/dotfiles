@@ -109,6 +109,7 @@ alias s='source'
 
 alias pdb='python -m pdb'
 alias jup='jupyter'
+alias jupnb='jupyter notebook'
 
 # Connect to existing tmux session if one exists, else create a new one
 tm() {
