@@ -63,7 +63,10 @@ function print_gitconfig_info {
     gitconfig_linked="${1}"
 
     if [ "${gitconfig_linked}" = true ]; then
-        echo -e "** Set up your git info, make a ~/.gitconfig.private and add the following:"
+        if [ ! -f "${HOME}/.gitconfig.private" ]; then
+            touch "${HOME}/.gitconfig.private"
+        fi
+        echo -e "** Set up your git info - we created a ~/.gitconfig.private file - open it and add the following:"
 
         printf "%s\n" \
             "[user]" \
@@ -128,12 +131,16 @@ for file in "${files_to_link[@]}"; do
     ln -s $dir/$file ~/.$file
 done
 
-echo -e "\nFinished linking everything!"
+echo -e "\nFinished linking everything!\n"
 
 echo "Installing vim plugins"
+if [ ! -d "${HOME}/.vim/bundle/Vundle.vim" ]; then
+    echo "Installing vundle for vim"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
 vim +PluginInstall +qall
 
-echo "Installing eg"
+echo -e "\nInstalling eg"
 {
     pip install eg
 } || {
@@ -142,6 +149,5 @@ echo "Installing eg"
 
 echo -e "\n\n"
 echo "** Remember to source your ~/.bashrc"
-echo "** Install Vundle with 'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim', and run :PluginInstall in vim (if Vundle not installed yet)"
 print_gitconfig_info "${gitconfig_linked}"
 
