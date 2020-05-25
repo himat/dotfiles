@@ -41,6 +41,8 @@ alias cd....="cd ../../.."
 alias cd.....="cd ../../../.."
 alias cd......="cd ../../../../.."
 
+alias md="mkdir"
+
 # Make a dir and immediately cd into it
 function mkdircd(){
     mkdir "$1" && cd "$1"
@@ -132,6 +134,10 @@ alias tmls='tmux ls'
 # Usage: CA <venv>
 alias CA='conda activate'
 alias CD='conda deactivate'
+alias capt="CA pytorch_p36"
+alias CAPT="CA pytorch_p36"
+alias catf="CA tensorflow_p36"
+alias CATF="CA tensorflow_p36"
 
 alias tb='tensorboard --logdir'
 
