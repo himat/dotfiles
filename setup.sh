@@ -150,4 +150,4 @@ echo -e "\nInstalling eg"
 echo -e "\n\n"
 echo "** Remember to source your ~/.bashrc"
 print_gitconfig_info "${gitconfig_linked}"
-
+echo -e "Install ctags with:\n - [linux] sudo apt-get install exuberant-ctags\n - [mac] brew install ctags"
