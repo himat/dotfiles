@@ -1,0 +1,298 @@
+
+# ----- Start in the last directory you were in ------------------------------
+
+# Move to the last saved working directory if one exists
+if [ -e ~/.last_cd ]
+then
+    cd "$(cat ~/.last_cd)"
+fi
+
+# Saves current directory between sessions
+unalias cd 2>/dev/null # Prevent infinite loops if sourcing this file again in the same session
+logged_cd() {
+    cd "$@"
+    pwd > ~/.last_cd
+}
+
+alias "cd"="logged_cd" # keep track of most recent directory 
+alias "cdb"="cd ~-" # cd to previous directory
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+alias ..5="cd ../../../../.."
+alias cd..="cd .."
+alias cd...="cd ../.."
+alias cd....="cd ../../.."
+alias cd.....="cd ../../../.."
+alias cd......="cd ../../../../.."
+
+alias md="mkdir"
+
+# Make a dir and immediately cd into it
+function mkdircd(){
+    mkdir "$1" && cd "$1"
+}
+alias mkdirc="mkdircd"
+alias mkcd="mkdircd"
+
+tmux_clear() {
+    if [ -n "$TMUX" ]; then
+        clear
+        tmux clear-history
+    else
+        clear
+    fi
+}
+alias "clear"="tmux_clear"
+
+# Use vim keybindings in the terminal!
+#set -o vi
+
+# ----- convenient alias and function definitions ----------------------------
+
+# ls uses colors, shows human-readable file sizes, shows indicators to classify file types
+if [[ ${OS_NAME} == "Linux" ]]; then 
+    alias ls='ls --color=auto --human-readable --classify'
+elif [[ ${OS_NAME} == "Mac" ]]; then
+    alias ls='ls -G -h -F'
+fi
+alias l='ls'
+alias la='ls -Al'
+alias ll='ls -l'
+alias llt='ls -lt'
+alias l.="ls -A | egrep '^\.'" # List only hidden files
+alias sl='ls'
+
+alias grep='grep --color=auto'
+alias lgrep="ls -AF | grep"
+
+alias killz='killall -9 '
+alias hidden='ls -a | grep "^\..*"'
+
+# Use \command to run the unaliased version of any command
+#   such as if you want to rm a large dir without it printing everything, use \rm
+alias rm='rm -v'
+alias cp='cp -v'
+alias mv='mv -v'
+
+alias shell='ps -p $$ -o comm='
+
+alias cc='gcc -Wall -W -ansi -pedantic -O2 '
+alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
+
+alias g='git'
+alias gi='git'
+alias v='vim'
+alias s='source'
+
+alias pdb='python -m pdb'
+alias jup='jupyter'
+alias jupnb='jupyter notebook'
+
+# Connect to existing tmux session if one exists, else create a new one
+tm() {
+    num_sess=$(tmux list-session | wc -l)
+    if [[ ${num_sess} -gt 1 && $# -ne 1 ]]; then
+        echo "ERR: There are multiple tmux sessions, so call this function with an argument choosing the session number"
+        echo "$(tmux list-session)"
+        return 1
+    elif [[ ${num_sess} -gt 1 && $# -eq 1 ]]; then
+        tmux attach -t $1
+    elif [[ ${num_sess} -eq 1 ]]; then
+        tmux attach # Connect to existing session 
+    else
+        tmux # Make new session
+    fi
+}
+alias tma="tmux attach" # Connect to default (last) session
+alias tmls='tmux ls'
+
+# Usage: CA <venv>
+alias CA='conda activate'
+alias CD='conda deactivate'
+alias capt="CA pytorch_p36"
+alias CAPT="CA pytorch_p36"
+alias catf="CA tensorflow_p36"
+alias CATF="CA tensorflow_p36"
+
+alias tb='tensorboard --logdir'
+
+# Shows the 10 most recently modifed files from most recent descending
+find_recent_modified_files() {
+
+    if [[ -z $1 ]]; then
+        IGNORE_HIDDEN_FILES=false
+    elif [[ $1 == "--ignore-hidden" ]]; then
+        IGNORE_HIDDEN_FILES=true
+    else
+        echo "Invalid argument. Supported options are: '--ignore-hidden'."
+        return 1
+    fi
+
+    if [[ ${OS_NAME} == "Mac" ]]; then
+        if [[ ${IGNORE_HIDDEN_FILES} == "true" ]]; then
+            find . -not -path '*/\.*' -exec stat -f '%m%t%Sm %N' {} + | sort -nr | cut -f2- | head -n10
+        else
+            find . -exec stat -f '%m%t%Sm %N' {} + | sort -nr | cut -f2- | head -n10
+        fi
+
+    elif [[ ${OS_NAME} == "Linux" ]]; then
+        if [[ ${IGNORE_HIDDEN_FILES} == "true" ]]; then
+            find . -type f -not -path '*/\.*' -print0 | xargs -0 stat --format '%Y :%y %n' | sort -nr | cut -d: -f2- | head
+        else
+            find . -type f -print0 | xargs -0 stat --format '%Y :%y %n' | sort -nr | cut -d: -f2- | head
+        fi
+
+    fi
+}
+alias mods="find_recent_modified_files"
+
+# Find files that are modified n minutes ago, where n is the argument 
+# Ex. lastmod 5 # Lists all files modified within the past 5 minutes
+function lastmod() {
+    find -type f -mmin -$1 -exec ls -l {} +
+}
+
+# Find the largest files in this directory
+alias largest-files="find . -printf '%s %p\n' | sort -nr | head"
+
+
+# Displays top processes by memory usage
+alias largest-mem="ps -eo size,pid,user,command --sort -size | awk '{ hr=\$1/1024 ; printf(\"%13.2f Mb \",hr)  } { for ( x=4 ; x<=NF ; x++  ) { printf(\"%s \",\$x)  } print \"\"  }' | head -n 15"
+
+# ----- local configuration ----------------------------------------------------
+# Put settings that should be there for each local machine in ~/.bashrc.extra
+    # so that local preferences aren't pushed to the git repo 
+if [[ -f ~/.bashrc.extra ]]; then
+    source ~/.bashrc.extra
+fi
+
+
+# Call from cmdline as 'aws_profile <prof_name>' to switch the current aws cli profile
+#   Profile names are found in ~/.aws/config
+function aws-profile() {
+    if [[ $# -eq 0 ]]; then
+        echo -e "\nErr: Call this with a profile name"
+        echo -e "Your profiles (~/.aws/config):\n"
+        cat ~/.aws/config
+    else 
+        export AWS_PROFILE=$1
+    fi
+}
+
+# AWS CLI utility functions
+function hostname_from_instance() {
+    aws ec2 describe-instances --filters "{\"Name\":\"tag:Name\", \"Values\":[\"$1\"]}" --query='Reservations[0].Instances[0].PublicDnsName' --output text | tr -d '"'
+}
+function ip_from_instance() {
+    name="$1"
+    shift # Remove name from args list
+    aws ec2 describe-instances --filters "{\"Name\":\"tag:Name\", \"Values\":[\"$name\"]}" --query='Reservations[0].Instances[0].PublicIpAddress' "$@" --output text | tr -d '"'
+}
+# Call as 'ssh-aws <name>' with ' --region <reg-name>' if default region not set in aws-cli
+#   Region can be anything like us-west-2 (don't put any sub-region letters since it won't work)
+# TODO: Figure out how to pass ssh options like -Y and -L 6006:localhost:6006
+function ssh-aws() { 
+    ssh "ubuntu@$(ip_from_instance "$@")"
+
+    if [[ $? == 255 ]]; then
+        echo "If the machine name could not be resolved, verify that your aws cli profile is set to the correct user"
+        return 255
+    fi
+}
+
+# TODO: Figure out how a scp function from an ec2 name would be possible
+# Maybe just parse for the string before a colon to find the name, and check that there is only one colon in the passed args
+function scp-aws() {
+    orig_cmd="$*"
+    # Count NumFields with colons
+    num_colons=$(echo "$orig_cmd" | awk -F: '{print NF-1}')
+
+    if [[ $num_colons != 1 ]]; then
+        echo "ERR: You must only have 1 colon in this scp command. Found: $num_colons."
+        return 1
+    fi
+    echo "|$orig_cmd|"
+   
+    # TODO: region extraction doesn't work. 
+    region=$(echo "$orig_cmd" | sed -E 's@^(.).*\s--region\s([\w,-]*).*$@\1\2@')
+    #region=$(echo "$orig_cmd" | sed -E 's@^(.*\s|)(.*)(:.*$)@\1\2@')
+    echo "r:$region"
+
+    return 1
+
+    # Extract word before the colon
+    name_match_str='^(.*\s|)(.*)(:.*$)'
+    name=$(echo "$orig_cmd" | sed -E 's/'"$name_match_str"'/\2/')
+
+    echo "$name"
+
+    ip=$(ip_from_instance "$name")
+
+    echo "$ip"
+    ip="43433"
+
+
+
+    final_cmd=$(echo "$orig_cmd" | sed -E 's/'"$name_match_str"'/scp \1'"$ip"'\3/')
+    echo "$final_cmd"
+}
+
+# Report port forwarding functions from https://superuser.com/questions/248389/list-open-ssh-tunnels/1437366#1437366
+function ports_local_forwardings() {
+
+  echo 
+  echo "LOCAL PORT FORWARDING"
+  echo
+  echo "You set up the following local port forwardings:"
+  echo
+
+  lsof -a -i4 -P -c '/^ssh$/' -u$USER -s TCP:LISTEN
+
+  echo
+  echo "The processes that set up these forwardings are:"
+  echo
+
+  # -a ands the selection criteria (default is or)
+  # -i4 limits to ipv4 internet files
+  # -P inhibits the conversion of port numbers to port names
+  # -c /regex/ limits to commands matching the regex
+  # -u$USER limits to processes owned by $USER
+  # http://man7.org/linux/man-pages/man8/lsof.8.html
+  # https://stackoverflow.com/q/34032299
+  ps -f -p $(lsof -t -a -i4 -P -c '/^ssh$/' -u$USER -s TCP:LISTEN)
+
+}
+
+function ports_remote_forwardings() {
+
+  echo 
+  echo "REMOTE PORT FORWARDING"
+  echo
+  echo "You set up the following remote port forwardings:"
+  echo
+
+  ps -f -p $(lsof -t -a -i -c '/^ssh$/' -u$USER -s TCP:ESTABLISHED) | awk '
+  NR == 1 || /R [[:digit:]]+:\S+:[[:digit:]]+.*/
+  '
+}
+
+#### Better grep that excludes directories from the .gitignore file in the current repo
+function grep_ignore() {
+    if [ -r .gitignore ]; then
+        while read -r line; do
+            if [[ "$line" =~ '#' ]] || [[ "$line" =~ ^$ ]]; then
+                continue
+            fi
+            EXCLUDE="$EXCLUDE --exclude-dir=\"$line\""
+        done < .gitignore
+    fi
+
+    # Recursive, Display line number of match in file, Ignore case
+    eval grep -rni "$EXCLUDE" '"$@"'
+}
+alias grepignore='grep_ignore'
+
