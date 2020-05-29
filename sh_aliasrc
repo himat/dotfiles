@@ -163,6 +163,9 @@ alias largest-files="find . -printf '%s %p\n' | sort -nr | head"
 # Displays top processes by memory usage
 alias largest-mem="ps -eo size,pid,user,command --sort -size | awk '{ hr=\$1/1024 ; printf(\"%13.2f Mb \",hr)  } { for ( x=4 ; x<=NF ; x++  ) { printf(\"%s \",\$x)  } print \"\"  }' | head -n 15"
 
+# Aliases thefuck pkg as 'tf' so just type that to fix a command
+eval $(thefuck --alias tf)
+
 # ----- local configuration ----------------------------------------------------
 # Put settings that should be there for each local machine in ~/.bashrc.extra
     # so that local preferences aren't pushed to the git repo 
