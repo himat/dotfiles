@@ -39,8 +39,8 @@ set expandtab
 " JS files should only indent by 2 spaces
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
-" Set all files with 'aliases' in the name to be highglihted as shell script files
-autocmd BufEnter,BufNewFile,BufRead .*aliases* set syntax=sh
+" Set all files with 'aliasrc' in the name to be highglihted as shell script files
+autocmd BufEnter,BufNewFile,BufRead *aliasrc set syntax=sh
 
 " Show multicharacter commands as they are being typed
 set showcmd

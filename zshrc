@@ -77,17 +77,35 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# [mine] Need to put this before zsh plugins get loaded so that when I use 
+#   autojump to go to a dir (which uses cd) internally that it uses my logged_cd
+#   since otherwise, it won't get saved
+#   And I couldn't just source my entire ~/.sh_aliasrc file here because then
+#   sourcing oh-my-zsh.sh alter overwrites some of the aliases like 'l'
+#   So I just had to duplicate this single one here
+# Saves current directory between sessions
+unalias cd 2>/dev/null # Prevent infinite loops if sourcing this file again in the same session
+logged_cd() {
+    cd "$@"
+    pwd > ~/.last_cd
+}
+
+alias "cd"="logged_cd" # keep track of most recent directory 
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions colorize autojump aws)
+plugins=(git zsh-autosuggestions colorize autojump aws nvm)
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
 
 ######################### User configuration ==============================
+
+# [mine] Load aliases and such
+[ -f ~/.sh_aliasrc ] && source ~/.sh_aliasrc
 
 # By default it seems that oh-my-zsh auto share history between current 
 # sesions, which is very annoying when using the up arrow key in terminal to 
@@ -119,8 +137,6 @@ setopt nosharehistory
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Load aliases and such
-[ -f ~/.shaliases_rc ] && source ~/.shaliases_rc
 
 
 #export CLICOLOR=1
