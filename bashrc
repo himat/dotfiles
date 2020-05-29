@@ -181,7 +181,5 @@ if [[ -d ~/.local/ok-bash/ ]]; then
     source ~/.local/ok-bash/ok.sh prompt prompt_default
 fi
 
-#. /home/ubuntu/anaconda3/etc/profile.d/conda.sh
-
 # Load fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
