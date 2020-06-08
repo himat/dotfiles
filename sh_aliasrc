@@ -120,6 +120,19 @@ alias CATF="CA tensorflow_p36"
 
 alias tb='tensorboard --logdir'
 
+# This function does an adb logcat and only shows you the logs printed from your specific app's PID
+# Call this function with the package name of your app: e.g. com.converge.com
+# Note that once the app crashes or ends, you'll have to re-run this command since the app will have a new PID
+function adb_logcat_myapp() {
+    if [[ $# -ne 1 ]]; then
+        echo -e "\nErr: Call this with your app package name (e.g. com.company.app)"
+        adb shell ps | less
+    else
+        adb logcat | grep `adb shell ps | grep $1 | tr -s '[:space:]' ' ' | cut -d' ' -f2`
+    fi
+}
+alias logcat-app=adb_logcat_myapp
+
 # Shows the 10 most recently modifed files from most recent descending
 find_recent_modified_files() {
 

@@ -97,7 +97,7 @@ alias "cd"="logged_cd" # keep track of most recent directory
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions colorize autojump aws nvm)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting colorize autojump aws nvm)
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
@@ -156,6 +156,12 @@ prompt_context(){} # For agnoster zsh theme, don't show hostname when you're on 
 # Note that for this to work you first need to send the escape sequence 
 #   [[CE when Ctrl-Enter is pressed in yur iterm settings
 bindkey '^[[[CE' autosuggest-execute
+
+# Use tab for autosuggest history completion, and shift+tab for regular completion
+bindkey '^I'      autosuggest-accept
+#ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty bracketed-paste accept-line push-line-or-edit)
+ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+#ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 ##########################
 # TODO: source bashrc file after moving bash specific things into a bash_profile or other bash file, and just keep bashrc for things that can be shared between zshrc and bashrc in cases where I don't have zsh installed yet like on a remote server, so whenever I add new bash/zsh aliases, I just always add them in the bashrc, so that I'll have access to both no matter if I'm using bash or zsh. Once that's done, remove the below since they're copied from my bashrc.
