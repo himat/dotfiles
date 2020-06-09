@@ -54,11 +54,15 @@ alias "clear"="tmux_clear"
 # ----- convenient alias and function definitions ----------------------------
 
 # ls uses colors, shows human-readable file sizes, shows indicators to classify file types
-if [[ ${OS_NAME} == "Linux" ]]; then 
-    alias ls='ls --color=auto --human-readable --classify'
-elif [[ ${OS_NAME} == "Mac" ]]; then
-    alias ls='ls -G -h -F'
-fi
+# Assuming that you are using gnu core utils installed via brew
+#   Otherwise, you need to uncomment the below lines to enable the different, 
+#   Mac-specific ls flags to enable colors
+alias ls='ls --color=auto --human-readable --classify'
+#if [[ ${OS_NAME} == "Linux" ]]; then
+    #alias ls='ls --color=auto --human-readable --classify'
+#elif [[ ${OS_NAME} == "Mac" ]]; then
+    #alias ls='ls -G -h -F'
+#fi
 alias l='ls'
 alias la='ls -Al'
 alias ll='ls -l'
