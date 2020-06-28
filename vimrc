@@ -101,7 +101,7 @@ nnoremap <silent> <leader>d :bp\|bd #<CR>
 nnoremap H :bp<CR>
 nnoremap L :bn<CR>
 " List all buffers and just enter the number you want to easily switch to it
-nnoremap <leader>b :ls<CR>:b<Space>
+"nnoremap <leader>b :ls<CR>:b<Space>
 " Switch to previously used buffer
 nnoremap <leader><leader>b :b#<CR>
 
@@ -254,9 +254,9 @@ Plugin 'JavaScript-Indent' " JS/html better indenting
 
 ""Plugin 'Valloric/YouCompleteMe'
 
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'majutsushi/tagbar' " Shows a side panel of the current file's tags (class/methods)
+"Plugin 'majutsushi/tagbar' " Shows a side panel of the current file's tags (class/methods)
 
 Plugin 'alvan/vim-closetag' " Auto closes HTML tags
 Plugin 'jiangmiao/auto-pairs' " Auto completing brackets
@@ -265,12 +265,15 @@ Plugin 'jiangmiao/auto-pairs' " Auto completing brackets
 "Plugin 'honza/vim-snippets'
 
 Plugin 'tpope/vim-surround' " Easily enclose text in parens and tags
+Plugin 'tpope/vim-abolish' " Do substitutions while prserving the case of words
 Plugin 'chaoren/vim-wordmotion'
 
+
 " Autocomplete. Uses YCM as its base
-Plugin 'zxqfl/tabnine-vim' 
+Plugin 'zxqfl/tabnine-vim'
 
 Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 " Language/framework tools
 Plugin 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
@@ -416,6 +419,21 @@ let g:NERDTrimTrailingWhitespace = 1
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 
+" fzf settings --------------------------
+" Using the same key as for ctrl-P plugin since I'm used to that
+map <C-p> :Files<CR>
+
+" Open fzf buffers pane
+nnoremap <leader>b :Buffers<CR>
+" Open fzf file history pane
+nnoremap <leader>h :History<CR>
+" Open fzf executed command history pane
+nnoremap <leader>c :History:<CR>
+" Open fzf command list pane
+nnoremap <leader>C :Commands<CR>
+" Open fzf marks pane
+nnoremap <leader>m :Marks<CR>
+
 " ctrlp settings -----------------------------
 " Auto-exclude files from being indexed in the current dir if they are
 "   excluded from git. This will make CtrlP much faster for when you have
@@ -438,9 +456,9 @@ let g:ctrlp_user_command = {
 
 
 " Search for tags (globally) with ctrlp
-nnoremap <leader>. :CtrlPTag<cr>
+"nnoremap <leader>. :CtrlPTag<cr>
 " Search for tags (in current buffer) with ctrlp
-nnoremap <leader>> :CtrlPBufTag<cr>
+"nnoremap <leader>> :CtrlPBufTag<cr>
 
 " SYNTASTIC settings -----------------------------
 let g:syntastic_error_symbol = '✘'

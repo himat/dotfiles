@@ -159,9 +159,14 @@ prompt_context(){} # For agnoster zsh theme, don't show hostname when you're on 
 bindkey '^[[[CE' autosuggest-execute
 
 # Use tab for autosuggest history completion, and shift+tab for regular completion
-bindkey '^I'      autosuggest-accept
+# (make sure to disable auto-completion import in ~/.fzf.zsh so that we can bind the tab-key here)
+bindkey '^I'      autosuggest-accept # tab key
+bindkey '^E'     forward-word
+#bindkey '^I'   complete-word       # tab          | complete
+#bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
+#
 #ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty bracketed-paste accept-line push-line-or-edit)
-ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 #ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 ##########################
@@ -189,3 +194,8 @@ alias s='source'
 
 #which aws_completer
 #export PATH="$(which aws_completer):${PATH}"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#export FZF_COMPLETION_TRIGGER=''
+#bindkey '^T' fzf-completion
+#bindkey '^I' $fzf_default_completion
