@@ -419,20 +419,37 @@ let g:NERDTrimTrailingWhitespace = 1
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 
-" fzf settings --------------------------
-" Using the same key as for ctrl-P plugin since I'm used to that
-map <C-p> :Files<CR>
+" Aux function to use with fzf in vim to search for files in the current git
+" project
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
 
-" Open fzf buffers pane
+command! ProjectFiles execute 'Files' s:find_git_root()
+
+" fzf settings --------------------------
+
+" Search through all file names in this project and open it with fzf
+" Using the same key as for ctrl-P plugin since I'm used to that
+map <C-p> :ProjectFiles<CR>
+" Search through all buffer names with fzf
 nnoremap <leader>b :Buffers<CR>
-" Open fzf file history pane
+" Search through all lines in loaded buffers with fzf
+nnoremap <leader>l :Lines<CR>
+" Search through history of opened files with fzf
 nnoremap <leader>h :History<CR>
-" Open fzf executed command history pane
-nnoremap <leader>c :History:<CR>
-" Open fzf command list pane
-nnoremap <leader>C :Commands<CR>
-" Open fzf marks pane
+" Search through executed command history with fzf
+nnoremap <leader>H :History:<CR>
+" Search through all vim commands with fzf
+nnoremap <leader>: :Commands<CR>
+" Search through marks pane with fzf
 nnoremap <leader>m :Marks<CR>
+" Search for tags (in current buffer) with fzf
+nnoremap <leader>> :BTags<cr>
+" Search for tags (globally) with fzf
+nnoremap <leader>. :Tags<cr>
+" Search through all vim help docs by line with fzf
+nnoremap <leader>? :Helptags<CR>
 
 " ctrlp settings -----------------------------
 " Auto-exclude files from being indexed in the current dir if they are

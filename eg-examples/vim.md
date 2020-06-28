@@ -22,3 +22,16 @@
 ### Misc
     - <C-a> | Increment the next number (increment and decrement are so fun to use!)
     - <C-x> | Decrement the next number
+
+## With my plugins and custom mappings
+
+- <C-p> | Search for and open any file in the current project
+- \b | Search through open buffer names
+- \l | Search through all lines in all loaded buffers
+- \h | Search through recent opened files
+- \H | Search through vim command history
+- \: | Search through all vim commands (includes installed plugin commands)
+- \m | Search through marks
+- \> | Search through tags in current file
+- \. | Search through tags globally
+- \? | Search through all vim help docs
