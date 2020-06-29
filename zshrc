@@ -169,6 +169,16 @@ bindkey '^E'     forward-word
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 #ZSH_AUTOSUGGEST_USE_ASYNC=true
 
+
+# Map C-K and C-J to go up and down the history same as the arrow keys
+# But these should be easier so that I don't have to move my hands all the way to the arrow keys
+# Needed to import this history-search-end zle lib to get the correct functionality
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey '^K' history-beginning-search-backward-end
+bindkey '^J' history-beginning-search-forward-end
+
 ##########################
 # TODO: source bashrc file after moving bash specific things into a bash_profile or other bash file, and just keep bashrc for things that can be shared between zshrc and bashrc in cases where I don't have zsh installed yet like on a remote server, so whenever I add new bash/zsh aliases, I just always add them in the bashrc, so that I'll have access to both no matter if I'm using bash or zsh. Once that's done, remove the below since they're copied from my bashrc.
 

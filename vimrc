@@ -238,9 +238,10 @@ Plugin 'mhartington/oceanic-next'
 "Plugin 'tyrannicaltoucan/vim-deep-space'
 "Plugin 'YorickPeterse/happy_hacking.vim'
 
-Plugin 'scrooloose/nerdTree'
+Plugin 'scrooloose/nerdTree' " Displays file explorer pane
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'tomtom/tcomment_vim' " For code commenting
 
 Plugin 'haya14busa/incsearch.vim' " Better jump to search as you type
 
@@ -248,9 +249,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'scrooloose/syntastic'
-
-Plugin 'tmhedberg/SimpylFold' " Python folding
-Plugin 'JavaScript-Indent' " JS/html better indenting
 
 ""Plugin 'Valloric/YouCompleteMe'
 
@@ -262,7 +260,6 @@ Plugin 'alvan/vim-closetag' " Auto closes HTML tags
 Plugin 'jiangmiao/auto-pairs' " Auto completing brackets
 
 "Plugin 'SirVer/ultisnips'
-"Plugin 'honza/vim-snippets'
 
 Plugin 'tpope/vim-surround' " Easily enclose text in parens and tags
 Plugin 'tpope/vim-abolish' " Do substitutions while prserving the case of words
@@ -276,7 +273,10 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
 " Language/framework tools
+Plugin 'tmhedberg/SimpylFold' " Python folding
+Plugin 'pangloss/vim-javascript' " JS syntax highlighting and improved indentation
 Plugin 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
+Plugin 'posva/vim-vue' " Vue syntax highlighting
 
 call vundle#end()
 
@@ -412,8 +412,10 @@ let NERDTreeMapActivateNode='<space>'
 
 " NERDCOMMENTER settings
 " nmap <silent> <leader>
-let g:NERDCompactSexyComs = 1
-let g:NERDTrimTrailingWhitespace = 1
+"let g:NERDCompactSexyComs = 1
+"let g:NERDTrimTrailingWhitespace = 1
+noremap <leader>cc :TComment<CR>
+"vnoremap <leader>cc :TComment<CR>
 
 " INCSEARCH settings -----------------------------
 map / <Plug>(incsearch-forward)
