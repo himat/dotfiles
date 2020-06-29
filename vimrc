@@ -36,8 +36,10 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" JS files should only indent by 2 spaces
+" Files that should only indent by 2 spaces
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType typescript setlocal shiftwidth=2 tabstop=2
+autocmd FileType vue setlocal shiftwidth=2 tabstop=2
 
 " Set files with matching names to be highlighted as shell script files
 autocmd BufEnter,BufNewFile,BufRead *aliasrc,*shellrc* set syntax=sh
@@ -248,9 +250,13 @@ Plugin 'haya14busa/incsearch.vim' " Better jump to search as you type
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
+Plugin 'dense-analysis/ale' " syntax checker and fixer
 
 ""Plugin 'Valloric/YouCompleteMe'
+
+" Enable FastFold if you're having slowness with folds
+" Plugin 'Konfekt/FastFold' " NOTE: I haven't tried this plugin yet, just putting it here if it will be useful one day
 
 "Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ludovicchabant/vim-gutentags'
@@ -494,7 +500,7 @@ augroup mySyntastic
 augroup END
 
 " press <Leader>S (i.e., \S) to not automatically check for errors
-nnoremap <Leader>S :SyntasticToggleMode<CR>
+" nnoremap <Leader>S :SyntasticToggleMode<CR>
 
 " type :lclose to close vim's loation list -- useful
 
@@ -518,8 +524,48 @@ set statusline+=%*
     " let g:syntastic_debug = 1
 " }
 
+
+" ALE settings ---------------------------
+
+" Needed to check vue files with eslint
+let g:ale_linter_aliases = {
+            \    'vue': ['vue', 'javascript'],
+            \    'jsx': ['css', 'javascript']
+\}
+
+" You should explicitly add only the linters you want running since it will be
+" more overhead otherwise since ALE will by default run all linteres found
+" in the ale_linteres dir in the ALE repo
+            " \ 'jsx': ['stylelint', 'eslint']
+let g:ale_linters = {
+            \ 'python': ['flake8', 'mypy'],
+            \ 'javascript': ['eslint'],
+            \ 'vue': ['eslint', 'vls'],
+            \ 'jsx': ['eslint']
+\}
+" Only run linters named in ale_linters settings.
+" let g:ale_linters_explicit = 1
+
+" Syntax fixers, can fix files with the ALEFix command
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'vue': ['eslint'],
+\}
+" Auto fix files on save
+let g:ale_fix_on_save = 1
+" Don't lint on entering a file
+" I turned this off bc the deafult of on made vim very slow when switching
+"   buffers
+let g:ale_lint_on_enter = 0
+
+" Toggle ALE active or not
+nnoremap <Leader>S :ALEToggle<CR>
+
+
 " Gutentags settings --------------------------
-set statusline+=%{gutentags#statusline()} " Prints when Gutentags is generating tags in the background
+" Prints when Gutentags is generating tags in the background
+set statusline+=%{gutentags#statusline()} 
 
 
 " Tagbar settings -----------------------------
