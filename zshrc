@@ -38,7 +38,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
  HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
 # DISABLE_UPDATE_PROMPT="true"
@@ -160,25 +160,31 @@ bindkey '^[[[CE' autosuggest-execute
 
 # Use tab for autosuggest history completion, and shift+tab for regular completion
 # (make sure to disable auto-completion import in ~/.fzf.zsh so that we can bind the tab-key here)
-bindkey '^I'      autosuggest-accept # tab key
+bindkey '^I'      autosuggest-accept # C-I === tab key
 bindkey '^E'     forward-word
-#bindkey '^I'   complete-word       # tab          | complete
-#bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
-#
-#ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty bracketed-paste accept-line push-line-or-edit)
+# bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
+
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty bracketed-paste accept-line push-line-or-edit)
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-#ZSH_AUTOSUGGEST_USE_ASYNC=true
+ZSH_AUTOSUGGEST_USE_ASYNC=true
 
-
-# Map C-I and C-E to go up and down the history same as the arrow keys
+# Map C-8 and C-7 to go up and down the history same as the arrow keys
 # But these should be easier so that I don't have to move my hands all the way to the arrow keys
 # Note: I couldn't use C-K/J because I use those for moving between tmux panes already
+# - And I couldn't use C-I/U because C-I and <Tab> send the same key codes in terminals, so you can't distinguish between them
 # Needed to import this history-search-end zle lib to get the correct functionality
 autoload -Uz history-search-end
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey '^I' history-beginning-search-backward-end
-bindkey '^E' history-beginning-search-forward-end
+# bindkey '^I' history-beginning-search-backward-end
+# NOTE: This requires setting up your iterm to map ctrl-9/8 to send these specific escape sequences
+bindkey '^[[[ctrl9' up-line-or-beginning-search
+bindkey '^[[[ctrl8' down-line-or-beginning-search
+# bindkey '^U' history-beginning-search-backward-end
+# bindkey '^U' down-line-or-beginning-search
+# bindkey ';' history-beginning-search-backward
 
 ##########################
 # TODO: source bashrc file after moving bash specific things into a bash_profile or other bash file, and just keep bashrc for things that can be shared between zshrc and bashrc in cases where I don't have zsh installed yet like on a remote server, so whenever I add new bash/zsh aliases, I just always add them in the bashrc, so that I'll have access to both no matter if I'm using bash or zsh. Once that's done, remove the below since they're copied from my bashrc.
