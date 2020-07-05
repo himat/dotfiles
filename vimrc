@@ -446,8 +446,8 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 map <C-p> :ProjectFiles<CR>
 " Search through all buffer names with fzf
 nnoremap <leader>b :Buffers<CR>
-" Search through all lines in loaded buffers with fzf
-nnoremap <leader>l :Lines<CR>
+" Search through all lines in all files with Ripgrep (:Rg is provided by fzf plugin)
+nnoremap <leader>l :Rg<CR>
 " Search through history of opened files with fzf
 nnoremap <leader>h :History<CR>
 " Search through executed command history with fzf
