@@ -39,6 +39,7 @@ set expandtab
 " Files that should only indent by 2 spaces
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 autocmd FileType typescript setlocal shiftwidth=2 tabstop=2
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType vue setlocal shiftwidth=2 tabstop=2
 
 " Set files with matching names to be highlighted as shell script files
@@ -91,7 +92,10 @@ set wildmode=full
 set wildignorecase
 
 " Keybinding for toggling paste mode
-set pastetoggle=<F2>
+:nnoremap <leader>p :set invpaste<CR>
+
+" Re-select the text you just pasted!
+nnoremap gV `[v`]
 
 "" Buffer bindings
 " Press F5 to show all open files and type the number to switch to
