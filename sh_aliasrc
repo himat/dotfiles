@@ -135,6 +135,31 @@ j() {
     cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' |  fzf --height 40% --reverse --inline-info)" 
 }
 
+# fzf + $PATH
+# Search for things in your $PATH
+# list directories in $PATH, press [enter] on an entry to list the executables inside.
+# press [escape] or ctrl-C to go back to directory listing
+fzfpath() {
+    local loc=$(echo $PATH | sed -e $'s/:/\\\n/g' | eval "fzf ${FZF_DEFAULT_OPTS} --header='[find:path]'")
+
+    if [[ -d $loc ]]; then
+        echo "$(rg --files $loc | rev | cut -d"/" -f1 | rev)" | eval "fzf ${FZF_DEFAULT_OPTS} --header='[find:exe] => ${loc}' >/dev/null"
+        fzfpath
+    fi
+}
+
+### fzf + brew 
+# Search for a brew package and then install it!
+fzfbrew() {
+    local inst=$(brew search | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:install]'")
+
+    if [[ $inst ]]; then
+        for prog in $(echo $inst); do
+            brew install $prog
+        done
+    fi
+}
+
 
 # Make fzf use ripgrep by default 
 # Main benefit of this is so that fzf will ignore files in .gitignore by default
