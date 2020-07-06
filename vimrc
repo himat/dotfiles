@@ -3,6 +3,9 @@ set nocompatible
 set backspace=indent,eol,start
 filetype off " required for Vundle plugin manager
 
+let mapleader=";"
+" let mapleader=" "
+
 " highlight occurrences from searches
 set hlsearch
 
@@ -31,14 +34,15 @@ set ruler
 set number
 
 " Indent as intelligently as vim knows how
-"set smartindent
+set smartindent
+set autoindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
 " Files that should only indent by 2 spaces
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
-autocmd FileType typescript setlocal shiftwidth=2 tabstop=2
+" autocmd FileType typescript setlocal shiftwidth=2 tabstop=2
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType vue setlocal shiftwidth=2 tabstop=2
 
@@ -110,6 +114,7 @@ nnoremap L :bn<CR>
 "nnoremap <leader>b :ls<CR>:b<Space>
 " Switch to previously used buffer
 nnoremap <leader><leader>b :b#<CR>
+nnoremap <silent><tab> :b#<CR>
 
 "" Vim tab bindings
 nnoremap gc :tabnew<CR>
