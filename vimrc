@@ -255,6 +255,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tomtom/tcomment_vim' " For code commenting
 
 Plugin 'haya14busa/incsearch.vim' " Better jump to search as you type
+Plugin 'haya14busa/incsearch-fuzzy.vim' " Fuzzy search as you type
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -276,8 +277,10 @@ Plugin 'jiangmiao/auto-pairs' " Auto completing brackets
 
 "Plugin 'SirVer/ultisnips'
 
+Plugin 'tpope/vim-fugitive' " Access git commands like blame inside vim
+
 Plugin 'tpope/vim-surround' " Easily enclose text in parens and tags
-Plugin 'tpope/vim-abolish' " Do substitutions while prserving the case of words
+Plugin 'tpope/vim-abolish' " Do substitutions while preserving the case of words
 Plugin 'chaoren/vim-wordmotion'
 
 
@@ -435,6 +438,8 @@ noremap <leader>cc :TComment<CR>
 " INCSEARCH settings -----------------------------
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
 
 " Aux function to use with fzf in vim to search for files in the current git
 " project
@@ -449,6 +454,9 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 " Search through all file names in this project and open it with fzf
 " Using the same key as for ctrl-P plugin since I'm used to that
 map <C-p> :ProjectFiles<CR>
+" Search through lines of current buffer
+" Replacing the default vim search with this
+" nnoremap / :BLines<CR>
 " Search through all buffer names with fzf
 nnoremap <leader>b :Buffers<CR>
 " Search through all lines in all files with Ripgrep (:Rg is provided by fzf plugin)
@@ -552,15 +560,20 @@ let g:ale_linters = {
             \ 'vue': ['eslint', 'vls'],
             \ 'jsx': ['eslint']
 \}
+let g:ale_python_mypy_options = '--ignore-missing-imports'
+
 " Only run linters named in ale_linters settings.
 " let g:ale_linters_explicit = 1
 
 " Syntax fixers, can fix files with the ALEFix command
 " \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 let g:ale_fixers = {
+\   'python': ['black', 'isort'],
 \   'javascript': ['eslint'],
 \   'vue': ['eslint'],
 \}
+let g:ale_python_isort_options='--profile black'
+
 " Auto fix files on save
 let g:ale_fix_on_save = 1
 " Don't lint on entering a file
@@ -568,9 +581,13 @@ let g:ale_fix_on_save = 1
 "   buffers
 let g:ale_lint_on_enter = 0
 
+let g:ale_virtualenv_dir_names = ['/Users/hima/Library/Caches/pypoetry/virtualenvs']
+
 " Toggle ALE active or not
 nnoremap <Leader>S :ALEToggle<CR>
 
+" Go to next ALE error
+nnoremap <Leader>a :ALENextWrap<CR>
 
 " Gutentags settings --------------------------
 " Prints when Gutentags is generating tags in the background
