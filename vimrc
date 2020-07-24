@@ -1,7 +1,6 @@
 " Ensure that we are in modern vim mode, not backwards-compatible vi mode
 set nocompatible
 set backspace=indent,eol,start
-filetype off " required for Vundle plugin manager
 
 let mapleader=";"
 " let mapleader=" "
@@ -231,79 +230,73 @@ augroup END
 " =============================================================================
 " =============================================================================
 " =============================================================================
-" Plugins settings below
+" Plugins settings below -----
 
-" set the runtime path to include Vundle and initialize
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Auto-install Plug if it's not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'christoomey/vim-tmux-navigator'
+call plug#begin('~/.vim/plugged')
 
 " Themes
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'mhartington/oceanic-next'
-"Plugin 'tyrannicaltoucan/vim-deep-space'
-"Plugin 'YorickPeterse/happy_hacking.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'mhartington/oceanic-next'
+"Plug 'tyrannicaltoucan/vim-deep-space'
+"Plug 'YorickPeterse/happy_hacking.vim'
 
-Plugin 'scrooloose/nerdTree' " Displays file explorer pane
-Plugin 'jistr/vim-nerdtree-tabs'
+Plug 'christoomey/vim-tmux-navigator'
 
-Plugin 'tomtom/tcomment_vim' " For code commenting
+Plug 'scrooloose/nerdTree' " Displays file explorer pane
+Plug 'jistr/vim-nerdtree-tabs'
 
-Plugin 'haya14busa/incsearch.vim' " Better jump to search as you type
-Plugin 'haya14busa/incsearch-fuzzy.vim' " Fuzzy search as you type
+Plug 'tomtom/tcomment_vim' " For code commenting
 
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'haya14busa/incsearch.vim' " Better jump to search as you type
+Plug 'haya14busa/incsearch-fuzzy.vim' " Fuzzy search as you type
 
-" Plugin 'scrooloose/syntastic'
-Plugin 'dense-analysis/ale' " syntax checker and fixer
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-""Plugin 'Valloric/YouCompleteMe'
+" Plug 'scrooloose/syntastic'
+Plug 'dense-analysis/ale' " syntax checker and fixer
+
+""Plug 'Valloric/YouCompleteMe'
 
 " Enable FastFold if you're having slowness with folds
-" Plugin 'Konfekt/FastFold' " NOTE: I haven't tried this plugin yet, just putting it here if it will be useful one day
+" Plug 'Konfekt/FastFold' " NOTE: I haven't tried this plugin yet, just putting it here if it will be useful one day
 
-"Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'ludovicchabant/vim-gutentags'
-"Plugin 'majutsushi/tagbar' " Shows a side panel of the current file's tags (class/methods)
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ludovicchabant/vim-gutentags'
+"Plug 'majutsushi/tagbar' " Shows a side panel of the current file's tags (class/methods)
 
-Plugin 'alvan/vim-closetag' " Auto closes HTML tags
-Plugin 'jiangmiao/auto-pairs' " Auto completing brackets
+Plug 'alvan/vim-closetag' " Auto closes HTML tags
+Plug 'jiangmiao/auto-pairs' " Auto completing brackets
 
-"Plugin 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 
-Plugin 'tpope/vim-fugitive' " Access git commands like blame inside vim
+Plug 'tpope/vim-fugitive' " Access git commands like blame inside vim
 
-Plugin 'tpope/vim-surround' " Easily enclose text in parens and tags
-Plugin 'tpope/vim-abolish' " Do substitutions while preserving the case of words
-Plugin 'chaoren/vim-wordmotion'
+Plug 'tpope/vim-surround' " Easily enclose text in parens and tags
+Plug 'tpope/vim-abolish' " Do substitutions while preserving the case of words
+Plug 'chaoren/vim-wordmotion'
 
 
 " Autocomplete. Uses YCM as its base
-Plugin 'zxqfl/tabnine-vim'
+Plug 'zxqfl/tabnine-vim'
 
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 " Language/framework tools
-Plugin 'tmhedberg/SimpylFold' " Python folding
-Plugin 'pangloss/vim-javascript' " JS syntax highlighting and improved indentation
-Plugin 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
-Plugin 'posva/vim-vue' " Vue syntax highlighting
+Plug 'tmhedberg/SimpylFold' " Python folding
+Plug 'pangloss/vim-javascript' " JS syntax highlighting and improved indentation
+Plug 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
+Plug 'posva/vim-vue' " Vue syntax highlighting
 
-call vundle#end()
-
-"Enable filetype detection and syntax highlighting
-"Must put after vundle block so that plugins can detect their own filetypes
-syntax enable
-filetype on
-filetype indent on
-filetype plugin on
+call plug#end()
 
 set t_Co=256
 
