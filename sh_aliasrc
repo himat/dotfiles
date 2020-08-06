@@ -112,7 +112,10 @@ tm() {
         tmux # Make new session
     fi
 }
-alias tma="tmux attach" # Connect to default (last) session
+
+# Attach to a session. Ex. "tmls" and then "tma projX" where projX is one of the names shown in tmls
+# To make a named session do "tmux new -s <proj_name>"
+alias tma="tmux attach -t" 
 alias tmls='tmux ls'
 
 # Usage: CA <venv>
