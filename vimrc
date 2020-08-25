@@ -244,6 +244,7 @@ call plug#begin('~/.vim/plugged')
 " Themes
 Plug 'altercation/vim-colors-solarized'
 Plug 'mhartington/oceanic-next'
+Plug 'NLKNguyen/papercolor-theme'
 "Plug 'tyrannicaltoucan/vim-deep-space'
 "Plug 'YorickPeterse/happy_hacking.vim'
 
@@ -256,7 +257,7 @@ Plug 'tomtom/tcomment_vim' " For code commenting
 
 Plug 'haya14busa/incsearch.vim' " Better jump to search as you type
 Plug 'haya14busa/incsearch-fuzzy.vim' " Fuzzy search as you type
-" Plug 'unblevable/quick-scope' " Highlights characters on current line when using seek motions
+Plug 'unblevable/quick-scope' " Highlights characters on current line when using seek motions
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -276,6 +277,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'alvan/vim-closetag' " Auto closes HTML tags
 Plug 'jiangmiao/auto-pairs' " Auto completing brackets
+Plug 'Yggdroot/indentLine' " Shows indentation levels
 
 "Plug 'SirVer/ultisnips'
 
@@ -312,9 +314,14 @@ set t_Co=256
 
 let g:oceanic_next_terminal_bold = 1
 "let g:oceanic_next_terminal_italic = 1
-colorscheme OceanicNext
+" colorscheme OceanicNext
+
 
 "colorscheme happy_hacking
+
+set background=light
+colorscheme PaperColor
+let g:airline_theme='papercolor'
 
 " set background=dark
 " colorscheme base16-twilight
