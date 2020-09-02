@@ -151,6 +151,10 @@ noremap g8 8gt
 noremap g9 9gt
 noremap g0 :tablast<CR>
 
+" Map different keys for increment and decrement a number
+nnoremap g+ <C-a>
+nnoremap g- <C-x>
+
 " Change position of new splits to open below and to the right by default
 set splitbelow
 set splitright
@@ -275,9 +279,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'ludovicchabant/vim-gutentags'
 "Plug 'majutsushi/tagbar' " Shows a side panel of the current file's tags (class/methods)
 
+Plug 'andymass/vim-matchup' " Extends the built-in % operator for more languages/words, also highlights words automatically
 Plug 'alvan/vim-closetag' " Auto closes HTML tags
 Plug 'jiangmiao/auto-pairs' " Auto completing brackets
-Plug 'Yggdroot/indentLine' " Shows indentation levels
+
+" Use :IndentLinesToggle to toggle showing indents
+Plug 'Yggdroot/indentLine' " Shows indentation levels 
 
 "Plug 'SirVer/ultisnips'
 
@@ -321,7 +328,6 @@ let g:oceanic_next_terminal_bold = 1
 
 set background=light
 colorscheme PaperColor
-let g:airline_theme='papercolor'
 
 " set background=dark
 " colorscheme base16-twilight
@@ -395,7 +401,8 @@ set laststatus=2 " Always show status bar
 " Auto find powerline symbols to display airline bar properly
 let g:airline_powerline_fonts = 1
 
-let g:airline_theme='cobalt2'
+" let g:airline_theme='cobalt2'
+let g:airline_theme='papercolor'
 
 " Defining a patch function lets us override pieces of an existing theme
 " Look at ~/.vim/bundle/vim-airline-themes/autoload/airline/themes to see what
@@ -414,6 +421,8 @@ let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 " Show tab numbers
 let g:airline#extensions#whitespace#enabled = 0 " Don't show trailing whitespace warnings
+
+let g:airline#extensions#branch#enabled = 0 " Don't show git branch
 
 " makes the display update faster when switching out of insert mode
 set ttimeoutlen=50
