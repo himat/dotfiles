@@ -1,7 +1,8 @@
 # Useful vim keybindings
 
-### Finding
-    - gd | (goto definition) Go to first occurrence of the text under cursor in this file, which will prob be the definition
+### Finding/Replacing
+    - gD | (goto definition) Go to first occurrence of the text under cursor in this file, which will prob be the definition
+    - <c-r> | To select some text and then replace it: select the text with `v`, then `y` which puts it in the default " register. Then type `:%s/` `<c-r>"` and this will insert the yanked " text right onto the command prompt!
 
 ### Folding
     - zO | Fully unfold all folds under cursor
@@ -14,10 +15,12 @@
     - e | Go to last character of this word 
     - [m | Go to top of current method 
     - ]m | Go to next method after current one
+    - % | Press while on a {, }, (, ), [, ] to jump to the matching one
 
 ### Change text
     - cw | Change this word until start of next word
     - ce | Change this word until the end of this word (a lot more useful than cw)
+    - J | Merge current line with the next one
 
 ### Misc
     - <C-a> | Increment the next number (increment and decrement are so fun to use!)
