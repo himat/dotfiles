@@ -13,6 +13,7 @@
 ### Text movement
     - w | Go to next character of the next word
     - e | Go to last character of this word 
+    - _ | Go to first non-whitespace character in this line (same as ^, but easier to reach)
     - [m | Go to top of current method 
     - ]m | Go to next method after current one
     - % | Press while on a {, }, (, ), [, ] to jump to the matching one
@@ -25,6 +26,15 @@
 ### Misc
     - <C-a> | Increment the next number (increment and decrement are so fun to use!)
     - <C-x> | Decrement the next number
+
+### Registers
+    - <C-r><register_name> | Inserts the contents of a register into the vim cmd line!
+    - "/ | Most recent search register. So if you just searched for something, and now want to replace it, you can do a substitution with this register instead of needing to retype it.
+    - "" | Default register. So if you just yanked or deleted something, then you can use this to paste it.
+    - "0 | Always has latest yanked text.
+    - "- | Small delete register. Set by a delete/change command if the deleted text is less than one line.
+    - "1 | Big delete register. Set by a delete/change command if text is more than one line.
+    - "2 - "9 | Store the previous changes/deleted text, and each one's contents gets moved to the next one upon every delete/change.
 
 ## With my plugins and custom mappings
 

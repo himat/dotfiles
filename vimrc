@@ -286,6 +286,9 @@ Plug 'jiangmiao/auto-pairs' " Auto completing brackets
 " Use :IndentLinesToggle to toggle showing indents
 Plug 'Yggdroot/indentLine' " Shows indentation levels 
 
+" Shows surrounding code context for the line you're on
+Plug 'wellle/context.vim'
+
 "Plug 'SirVer/ultisnips'
 
 Plug 'tpope/vim-fugitive' " Access git commands like blame inside vim
