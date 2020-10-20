@@ -10,6 +10,9 @@
 # Attach to a single session that's running if there's only one
     tm
 
+# Start new session with name
+    tmux new -s <name>
+
 # Restore all saved tmux sessions
     [inside running tmux session] <prefix> <C-r>
 

@@ -217,7 +217,6 @@ alias s='source'
 #bindkey '^T' fzf-completion
 #bindkey '^I' $fzf_default_completion
 
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/hima/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -232,4 +231,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
 
