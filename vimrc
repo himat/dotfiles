@@ -8,6 +8,10 @@ let mapleader=" "
 " highlight occurrences from searches
 set hlsearch
 
+" -------------------- General settings below ------------------------
+
+set t_Co=256
+
 " clears highlighting till next search
 " ctrl L - it also normally redraws the vim screen
 " NOTE: broken because of vim tmux navigator using C-l
@@ -310,8 +314,6 @@ Plug 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
 Plug 'posva/vim-vue' " Vue syntax highlighting
 
 call plug#end()
-
-set t_Co=256
 
 " ----------------- PLUGIN SETTINGS START HERE -----------------
 
@@ -623,6 +625,14 @@ set statusline+=%{gutentags#statusline()}
 " Opens the tagbar side pane, and auto-closes it once you go to a tag
 nmap <leader>g :TagbarOpenAutoClose<CR> 
 
+" Context.vim settings -----------------------------
+let g:context_add_mappings = 0
+
+nnoremap <silent> <expr> <C-Y> context#util#map('<C-Y>')
+nnoremap <silent> <expr> <C-E> context#util#map('<C-E>')
+nnoremap <silent> <expr> zz    context#util#map('zz')
+nnoremap <silent> <expr> zb    context#util#map('zb')
+nnoremap <silent> <expr> zt    context#util#map_zt()
 
 " coc settings --------------------------------
 
