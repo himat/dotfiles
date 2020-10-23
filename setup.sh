@@ -133,12 +133,13 @@ done
 
 echo -e "\nFinished linking everything!\n"
 
-echo "Installing vim plugins"
-if [ ! -d "${HOME}/.vim/bundle/Vundle.vim" ]; then
-    echo "Installing vundle for vim"
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-fi
-vim +PluginInstall +qall
+# if [ ! -f "${HOME}/.vim/autoload/plug.vim" ]; then
+#     echo "Installing Vim Plug"
+#     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \ 
+#         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# fi
+# echo "Installing vim plugins"
+# vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
 
 echo -e "\nInstalling eg"
 {
