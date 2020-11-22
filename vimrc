@@ -117,7 +117,6 @@ nnoremap L :bn<CR>
 "nnoremap <leader>b :ls<CR>:b<Space>
 " Switch to previously used buffer
 nnoremap <leader><leader>b :b#<CR>
-nnoremap <silent><tab> :b#<CR>
 
 "" Vim tab bindings
 nnoremap gc :tabnew<CR>
