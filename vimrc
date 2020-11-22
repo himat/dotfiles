@@ -310,12 +310,26 @@ Plug 'junegunn/fzf.vim'
 " Language/framework tools
 Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'pangloss/vim-javascript' " JS syntax highlighting and improved indentation
+Plug 'leafgarland/typescript-vim' " TS syntax highlighting"
 Plug 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
 Plug 'posva/vim-vue' " Vue syntax highlighting
 
 call plug#end()
 
 " ----------------- PLUGIN SETTINGS START HERE -----------------
+
+" quick scope settings --------------------
+" Triggers highlights only when pressing these keys instead of all the time
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" This changes the quick scope default colors (needed to do this since the
+" default colors didn't appear with my light vim color scheme)
+" NOTE: These lines need to happen before the 'colorscheme' is set in vim
+augroup qs_colors
+    autocmd!
+    autocmd ColorScheme * highlight QuickScopePrimary guifg='#88b061' gui=underline ctermfg=129 cterm=bold,underline
+    autocmd ColorScheme * highlight QuickScopeSecondary guifg='#49bfbf' gui=underline ctermfg=81 cterm=bold,underline
+augroup END
 
 "set background=dark
 "set termguicolors
@@ -468,10 +482,6 @@ endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
 
-" quick scope settings --------------------
-" Triggers highlights only when pressing these keys instead of all the time
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
 " fzf settings --------------------------
 
 " Search through all file names in this project and open it with fzf
@@ -590,15 +600,16 @@ let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 " Syntax fixers, can fix files with the ALEFix command
 " \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-let g:ale_fixers = {
-\   'python': ['black', 'isort'],
-\   'javascript': ['eslint'],
-\   'vue': ['eslint'],
-\}
-let g:ale_python_isort_options='--profile black'
+" \   'python': ['black', 'isort'],
+" let g:ale_fixers = {
+" \   'python': ['isort'],
+" \   'javascript': ['eslint'],
+" \   'vue': ['eslint'],
+" \}
+" let g:ale_python_isort_options='--profile black'
 
 " Auto fix files on save
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 " Don't lint on entering a file
 " I turned this off bc the deafult of on made vim very slow when switching
 "   buffers
@@ -737,7 +748,9 @@ augroup end
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-" Remap keys for applying codeAction to the current buffer.
+" Code actions are automated changes or fixes for an issue, such as
+" automatically importing a missing symbol. Code actions can be performed on
+" the word under the cursor with this mapping
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
@@ -764,8 +777,9 @@ command! -nargs=0 Format :call CocAction('format')
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" Add `:OrganizeImports` command to organize imports of the current buffer.
+" Removes unused and sorts them 
+command! -nargs=0 OrganizeImports   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
