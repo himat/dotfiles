@@ -12,7 +12,8 @@ backupdir=~/dotfiles_OLD
 RED="\033[0;31m"
 
 all_files=($(ls))
-exclude_files=("README.md" "setup.sh" "eg-examples")
+exclude_files=("README.md" "setup.sh" "eg-examples" "vim")
+additional_symlink_dirs_to_include=("vim")
 
 # Get list of all dotfiles without the excluded files
 for f_ind in "${!all_files[@]}"; do
@@ -129,6 +130,19 @@ for file in "${files_to_link[@]}"; do
 
     echo "-Symlinking $file"
     ln -s $dir/$file ~/.$file
+done
+
+# Also auto links all the files in the additional_symlink_dirs_to_include
+for add_dir in "${additional_symlink_dirs_to_include[@]}"; do
+    for file in "${add_dir}"; do
+        if [[ -f ~/.$add_dir/.$file ]]; then
+            echo "!Moving existing dotfile to backup dir: $add_dir/$file"
+            mv ~/.$add_dir/.$file $backupdir/$add_dir/$file
+        fi
+
+        echo "-Symlinking $file"
+        ln -s $add_dir/$file ~/.$add_dir/.$file
+    done
 done
 
 echo -e "\nFinished linking everything!\n"
