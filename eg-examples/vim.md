@@ -10,18 +10,23 @@
     - zR | Fully unfold all folds in buffer
     - zM | Fully fold all folds in buffer
 
-### Text movement
+### Movement
     - w | Go to next character of the next word
     - e | Go to last character of this word 
     - _ | Go to first non-whitespace character in this line (same as ^, but easier to reach)
+    - g_ | Go to last non-whitespace character in this line
     - [m | Go to top of current method 
     - ]m | Go to next method after current one
     - % | Press while on a {, }, (, ), [, ] to jump to the matching one
+    - ; | Repeat f,t,F,T command forward
+    - , | Repeat f,t,F,T command backwards
 
 ### Change text
     - cw | Change this word until start of next word
     - ce | Change this word until the end of this word (a lot more useful than cw)
     - J | Merge current line with the next one
+    - gU | Make letters upper-case
+    - gu | Make letters lower-case
 
 ### Misc
     - <C-a> | Increment the next number (increment and decrement are so fun to use!)
@@ -35,6 +40,12 @@
     - "- | Small delete register. Set by a delete/change command if the deleted text is less than one line.
     - "1 | Big delete register. Set by a delete/change command if text is more than one line.
     - "2 - "9 | Store the previous changes/deleted text, and each one's contents gets moved to the next one upon every delete/change.
+
+### Moving vim splits around
+    - <C-w>K | Move this current split to be the top-side one
+    - <C-w>L | Move this current split to be the right-side one
+    - <C-w>J | Move this current split to be the bottom-side one
+    - <C-w>H | Move this current split to be the left-side one
 
 ## With my plugins and custom mappings
 
