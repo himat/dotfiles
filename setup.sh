@@ -124,7 +124,7 @@ echo ""
 # Performing the copying and symlinking
 for file in "${files_to_link[@]}"; do
     if [[ -f ~/.$file ]]; then
-        echo "!Moving existing dotfile to backup dir: $file"
+        echo "!Moving existing dotfile to backup dir: ~/.$file"
         mv ~/.$file $backupdir/$file
     fi
 
@@ -133,15 +133,16 @@ for file in "${files_to_link[@]}"; do
 done
 
 # Also auto links all the files in the additional_symlink_dirs_to_include
+# NOTE: we assume that the dir itself is a hidden .dir but the files inside are not hidden (don't have a dot prefix)
 for add_dir in "${additional_symlink_dirs_to_include[@]}"; do
-    for file in "${add_dir}"; do
-        if [[ -f ~/.$add_dir/.$file ]]; then
-            echo "!Moving existing dotfile to backup dir: $add_dir/$file"
-            mv ~/.$add_dir/.$file $backupdir/$add_dir/$file
+    for file_with_dir in "${add_dir}/"*; do
+        if [[ -f ~/.$file_with_dir ]]; then
+            echo "!Moving existing dotfile to backup dir: ~/.$file_with_dir"
+            mv ~/.$file_with_dir $backupdir/$file_with_dir
         fi
 
-        echo "-Symlinking $file"
-        ln -s $add_dir/$file ~/.$add_dir/.$file
+        echo "-Symlinking ~/.$file_with_dir"
+        ln -s $dir/$file_with_dir ~/.$file_with_dir
     done
 done
 
