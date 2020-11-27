@@ -104,6 +104,14 @@ source $ZSH/oh-my-zsh.sh
 
 ######################### User configuration ==============================
 
+# Don't make ohmyzsh correct all arguments too, but only correct commands
+# This makes the corrections a lot less annoying but we do lose out on the 
+# argument corrections which can be useful. Would prob be better at some point
+# to just disable correction for my most used commands like git
+unsetopt correctall
+setopt correct
+
+
 # [mine] Load aliases and such
 [ -f ~/.sh_aliasrc ] && source ~/.sh_aliasrc
 
