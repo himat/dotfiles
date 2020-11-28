@@ -172,7 +172,7 @@ if [ -f '/Library/google-cloud-sdk/path.bash.inc' ]; then source '/Library/googl
 if [ -f '/Library/google-cloud-sdk/completion.bash.inc' ]; then source '/Library/google-cloud-sdk/completion.bash.inc'; fi
 
 # Using eval bc it makes nvm load faster
-export NVM_DIR="~/.nvm"
+export NVM_DIR="$HOME/.nvm"
 eval [ -s "$NVM_DIR/nvm.sh" ] && eval \. "$NVM_DIR/nvm.sh"  # This loads nvm
 eval [ -s "$NVM_DIR/bash_completion" ] && eval \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
