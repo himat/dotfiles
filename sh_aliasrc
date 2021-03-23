@@ -68,6 +68,7 @@ alias l='ls'
 alias la='ls -Al'
 alias ll='ls -l'
 alias llt='ls -lt'
+alias lltr='ls -ltr'
 alias l.="ls -A | egrep '^\.'" # List only hidden files
 alias sl='ls'
 
@@ -117,6 +118,14 @@ tm() {
 # To make a named session do "tmux new -s <proj_name>"
 alias tma="tmux attach -t" 
 alias tmls='tmux ls'
+
+# Python venv utils
+# Create a venv with `python -m venv <venv_name>`. Most commonly do `python -m venv venv`
+# Deactivate the current venv with simply the command `deactivate`
+VA() {
+    venv_folder_name="${1:-venv}" # Uses the name 'venv' by default since that's most common
+    source "${venv_folder_name}/bin/activate"
+}
 
 # Usage: CA <venv>
 alias CA='conda activate'

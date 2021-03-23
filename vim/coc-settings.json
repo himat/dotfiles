@@ -1,7 +1,7 @@
 {
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
     "eslint.autoFixOnSave": true,
-    "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "coc.preferences.formatOnSaveFiletypes": ["html", "javascript", "javascriptreact", "typescript", "typescriptreact"],
     "python.jediEnabled": false,
     "python.formatting.provider": "black",
     "python.linting.pylintEnabled": false,

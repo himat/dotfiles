@@ -309,7 +309,8 @@ Plug 'junegunn/fzf.vim'
 " Language/framework tools
 Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'pangloss/vim-javascript' " JS syntax highlighting and improved indentation
-Plug 'leafgarland/typescript-vim' " TS syntax highlighting"
+Plug 'leafgarland/typescript-vim' " TS syntax highlighting
+" Plug 'peitalin/vim-jsx-typescript' " tsx syntax highlighting
 Plug 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
 Plug 'posva/vim-vue' " Vue syntax highlighting
 

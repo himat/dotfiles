@@ -241,3 +241,13 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
+function up_dir() {
+    cd ..
+    # Needed to refresh zsh prompt
+    BUFFER=
+    zle accept-line
+}
+zle -N up_dir up_dir
+# alt-k to go cd up
+bindkey "^[k" up_dir
+
