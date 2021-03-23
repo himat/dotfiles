@@ -27,6 +27,10 @@
     - J | Merge current line with the next one
     - gU | Make letters upper-case
     - gu | Make letters lower-case
+    - ci<char> | Change inside these <char>s. Cool thing is that this actually works even if you're at the beginning of a line for quote chars!
+
+### Compose commands
+    - You can use search commands after a motion. For instance, / is the search command and.  d/testo: delete until the next occurrence of "testo"; - c/testo: change until the next occurrence of "testo";
 
 ### Misc
     - <C-a> | Increment the next number (increment and decrement are so fun to use!)
