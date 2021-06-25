@@ -1,13 +1,18 @@
 {
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
     "eslint.autoFixOnSave": true,
-    "coc.preferences.formatOnSaveFiletypes": ["html", "javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "coc.preferences.formatOnSaveFiletypes": ["html", "javascript", "javascriptreact", "typescript", "typescriptreact", "ruby"],
     "python.jediEnabled": false,
     "python.formatting.provider": "black",
     "python.linting.pylintEnabled": false,
     "python.linting.mypyEnabled": true,
     "python.linting.enabled": true,
 
-    "tailwindCSS.headwind.runOnSave": false
+    "tailwindCSS.headwind.runOnSave": false,
+
+    "solargraph.diagnostics": true,
+    "solargraph.commandPath": "~/.rvm/gems/ruby-2.7.2/wrappers/solargraph",
+    "solargraph.useBundler": false,
+    "solargraph.formatting": true
 
 }

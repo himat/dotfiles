@@ -11,8 +11,12 @@
     - zM | Fully fold all folds in buffer
 
 ### Movement
-    - w | Go to next character of the next word
+    - w | Go to first character of the next word
+    - b | Go back to the first character of the previous word
+    - W | Go to first character of the next WORD (delimited by any whitespace character)
+    - B | Go back to the first character of the previous WORD
     - e | Go to last character of this word 
+    - E | Go to last character of this WORD 
     - _ | Go to first non-whitespace character in this line (same as ^, but easier to reach)
     - g_ | Go to last non-whitespace character in this line
     - [m | Go to top of current method 

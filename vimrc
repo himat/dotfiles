@@ -2,7 +2,6 @@
 set nocompatible
 set backspace=indent,eol,start
 
-" let mapleader=";"
 let mapleader=" "
 
 " highlight occurrences from searches
