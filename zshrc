@@ -97,7 +97,7 @@ alias "cd"="logged_cd" # keep track of most recent directory
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting colorize autojump aws nvm)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting colorize autojump aws nvm fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
@@ -167,10 +167,15 @@ prompt_context(){} # For agnoster zsh theme, don't show hostname when you're on 
 bindkey '^[[[CE' autosuggest-execute
 
 # Use tab for autosuggest history completion, and shift+tab for regular completion
+# Note: I was using these segment of commands before I added fzf-tab below
 # (make sure to disable auto-completion import in ~/.fzf.zsh so that we can bind the tab-key here)
-bindkey '^I'      autosuggest-accept # C-I === tab key
-bindkey '^E'     forward-word
+# bindkey '^I'      autosuggest-accept # C-I === tab key
+# bindkey '^E'     forward-word
 # bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
+
+# For use with fzf-tab
+bindkey "^I" autosuggest-accept # Tab
+bindkey "^[[Z" fzf-tab-complete # Shift-tab activates the fzf-tab window to search
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty bracketed-paste accept-line push-line-or-edit)
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -219,26 +224,13 @@ alias s='source'
 
 #which aws_completer
 #export PATH="$(which aws_completer):${PATH}"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="$(gem env gemdir)/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #export FZF_COMPLETION_TRIGGER=''
 #bindkey '^T' fzf-completion
 #bindkey '^I' $fzf_default_completion
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/hima/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/hima/anaconda/etc/profile.d/conda.sh" ]; then
-        . "/Users/hima/anaconda/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/hima/anaconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 
 function up_dir() {
@@ -251,3 +243,8 @@ zle -N up_dir up_dir
 # alt-k to go cd up
 bindkey "^[k" up_dir
 
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
