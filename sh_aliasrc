@@ -31,6 +31,8 @@ alias cd......="cd ../../../../.."
 
 alias md="mkdir"
 alias rg="rg -S" # Makes ripgrep case insensitive by default (use rg -s for case sensitive)
+alias df="duf" # A better df alternative
+alias du="dust -d 1" # A better du alternative - shows the sizes of all subdirs in this current dir
 
 # Make a dir and immediately cd into it
 function mkdircd(){
@@ -242,10 +244,10 @@ function lastmod() {
 alias largest-files="find . -printf '%s %p\n' | sort -rn | head"
 
 # List the largest directories and files in this dir (shows in MB)
-alias largest-dirs="du -am | sort -rn | less"
+alias largest-dirs="\du -am | sort -rn | less"
 
 # List the largest immediate directories in this dir (shows in MB)
-alias largest-dirs-1="du -m --max-depth 1 | sort -rn | head"
+alias largest-dirs-1="\du -m --max-depth 1 | sort -rn | head"
 
 # Displays top processes by memory usage
 alias largest-mem="ps -eo size,pid,user,command --sort -size | awk '{ hr=\$1/1024 ; printf(\"%13.2f Mb \",hr)  } { for ( x=4 ; x<=NF ; x++  ) { printf(\"%s \",\$x)  } print \"\"  }' | head -n 15"
