@@ -803,6 +803,12 @@ nnoremap <silent><nowait> <leader>Ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>Cp  :<C-u>CocListResume<CR>
 
+let g:coc_global_extensions = [
+      \'coc-python',
+      \'coc-html', 
+      \'coc-tsserver', 
+      \]
+
 " ----------------- PLUGIN SETTINGS END HERE -----------------
 
 
