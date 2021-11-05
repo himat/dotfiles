@@ -294,6 +294,7 @@ Plug 'wellle/context.vim'
 "Plug 'SirVer/ultisnips'
 
 Plug 'tpope/vim-fugitive' " Access git commands like blame inside vim
+Plug 'tpope/vim-rhubarb' " GitHub extension for vim-fugitive
 
 Plug 'tpope/vim-surround' " Easily enclose text in parens and tags
 Plug 'tpope/vim-abolish' " Do substitutions while preserving the case of words
@@ -449,6 +450,8 @@ set ttimeoutlen=50
 map <C-n> :NERDTreeToggle<CR>
 " Open/close NERDTree Tabs with \t
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+" Show current file in nerdtree \n
+nmap <silent> <leader>n :NERDTreeFind<CR>
 " have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
 " Close current tab if there is only one window in it and it's NERDTree (default 1)
