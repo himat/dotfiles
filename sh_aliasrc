@@ -100,6 +100,9 @@ alias pdb='python -m pdb'
 alias jup='jupyter'
 alias jupnb='jupyter notebook'
 
+# Open github url for current repo's remote
+alias gh_open="git remote -v | awk '/fetch/{print \$2}' | sed -Ee 's#(git@|git://)#https://#' -e 's@com:@com/@' | head -n1 | xargs open"
+
 # Connect to existing tmux session if one exists, else create a new one
 tm() {
     num_sess=$(tmux list-session | wc -l)
