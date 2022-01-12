@@ -31,7 +31,8 @@
     cia = commit --amend
     cim = commit -m
     co = checkout
-    cob = checkout -b
+    cob = checkout -b # Creates new local branch
+    cobb = checkout - # Switches to previous branch
     b = branch
     bd = branch -d
     br = branch
