@@ -243,7 +243,7 @@ function lastmod() {
     find -type f -mmin -$1 -exec ls -l {} +
 }
 
-# List the largest files in this directory
+# List the largest files in this directory (shows in bytes)
 alias largest-files="find . -printf '%s %p\n' | sort -rn | head"
 
 # List the largest directories and files in this dir (shows in MB)
