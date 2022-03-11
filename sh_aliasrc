@@ -70,7 +70,9 @@ alias l='ls'
 alias la='ls -Al'
 alias ll='ls -l'
 alias llt='ls -lt'
+alias llth='ls -lt | head' # get the few most recently modified files
 alias lltr='ls -ltr'
+alias lltrh='ls -ltr | head'
 alias l.="ls -A | egrep '^\.'" # List only hidden files
 alias sl='ls'
 
