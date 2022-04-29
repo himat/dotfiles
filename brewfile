@@ -2,6 +2,7 @@
 
 brew "htop"
 brew "fzf"
+brew "autojump"
 
 # GNU utils
 brew "coreutils"
