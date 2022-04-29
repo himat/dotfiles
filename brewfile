@@ -1,0 +1,8 @@
+# Run 'brew bundle' to install all the packages in this file
+
+brew "htop"
+brew "fzf"
+brew "coreutils"
+brew "gnu-tar"
+brew "gnu-sed"
+# TODO: add the rest
