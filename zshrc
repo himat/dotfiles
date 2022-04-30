@@ -11,7 +11,7 @@ fi
 # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/hima/.oh-my-zsh"
+export ZSH="/Users/$USER/.oh-my-zsh"
 
 # Shows `less` output inline in the terminal if it's less than one page in length
 #   Otherwise does the default of showing it in a paged view
@@ -97,7 +97,8 @@ alias "cd"="logged_cd" # keep track of most recent directory
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting colorize autojump aws nvm fzf-tab)
+# NOTE: zsh-syntax-highlighting needs to be the last plugin apparently (https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#with-a-plugin-manager)
+plugins=(git zsh-autosuggestions colorize autojump aws nvm fzf-tab zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
