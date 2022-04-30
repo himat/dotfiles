@@ -12,3 +12,4 @@ Clone repo and then run `./setup.sh` which will symlink files in your home direc
 	    email = pegasus@industrial.illusions
 	```
 
+
