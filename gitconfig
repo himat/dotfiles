@@ -1,5 +1,7 @@
 [include]
     path = ~/.gitconfig.private
+[includeIf "gitdir:~/dotfiles/"]
+    path = ~/.gitconfig.personal
 
 [core]
     excludesfile = ~/.gitignore_global
@@ -74,3 +76,5 @@
 	branch = false
 [pull]
 	rebase = true
+[init]
+	defaultBranch = master
