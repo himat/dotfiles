@@ -280,8 +280,9 @@ Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'scrooloose/nerdTree' " Displays file explorer pane
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'lambdalisue/fern.vim' " File explorer pane
+" Plug 'scrooloose/nerdTree' " Displays file explorer pane
+" Plug 'jistr/vim-nerdtree-tabs'
 
 Plug 'tomtom/tcomment_vim' " For code commenting
 
@@ -320,6 +321,7 @@ Plug 'chamindra/marvim' " Save and run macros in a folder with custom names
 
 Plug 'tpope/vim-fugitive' " Access git commands like blame inside vim
 Plug 'tpope/vim-rhubarb' " GitHub extension for vim-fugitive
+Plug 'airblade/vim-gitgutter' " Shows markers for lines changed/added/deleted in vim
 
 Plug 'tpope/vim-surround' " Easily enclose text in parens and tags
 Plug 'tpope/vim-abolish' " Do substitutions while preserving the case of words
@@ -481,18 +483,102 @@ let g:airline#extensions#branch#enabled = 0 " Don't show git branch
 " makes the display update faster when switching out of insert mode
 set ttimeoutlen=50
 
+
+""" Fern file explorer 
+" Open/close with \t
+nmap <silent> <leader>t :Fern . -reveal=%<CR>
+
+" function! s:init_fern() abort
+"   " remove default mappings we don't want 
+"   unmap <buffer> h
+"   unmap <buffer> l
+"
+"   " new mappings
+"   nmap <buffer><expr> 
+"       \ <Plug>(fern-my-expand-or-collapse)
+"       \ fern#smart#leaf(
+"       \   "\<Plug>(fern-action-collapse)",
+"       \   "\<Plug>(fern-action-expand)",
+"       \   "\<Plug>(fern-action-collapse)",
+"       \ )
+"   nmap <buffer><nowait><C-m> <Plug>(fern-my-expand-or-collapse) " Enter key expands/folds a folder
+"
+"   
+"   nmap <buffer> o <Plug>(fern-action-open)
+"   nmap <buffer> r <Plug>(fern-action-reload)
+"   nmap <buffer> R <Plug>(fern-action-rename)
+"
+"   nmap <buffer> q :<C-u>quit<CR>
+" endfunction
+" augroup fern-custom
+"   autocmd! *
+"   autocmd FileType fern call s:init_fern()
+" augroup END
+
+
+" Show a preview window in fern with file contents
+function! s:fern_preview_init() abort
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-preview-or-nop)
+        \ fern#smart#leaf(
+        \   "\<Plug>(fern-action-open:edit)\<C-w>p",
+        \   "",
+        \ )
+  nmap <buffer><expr> j
+        \ fern#smart#drawer(
+        \   "j\<Plug>(fern-my-preview-or-nop)",
+        \   "j",
+        \ )
+  nmap <buffer><expr> k
+        \ fern#smart#drawer(
+        \   "k\<Plug>(fern-my-preview-or-nop)",
+        \   "k",
+        \ )
+endfunction
+augroup my-fern-preview
+  autocmd! *
+  autocmd FileType fern call s:fern_preview_init()
+augroup END
+
+
 """ NERDTREE TABS -----------------------------
-map <C-n> :NERDTreeToggle<CR>
+function s:OpenNERDTree()
+  let isFile = (&buftype == "") && (bufname() != "")
+
+  if isFile
+    let findCmd = "NERDTreeFind " . expand('%')
+  endif
+
+  " open a NERDTree in this window
+  edit .
+
+  " make this the implicit NERDTree buffer
+  let t:NERDTreeBufName=bufname()
+
+  if isFile
+    exe findCmd
+  endif
+endfunction
+
+" map <C-n> :NERDTreeToggle<CR>
+
 " Open/close NERDTree Tabs with \t
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+" nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+" nmap <silent> <leader>t :call <SID>OpenNERDTree()<CR>
+
 " Show current file in nerdtree \n
-nmap <silent> <leader>n :NERDTreeFind<CR>
+" nmap <silent> <leader>n :NERDTreeFind<CR>
+
+
 " have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
+"
 " Close current tab if there is only one window in it and it's NERDTree (default 1)
-let g:nerdtree_tabs_autoclose=0
+" let g:nerdtree_tabs_autoclose=0
 " Open dir/file with space
-let NERDTreeMapActivateNode='<space>'
+" let NERDTreeMapActivateNode='<space>'
+
+" let NERDTreeHijackNetrw=1
 
 " NERDCOMMENTER settings
 " nmap <silent> <leader>
