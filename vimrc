@@ -316,6 +316,7 @@ Plug 'Yggdroot/indentLine' " Shows indentation levels
 Plug 'wellle/context.vim'
 
 "Plug 'SirVer/ultisnips'
+Plug 'chamindra/marvim' " Save and run macros in a folder with custom names
 
 Plug 'tpope/vim-fugitive' " Access git commands like blame inside vim
 Plug 'tpope/vim-rhubarb' " GitHub extension for vim-fugitive
@@ -327,7 +328,7 @@ Plug 'chaoren/vim-wordmotion'
 " Autocomplete. Uses YCM as its base
 " Plug 'zxqfl/tabnine-vim'
 
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Language/framework tools
@@ -393,6 +394,16 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+""" Marvim macro saver/runner
+" let g:marvim_store = '/usr/local/.marvim' " change store place.
+let g:marvim_find_key = '<C-n>' " change find key from <F2> to 'space'
+let g:marvim_store_key = 'macrosave'     " change store key from <F3> to 'ms'
+" let g:marvim_register = 'q'       " change used register from 'q' to 'c' -
+" you have to record macros in this register and then run the save command
+" command Macrofind :call marvim#search()<CR>
+" command Macrofind :call marvim#search()<CR>
+" command Macrofind <C-n>
+" command Macrostore :call marvim#macro_store()<CR>
 
 """ YCM ----------------------------------
 " Set shift tab to tab backwards (to the left)
