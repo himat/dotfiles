@@ -12,4 +12,6 @@ Increase tracking speed in Trackpad system settings
 
 If using logitech mouse or a mouse without a compatible software on your mac, then install the SteerMouse program which helped make my logitech mouse work since I couldn't download the logitech software on macos 12 on a new mac.
 
+## Misc
 
+Show full path bar in Finder. Open a Finder window. Choose View > Show Path Bar.

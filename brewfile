@@ -1,4 +1,4 @@
-# Run 'brew bundle' to install all the packages in this file
+# Run 'brew bundle' in this dir to install all the packages in this file
 
 brew "tmux"
 brew "vim"

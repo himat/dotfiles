@@ -244,8 +244,5 @@ zle -N up_dir up_dir
 # alt-k to go cd up
 bindkey "^[k" up_dir
 
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
+

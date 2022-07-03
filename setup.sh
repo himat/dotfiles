@@ -12,7 +12,7 @@ backupdir=~/dotfiles_OLD
 RED="\033[0;31m"
 
 all_files=($(ls))
-exclude_files=("README.md" "setup.sh" "eg-examples" "vim")
+exclude_files=("README.md" "setup.sh" "eg-examples" "vim" "macos_shortcuts_setup.md" "iterm_my_light_theme.json" "setup_linux.sh" "setup_zsh.sh")
 additional_symlink_dirs_to_include=("vim")
 
 # Get list of all dotfiles without the excluded files
@@ -167,5 +167,6 @@ echo -e "\n\n"
 echo "** Remember to source your ~/.bashrc"
 print_gitconfig_info "${gitconfig_linked}"
 echo "See additional useful files: macos_shortcuts_setup.md"
-echo "Install my common utilities with `brew bundle` to install the packages in `brewfile`"
+echo "Install node manually by installing nvm first via their script from https://github.com/nvm-sh/nvm#installing-and-updating and then do 'nvm install node' and 'npm install -g yarn'"
+echo "Install my common utilities with 'brew bundle' to install the packages in 'brewfile'"
 echo "Install any ohmyzsh plugins with ./setup_zsh.sh"
