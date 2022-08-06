@@ -597,19 +597,13 @@ map ? <Plug>(incsearch-backward)
 map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 
-" Aux function to use with fzf in vim to search for files in the current git
-" project
-function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
-
-command! ProjectFiles execute 'Files' s:find_git_root()
-
 " fzf settings --------------------------
 
-" Search through all file names in this project and open it with fzf
+" Search through all file names in this current folder and below and open it with fzf
 " Using the same key as for ctrl-P plugin since I'm used to that
-map <C-p> :ProjectFiles<CR>
+map <C-p> :Files<CR> 
+" Use :GFiles to search for all files in the current entire git project, even
+" if you're in a subdir
 " Search through lines of current buffer
 " Replacing the default vim search with this
 " nnoremap / :BLines<CR>
@@ -931,6 +925,9 @@ let g:coc_global_extensions = [
       \'coc-python',
       \'coc-html', 
       \'coc-tsserver', 
+      \'coc-prettier',
+      \'coc-tabnine',
+      \'coc-rust-analyzer',
       \]
 
 " ----------------- PLUGIN SETTINGS END HERE -----------------
