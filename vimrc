@@ -599,6 +599,15 @@ map z? <Plug>(incsearch-fuzzy-?)
 
 " fzf settings --------------------------
 
+
+" Search through all files even those that would be ignored by rg normally
+" Note that if there are certain files for your project specifically that
+" you're going to be searching for often even though they're gitignored, then
+" it's better to add those to a new `.ignore` file in that project dir with a
+" line like `!logs` or whatever the name of the file you want to include in
+" searches
+command! -bang -nargs=* FilesAll call fzf#vim#grep("rg --files --no-ignore ".<q-args>, 1, <bang>0)
+
 " Search through all file names in this current folder and below and open it with fzf
 " Using the same key as for ctrl-P plugin since I'm used to that
 map <C-p> :Files<CR> 
