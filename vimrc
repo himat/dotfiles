@@ -753,6 +753,9 @@ nnoremap <Leader>a :ALENextWrap<CR>
 " Prints when Gutentags is generating tags in the background
 set statusline+=%{gutentags#statusline()} 
 
+" Gitgutter settings  --------------------------
+" I don't want any of the keybindings since a few were interfering with some other bindings I had and I don't use any of the commands from this plugin anyway
+let g:gitgutter_map_keys = 0 
 
 " Tagbar settings -----------------------------
 " Main benefit of tagbar for me is that with airline, it auto-shows the
