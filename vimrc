@@ -340,6 +340,7 @@ Plug 'leafgarland/typescript-vim' " TS syntax highlighting
 " Plug 'peitalin/vim-jsx-typescript' " tsx syntax highlighting
 Plug 'jparise/vim-graphql' " Graphql syntax highlighting and indentation
 Plug 'posva/vim-vue' " Vue syntax highlighting
+Plug 'tpope/vim-fireplace' " Clojure interactive repl connection
 
 call plug#end()
 
