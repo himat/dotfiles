@@ -34,6 +34,9 @@ alias rg="rg -S" # Makes ripgrep case insensitive by default (use rg -s for case
 alias df="duf" # A better df alternative
 alias du="dust -d 1" # A better du alternative - shows the sizes of all subdirs in this current dir
 
+alias gpsh="git push"
+alias gpl="git pull"
+
 # Make a dir and immediately cd into it
 function mkdircd(){
     mkdir "$1" && cd "$1"
