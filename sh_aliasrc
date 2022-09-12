@@ -31,6 +31,7 @@ alias cd......="cd ../../../../.."
 
 alias md="mkdir"
 alias rg="rg -S" # Makes ripgrep case insensitive by default (use rg -s for case sensitive)
+alias rgf="rg --files | rg" # For searching through only filenames in current dir instead of file contents
 alias df="duf" # A better df alternative
 alias du="dust -d 1" # A better du alternative - shows the sizes of all subdirs in this current dir
 
