@@ -35,6 +35,7 @@
     co = checkout
     cob = checkout -b # Creates new local branch
     cobb = checkout - # Switches to previous branch
+    com = checkout master # Switch to master
     b = branch
     bd = branch -d
     br = branch
