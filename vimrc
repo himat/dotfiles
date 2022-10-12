@@ -935,7 +935,7 @@ nnoremap <silent><nowait> <leader>Ck  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <leader>Cp  :<C-u>CocListResume<CR>
 
 let g:coc_global_extensions = [
-      \'coc-python',
+      \'coc-pyright',
       \'coc-html', 
       \'coc-tsserver', 
       \'coc-prettier',
