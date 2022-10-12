@@ -49,6 +49,10 @@
     tree = log --graph --decorate --pretty=format:\"%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s\" --abbrev-commit --all
     root = rev-parse --show-toplevel # Return repo's root dir, useful for shell prompts
 
+    # Run this when you have a branch that was forked off another branch, and that original branch was squash merged into master. https://stackoverflow.com/a/70994400/1807163
+    #   Ex. `git rebase-onto feature-b-off-a feature-a` where feature-a is the branch that was squash merged into master
+	rebase-onto = "!f() { git rebase --onto master $(git merge-base \"$1\" \"$2\") \"$1\"; }; f"
+
 [diff]
     # Automatically detect renames/moves of files in git diffs, so that it
     #   doesn't show the full text of the diff as long as the similarity
