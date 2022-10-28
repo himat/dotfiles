@@ -1,4 +1,6 @@
 {
+    "suggest.noselect": true,
+
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
     "eslint.autoFixOnSave": true,
     "coc.preferences.formatOnSaveFiletypes": ["html", "javascript", "javascriptreact", "typescript", "typescriptreact", "ruby"],
