@@ -4,6 +4,7 @@
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
     "eslint.autoFixOnSave": true,
     "coc.preferences.formatOnSaveFiletypes": ["html", "javascript", "javascriptreact", "typescript", "typescriptreact", "ruby"],
+    "python.analysis.diagnosticMode": "workspace",
     "python.jediEnabled": false,
     "python.formatting.provider": "black",
     "python.linting.pylintEnabled": false,
