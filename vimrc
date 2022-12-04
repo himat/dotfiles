@@ -489,32 +489,32 @@ set ttimeoutlen=50
 " Open/close with \t
 nmap <silent> <leader>t :Fern . -reveal=%<CR>
 
-" function! s:init_fern() abort
-"   " remove default mappings we don't want 
-"   unmap <buffer> h
-"   unmap <buffer> l
-"
-"   " new mappings
-"   nmap <buffer><expr> 
-"       \ <Plug>(fern-my-expand-or-collapse)
-"       \ fern#smart#leaf(
-"       \   "\<Plug>(fern-action-collapse)",
-"       \   "\<Plug>(fern-action-expand)",
-"       \   "\<Plug>(fern-action-collapse)",
-"       \ )
-"   nmap <buffer><nowait><C-m> <Plug>(fern-my-expand-or-collapse) " Enter key expands/folds a folder
-"
-"   
-"   nmap <buffer> o <Plug>(fern-action-open)
-"   nmap <buffer> r <Plug>(fern-action-reload)
-"   nmap <buffer> R <Plug>(fern-action-rename)
-"
-"   nmap <buffer> q :<C-u>quit<CR>
-" endfunction
-" augroup fern-custom
-"   autocmd! *
-"   autocmd FileType fern call s:init_fern()
-" augroup END
+function! s:init_fern() abort
+  " remove default mappings we don't want 
+  " unmap <buffer> h
+  " unmap <buffer> l
+
+  " new mappings
+  " nmap <buffer><expr> 
+  "     \ <Plug>(fern-my-expand-or-collapse)
+  "     \ fern#smart#leaf(
+  "     \   "\<Plug>(fern-action-collapse)",
+  "     \   "\<Plug>(fern-action-expand)",
+  "     \   "\<Plug>(fern-action-collapse)",
+  "     \ )
+  nmap <buffer><nowait><C-m> <Plug>(fern-my-expand-or-collapse) " Enter key expands/folds a folder
+
+
+  nmap <buffer> o <Plug>(fern-action-open)
+  nmap <buffer> r <Plug>(fern-action-reload)
+  nmap <buffer> R <Plug>(fern-action-rename)
+
+  nmap <buffer> q :<C-u>quit<CR>
+endfunction
+augroup fern-custom
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
 
 
 " Show a preview window in fern with file contents
