@@ -98,7 +98,7 @@ alias "cd"="logged_cd" # keep track of most recent directory
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # NOTE: zsh-syntax-highlighting needs to be the last plugin apparently (https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#with-a-plugin-manager)
-plugins=(git zsh-autosuggestions colorize autojump aws nvm fzf-tab zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions colorize autojump aws nvm poetry fzf-tab zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
