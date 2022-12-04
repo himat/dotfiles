@@ -83,6 +83,15 @@ alias sl='ls'
 alias grep='grep --color=auto'
 alias lgrep="ls -AF | grep"
 
+diff-pretty() {
+    if which diff-so-fancy >/dev/null; then
+        diff -u $1 $2 | diff-so-fancy
+    else
+        diff -u $1 $2
+    fi
+}
+alias diff='diff-pretty'
+
 alias killz='killall -9 '
 alias hidden='ls -a | grep "^\..*"'
 

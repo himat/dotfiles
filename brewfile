@@ -16,6 +16,7 @@ brew "watch"
 brew "md5sha1sum"
 brew "duf" # better disk free util
 brew "dust" # better disk used util
+brew "diff-so-fancy" # better diff UI
 
 # GNU utils
 brew "coreutils"
