@@ -19,6 +19,11 @@
    - Binary files. (ripgrep considers any file with a NUL byte to be binary.)
    - Symbolic links aren't followed. 
 
+# Search ignored files 
+    rg -u # disable gitignore ignored files 
+    rg -uu # also search hidden files and dirs
+    rg -uuu # also search binary files
+
 # See only file names with matches
     rg -l 'some text'
     rg --files-with-matches 'some text' 
