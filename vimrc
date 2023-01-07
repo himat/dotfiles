@@ -417,6 +417,12 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 " it scrolls up, otherwise, it unindents 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-d>" 
 
+" Vim indentlines 
+" Prevents quotes from being hidden in json files
+" The indentlines plugin by default causes  quotes to be hidden in json files
+" and similarly in markdown files in vim, so need to do this so that we can still see those
+let g:vim_json_conceal=0
+let g:markdown_syntax_conceal=0
 
 " Vim closetag ----------------------------
 " filenames like *.xml, *.html, *.xhtml, ...
@@ -968,4 +974,7 @@ if &term =~ '256color'
   " from: https://sunaku.github.io/vim-256color-bce.html
   set t_ut=
 endif
+
+
+
 
