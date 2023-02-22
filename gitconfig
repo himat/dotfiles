@@ -17,9 +17,12 @@
 
     di = diff
     dis = diff --staged
+    distat = diff --stat # --stat shows stats on lines changed per file in diff
+    disstat = diff --staged --stat
+
     # Shows the diff from before the latest pull/commit/reflog change and now
     #   Can also do things like master@{10 minutes ago} and such
-    diffpull = diff master@{1} master
+    difflatestpull = diff master@{1} master
 
     show-names = show --name-status # Only show files changed in the latest commit instead of all the diffs too
 
