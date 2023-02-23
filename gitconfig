@@ -8,6 +8,8 @@
     editor = vim
 
 [alias]
+    main-branch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4 # auto determines master vs main based on the current repo
+
     aliases = config --get-regexp alias
     st = status
     s = status -s # Short status
@@ -38,7 +40,7 @@
     co = checkout
     cob = checkout -b # Creates new local branch
     cobb = checkout - # Switches to previous branch
-    com = checkout master # Switch to master
+    com = "!f(){ git checkout $(git main-branch) $@;}; f" # Switch to main branch
     b = branch
     bd = branch -d
     br = branch
