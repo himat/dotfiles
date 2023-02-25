@@ -7,6 +7,7 @@ let mapleader=" "
 " highlight occurrences from searches
 set hlsearch
 
+
 " -------------------- General settings below ------------------------
 
 set t_Co=256
@@ -329,6 +330,7 @@ Plug 'chaoren/vim-wordmotion'
 
 " Autocomplete. Uses YCM as its base
 " Plug 'zxqfl/tabnine-vim'
+Plug 'github/copilot.vim'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -781,6 +783,22 @@ nnoremap <silent> <expr> zz    context#util#map('zz')
 nnoremap <silent> <expr> zb    context#util#map('zb')
 nnoremap <silent> <expr> zt    context#util#map_zt()
 
+" github copilot settings -----------------------------
+
+" The keys shown here are the chars that get actually printed to my screen in
+" iterm2 when I hit alt+the original keys, so I needed to use the printed keys
+" to map to the desired actions (I tried changing iterm settings to send a
+" meta key but it just didn't work)
+" <alt-[> - there's an issue with this one in tmux where it inserts spaces for
+" some reason - ignoring for now since I can get by with just using the
+" copilot-next one only for now
+inoremap <silent>“ <Plug>(copilot-previous) 
+" <alt-]>
+inoremap ‘ <Plug>(copilot-next)
+" <alt-\>
+inoremap « <Plug>(copilot-suggest)
+
+
 " coc settings --------------------------------
 " Based on recommended setup https://github.com/neoclide/coc.nvim#example-vim-configuration
 
@@ -974,7 +992,6 @@ if &term =~ '256color'
   " from: https://sunaku.github.io/vim-256color-bce.html
   set t_ut=
 endif
-
 
 
 
