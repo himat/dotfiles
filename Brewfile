@@ -18,6 +18,7 @@ brew "duf" # better disk free util
 brew "dust" # better disk used util
 brew "ncdu" # better disk used util that's actually interactive so reduces time spent looking at various folders to see what's taking up space
 brew "diff-so-fancy" # better diff UI
+brew "jq"
 
 # GNU utils
 brew "coreutils"
