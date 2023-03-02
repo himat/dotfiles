@@ -12,6 +12,7 @@
 
     aliases = config --get-regexp alias
     st = status
+    stt = status . # status of current directory
     s = status -s # Short status
 
     a = add
