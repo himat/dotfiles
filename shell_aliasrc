@@ -411,12 +411,13 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 
 
-function add_to_blacklist() {
-# adds to /etc/hosts
+function add_domain_to_blacklist() {
     if [[ $# -eq 0 ]]; then
         echo "ERR: Call this with a domain name"
         return 1
     fi
 
-    echo ""
+    # Need to sudo the entire thing since just doing 'sudo echo...' doesn't work because the shell is the one doing the redirection '>>' not the echo command
+    sudo sh -c "echo '127.0.0.1 $1' >> /etc/hosts"
 }
+alias blacklist_domain='add_domain_to_blacklist'
