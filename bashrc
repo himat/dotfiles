@@ -70,7 +70,7 @@ fi
 
 
 # Load aliases and such
-[ -f ~/.sh_aliasrc ] && source ~/.sh_aliasrc
+[ -f ~/.shell_aliasrc ] && source ~/.shell_aliasrc
 
 # ----- change the prompt ----------------------------------------------------
 # get current branch in git repo

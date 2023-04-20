@@ -80,14 +80,14 @@ DISABLE_AUTO_UPDATE="true"
 # [mine] Need to put this before zsh plugins get loaded so that when I use 
 #   autojump to go to a dir (which uses cd) internally that it uses my logged_cd
 #   since otherwise, it won't get saved
-#   And I couldn't just source my entire ~/.sh_aliasrc file here because then
+#   And I couldn't just source my entire ~/.shell_aliasrc file here because then
 #   sourcing oh-my-zsh.sh alter overwrites some of the aliases like 'l'
 #   So I just had to duplicate this single one here
 # Saves current directory between sessions
 unalias cd 2>/dev/null # Prevent infinite loops if sourcing this file again in the same session
 logged_cd() {
-    cd "$@"
-    pwd > ~/.last_cd
+    # return 1
+    cd "$@" && pwd > ~/.last_cd || return 1
 }
 
 alias "cd"="logged_cd" # keep track of most recent directory 
@@ -98,7 +98,8 @@ alias "cd"="logged_cd" # keep track of most recent directory
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # NOTE: zsh-syntax-highlighting needs to be the last plugin apparently (https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#with-a-plugin-manager)
-plugins=(git zsh-autosuggestions colorize autojump aws nvm poetry fzf-tab zsh-syntax-highlighting)
+# And fzf-tab should also be the last plugin almost but before zsh-autosuggestions (https://github.com/Aloxaf/fzf-tab#compatibility-with-other-plugins)
+plugins=(git colorize autojump aws nvm poetry fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
@@ -114,7 +115,7 @@ setopt correct
 
 
 # [mine] Load aliases and such
-[ -f ~/.sh_aliasrc ] && source ~/.sh_aliasrc
+[ -f ~/.shell_aliasrc ] && source ~/.shell_aliasrc
 
 # By default it seems that oh-my-zsh auto share history between current 
 # sesions, which is very annoying when using the up arrow key in terminal to 
@@ -220,7 +221,6 @@ alias cd......="cd ../../../../.."
 alias g='git'
 alias gi='git'
 alias v='vim'
-alias s='source'
 
 
 #which aws_completer

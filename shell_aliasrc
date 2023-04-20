@@ -411,3 +411,12 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 
 
+function add_to_blacklist() {
+# adds to /etc/hosts
+    if [[ $# -eq 0 ]]; then
+        echo "ERR: Call this with a domain name"
+        return 1
+    fi
+
+    echo ""
+}
