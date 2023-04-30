@@ -88,6 +88,24 @@ au FileType python nnoremap <leader><S-i> oimport IPython; IPython.embed(); impo
 vnoremap p "_dp
 vnoremap P "_dP
 
+" Remaps the default :s in visual mode to auto map it so that only the text you have
+" already highlighted is used for the replace command that you'll type after
+" this usually
+" From: https://vi.stackexchange.com/questions/1922/how-to-replace-only-within-visual-selection
+" This is because I ran into this issue where I wanted to replace ONLY within the
+" visual selection, but the default vim '<,'>s/ would replace in the entire
+" line instead which is terrible default functionality!
+" But using the \%V around where you want to replace fixes this
+"
+" If you don't want this because you're selecting on an entire line, then just
+" proceed as usual with a V to select the entire line, and then do a : and
+" wait a tiny bit, and then type the s manually. Otherwise if you type it
+" immediately then it will insert the %V's but that's also fine since you've
+" already selected the entire line -- so just mentioning this if you prefer
+" not having those even when selecting the entire line, but again doesn't
+" matter either way.
+vnoremap :s :s/\%V\%V/<Left><Left><Left><Left>
+
 " Synchronizes vim's default register and the system clipboard so you can just
 " use y and p to copy and paste the same text anywhere on your computer
 "set clipboard^=unnamed
