@@ -72,6 +72,8 @@ alias ls='ls --color=auto --human-readable --classify'
 #fi
 alias l='ls'
 alias la='ls -Al'
+alias lla='la'
+alias lal='la'
 alias ll='ls -l'
 alias llt='ls -lt'
 alias llth='ls -lt | head' # get the few most recently modified files

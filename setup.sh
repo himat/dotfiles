@@ -12,7 +12,7 @@ backupdir=~/dotfiles_OLD
 RED="\033[0;31m"
 
 all_files=($(ls))
-exclude_files=("README.md" "setup.sh" "eg-examples" "vim" "macos_shortcuts_setup.md" "iterm_my_light_theme.json" "setup_linux.sh" "setup_zsh.sh")
+exclude_files=("README.md" "setup.sh" "eg-examples" "vim" "macos_shortcuts_setup.md" "iterm_my_light_theme.json" "setup_linux.sh" "setup_zsh.sh" "Brewfile" "Brewfile.lock.json" "setup_tmux.sh")
 additional_symlink_dirs_to_include=("vim")
 
 # Get list of all dotfiles without the excluded files
