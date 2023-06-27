@@ -17,6 +17,7 @@
     "solargraph.diagnostics": true,
     "solargraph.commandPath": "~/.rvm/gems/ruby-2.7.2/wrappers/solargraph",
     "solargraph.useBundler": false,
-    "solargraph.formatting": true
+    "solargraph.formatting": true,
+    "svelte.enable-ts-plugin": true
 
 }

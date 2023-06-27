@@ -275,14 +275,6 @@ alias largest-mem="ps -eo size,pid,user,command --sort -size | awk '{ hr=\$1/102
 # Aliases thefuck pkg as 'tf' so just type that to fix a command
 eval $(thefuck --alias tf)
 
-# ----- local configuration ----------------------------------------------------
-# Put settings that should be there for each local machine in ~/.bashrc.extra
-    # so that local preferences aren't pushed to the git repo 
-if [[ -f ~/.shellrc.extra ]]; then
-    source ~/.shellrc.extra
-fi
-
-
 # Call from cmdline as 'aws_profile <prof_name>' to switch the current aws cli profile
 #   Profile names are found in ~/.aws/config
 function aws-profile() {
@@ -423,3 +415,12 @@ function add_domain_to_blacklist() {
     sudo sh -c "echo '127.0.0.1 $1' >> /etc/hosts"
 }
 alias blacklist_domain='add_domain_to_blacklist'
+
+# ----- local configuration ----------------------------------------------------
+# Put settings that should be there for each local machine in ~/.bashrc.extra
+    # so that local preferences aren't pushed to the git repo 
+if [[ -f ~/.shellrc.extra ]]; then
+    source ~/.shellrc.extra
+fi
+
+

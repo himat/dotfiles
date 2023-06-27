@@ -114,9 +114,6 @@ unsetopt correctall
 setopt correct
 
 
-# [mine] Load aliases and such
-[ -f ~/.shell_aliasrc ] && source ~/.shell_aliasrc
-
 # By default it seems that oh-my-zsh auto share history between current 
 # sesions, which is very annoying when using the up arrow key in terminal to 
 # go to previous commands since it starts showing commands ran in other tabs, 
@@ -248,4 +245,8 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+# [mine] Load aliases and such
+[ -f ~/.shell_aliasrc ] && source ~/.shell_aliasrc
 
