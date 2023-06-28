@@ -416,6 +416,27 @@ function add_domain_to_blacklist() {
 }
 alias blacklist_domain='add_domain_to_blacklist'
 
+
+# Enables having the `pbpaste | something | pbcopy` idiom as `pbfilter something`, which enables easy filtering/transformation of clipboard text through a shell command 
+# Ex. 
+#   - pbfilter | json_pp 
+#   - pbfilter | sed 's/this/that/'
+#   - pbfilter | vipe # to edit text more easily in vim and then save it back to clipboard
+# Calling this without arguments will remove any formatting from the text in the pasteboard, putting just plain text back.
+# It does have a some limitations, though: you can't use it with an alias, or pipeline, or anything complex like that. The filter command must be a single regular command (or function) and its arguments.
+function pbfilter() {
+      if [ $# -gt 0 ]; then
+          (pbpaste | "$@" | pbcopy)
+      else
+          pbpaste | pbcopy
+      fi
+} 
+
+# Can't use vipe with pbfilter as vipe is interactive, so this separate one just for vipe
+function pbvipe() {
+    pbpaste | vipe | pbcopy
+}
+
 # ----- local configuration ----------------------------------------------------
 # Put settings that should be there for each local machine in ~/.bashrc.extra
     # so that local preferences aren't pushed to the git repo 
