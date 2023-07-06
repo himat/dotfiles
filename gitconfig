@@ -44,6 +44,7 @@
     com = "!f(){ git checkout $(git main-branch) $@;}; f" # Switch to main branch
     b = branch
     bd = branch -d
+    b-recent = branch --sort=-committerdate # Shows branches with most recently committed first
     br = branch
     ba = branch -av
     bra = branch -av
