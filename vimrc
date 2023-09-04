@@ -275,6 +275,22 @@ augroup autosourcing
     endif
 augroup END
 
+"""" My custom vim functions 
+function! DBTRefReplace(match)
+  if a:match[0:2] == 'int'
+    return 'int.' . a:match
+  elseif a:match[0:2] == 'dim'
+    return 'marts.' . a:match
+  elseif a:match[0:2] == 'stg'
+    return 'staging.' . a:match
+  else
+    return a:match[0:2]
+  endif
+endfunction
+" Use it like:
+" :%s/\v\{\{\s*ref\('(.*)'\)\s*\}\}/\=DBTRefReplace(submatch(1))/g
+
+
 " =============================================================================
 " =============================================================================
 " =============================================================================
@@ -426,7 +442,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 """ Marvim macro saver/runner
 " let g:marvim_store = '/usr/local/.marvim' " change store place.
-let g:marvim_find_key = '<C-n>' " change find key from <F2> to 'space'
+let g:marvim_find_key = '<C-n>' " change find key from <F2> to this
 let g:marvim_store_key = 'macrosave'     " change store key from <F3> to 'ms'
 " let g:marvim_register = 'q'       " change used register from 'q' to 'c' -
 " you have to record macros in this register and then run the save command
@@ -633,6 +649,10 @@ map z? <Plug>(incsearch-fuzzy-?)
 
 " fzf settings --------------------------
 
+" Preview window settings
+" - Note that this array is passed as arguments to fzf#vim#with_preview function.
+" - To learn more about preview window options, see `--preview-window` section of `man fzf`.
+" let g:fzf_preview_window = ['right,50%', 'ctrl-/', 'keep-right']
 
 " Search through all files even those that would be ignored by rg normally
 " Note that if there are certain files for your project specifically that
@@ -641,6 +661,9 @@ map z? <Plug>(incsearch-fuzzy-?)
 " line like `!logs` or whatever the name of the file you want to include in
 " searches
 command! -bang -nargs=* FilesAll call fzf#vim#grep("rg --files --no-ignore ".<q-args>, 1, <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {'options': ['--info=inline', '--keep-right', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
 
 " Search through all file names in this current folder and below and open it with fzf
 " Using the same key as for ctrl-P plugin since I'm used to that
@@ -1017,7 +1040,6 @@ let g:coc_global_extensions = [
 " nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " ----------------- PLUGIN SETTINGS END HERE -----------------
-
 
 """ Cursor settings
 " (needed to put after plugins since something was interfering with the colors)
