@@ -199,26 +199,6 @@ bindkey '^[[[ctrl8' down-line-or-beginning-search
 # bindkey ';' history-beginning-search-backward
 
 ##########################
-# TODO: source bashrc file after moving bash specific things into a bash_profile or other bash file, and just keep bashrc for things that can be shared between zshrc and bashrc in cases where I don't have zsh installed yet like on a remote server, so whenever I add new bash/zsh aliases, I just always add them in the bashrc, so that I'll have access to both no matter if I'm using bash or zsh. Once that's done, remove the below since they're copied from my bashrc.
-
-alias "cdb"="cd ~-" # cd to previous directory
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias ..2="cd ../.."
-alias ..3="cd ../../.."
-alias ..4="cd ../../../.."
-alias ..5="cd ../../../../.."
-alias cd..="cd .."
-alias cd...="cd ../.."
-alias cd....="cd ../../.."
-alias cd.....="cd ../../../.."
-alias cd......="cd ../../../../.."
-
-alias g='git'
-alias gi='git'
-alias v='vim'
-
 
 #which aws_completer
 #export PATH="$(which aws_completer):${PATH}"

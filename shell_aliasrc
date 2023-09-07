@@ -438,7 +438,7 @@ function pbvipe() {
 }
 
 # ----- local configuration ----------------------------------------------------
-# Put settings that should be there for each local machine in ~/.bashrc.extra
+# Put settings that should be there for each local machine in ~/.shellrc.extra
     # so that local preferences aren't pushed to the git repo 
 if [[ -f ~/.shellrc.extra ]]; then
     source ~/.shellrc.extra
