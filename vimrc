@@ -88,6 +88,11 @@ au FileType python nnoremap <leader><S-i> oimport IPython; IPython.embed(); impo
 vnoremap p "_dp
 vnoremap P "_dP
 
+" Maps ctrl+w 0 to resizing the window height and width to baseline
+nnoremap <C-w>0 <C-w>_<C-w>|
+
+
+
 " Remaps the default :s in visual mode to auto map it so that only the text you have
 " already highlighted is used for the replace command that you'll type after
 " this usually
@@ -376,6 +381,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Language/framework tools
+" Plug 'vim-python/python-syntax' " Better Python syntax highlighting
 Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'pangloss/vim-javascript' " JS syntax highlighting and improved indentation
 Plug 'leafgarland/typescript-vim' " TS syntax highlighting
@@ -385,11 +391,36 @@ Plug 'posva/vim-vue' " Vue syntax highlighting
 Plug 'tpope/vim-fireplace' " Clojure interactive repl connection
 Plug 'evanleck/vim-svelte' " Svelte syntax highlighting
 
+
+" neovim only plugins
+if has('nvim')
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+endif
+
+
 call plug#end()
 
 " ----------------- PLUGIN SETTINGS START HERE -----------------
 
-" quick scope settings --------------------
+" lua require('config/treesitter')
+
+if has('nvim')
+lua << EOF
+    require("nvim-treesitter.configs").setup({
+        ensure_installed = { "javascript", "typescript", "lua", "vim", 
+                             "json", "html", "rust", "tsx", "python" 
+                           },
+            sync_install = false,
+            auto_install = true,
+            highlight = {
+                    enable = true,
+            },
+    })
+EOF
+endif
+
+"
+"" quick scope settings --------------------
 " Triggers highlights only when pressing these keys instead of all the time
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
