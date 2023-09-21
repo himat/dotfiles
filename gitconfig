@@ -26,7 +26,7 @@
 
     # Shows the diff from before the latest pull/commit/reflog change and now
     #   Can also do things like master@{10 minutes ago} and such
-    difflatestpull = diff master@{1} master
+    showdifflatestpull = diff master@{1} master
 
     show-names = show --name-status # Only show files changed in the latest commit instead of all the diffs too
 
