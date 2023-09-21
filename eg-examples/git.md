@@ -1,5 +1,10 @@
 # Very useful commands
 
+## Re-add updated staged files 
+e.g. if you added some files, then tried to commit, but then precommit updated the files, so now you need to re-add only the same ones and not all files that have diffs since there may be others
+
+    git update-index --again
+
 ## Avoid merge commits
 This rewinds your local commits, pulls the remote ones, and then replays your local commits on top of the remote ones. No merge conflicts! (unless there are actual differences at the same locations in both local and remote files)
     git pull --rebase

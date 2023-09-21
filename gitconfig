@@ -17,6 +17,7 @@
 
     a = add
     aa = add --all
+    au = update-index --again # re-add only updated files that are currently staged as well
 
     di = diff
     dis = diff --staged
