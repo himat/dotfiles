@@ -17,7 +17,9 @@
 
     a = add
     aa = add --all
-    au = update-index --again # re-add only updated files that are currently staged as well
+    au = update-index --again # re-add only updated files that are already staged
+    aui = au
+    readd = au
 
     di = diff
     dis = diff --staged
@@ -49,6 +51,8 @@
     br = branch
     ba = branch -av
     bra = branch -av
+
+    rs = restore --staged
 
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
     logdiffs = log -p
