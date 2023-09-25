@@ -445,6 +445,10 @@ function pbvipe() {
     pbpaste | vipe | pbcopy
 }
 
+function pb_python_dict_to_json() {
+     pbpaste | python -c "import json; import sys; import ast; string = sys.stdin.read(); d = ast.literal_eval(string); out = json.dumps(d); print(out)" | pbcopy
+}
+
 # ----- local configuration ----------------------------------------------------
 # Put settings that should be there for each local machine in ~/.shellrc.extra
     # so that local preferences aren't pushed to the git repo 
