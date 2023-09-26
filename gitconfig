@@ -52,7 +52,8 @@
     ba = branch -av
     bra = branch -av
 
-    rs = restore --staged
+    ress = restore --staged 
+    rs = ress
 
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
     logdiffs = log -p
