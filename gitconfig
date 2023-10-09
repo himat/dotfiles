@@ -40,6 +40,7 @@
 
     ci = commit
     cia = commit --amend
+    ciane = commit --amend --no-edit
     cim = commit -m
     co = checkout
     cob = checkout -b # Creates new local branch
