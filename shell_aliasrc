@@ -422,7 +422,7 @@ function find_all_hidden_swp_files() {
 function delete_all_hidden_swp_files() {
     files_to_delete=$(find_all_hidden_swp_files)
     echo "\nDeleting files\n"
-    rm -f $files_to_delete
+    rm -f ${files_to_delete}
 }
 
 # Enables having the `pbpaste | something | pbcopy` idiom as `pbfilter something`, which enables easy filtering/transformation of clipboard text through a shell command 
