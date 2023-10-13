@@ -416,14 +416,22 @@ function add_domain_to_blacklist() {
 }
 alias blacklist_domain='add_domain_to_blacklist'
 
-function find_all_hidden_swp_files() {
+function find-all-hidden-swp-files() {
     find . -type f -name ".*.swp"
 }
-function delete_all_hidden_swp_files() {
+function delete-all-hidden-swp-files() {
     files_to_delete=$(find_all_hidden_swp_files)
     echo "\nDeleting files\n"
     rm -f ${files_to_delete}
 }
+
+
+# Displays the content of all *untracked* files in the current git repo, from the current dir down
+# Can combine running this with `less` as `show-all-untracked-file-contents | less` to get in a paged format
+function show-all-untracked-file-contents() {
+    git ls-files --others --exclude-standard | while read file; do echo -e "\n\n\n\n\n\n=============\033[32m\n$file"; echo -e "\033[0m"; cat "$file"; done
+}
+alias cat-untracked-file-contents='show-all-untracked-file-contents'
 
 # Enables having the `pbpaste | something | pbcopy` idiom as `pbfilter something`, which enables easy filtering/transformation of clipboard text through a shell command 
 # Ex. 
