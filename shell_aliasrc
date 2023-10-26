@@ -420,9 +420,11 @@ function find-all-hidden-swp-files() {
     find . -type f -name ".*.swp"
 }
 function delete-all-hidden-swp-files() {
-    files_to_delete=$(find_all_hidden_swp_files)
     echo "\nDeleting files\n"
-    rm -f ${files_to_delete}
+
+    while IFS= read -r file_to_delete; do
+        rm -f "${file_to_delete}"
+    done < <(find-all-hidden-swp-files)
 }
 
 
