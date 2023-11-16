@@ -23,7 +23,7 @@
 
     di = diff
     dis = diff --staged
-    dimods = !git diff $(git diff --staged --name-only) # "git diff modified staged" to see the diffs of *only* worktree files that were also *already* staged. So that you can see just the files you staged previously that you then modified again.
+    dimods = !git diff $(git diff --staged --name-only) # "git diff modified staged" to see the diffs of *only* worktree files that were also *already* staged. So that you can see just the files you staged previously that you then modified again. This is perfect to combine with `readd`
     distat = diff --stat # --stat shows stats on lines changed per file in diff
     disstat = diff --staged --stat
 
