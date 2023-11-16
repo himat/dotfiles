@@ -426,6 +426,8 @@ function delete-all-hidden-swp-files() {
         rm -f "${file_to_delete}"
     done < <(find-all-hidden-swp-files)
 }
+alias rm-all-hidden-swp-files='delete-all-hidden-swp-files'
+
 
 
 # Displays the content of all *untracked* files in the current git repo, from the current dir down
