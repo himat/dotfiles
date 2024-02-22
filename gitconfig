@@ -36,6 +36,7 @@
     show-names = show --name-status # Only show files changed in the latest commit instead of all the diffs too
 
     pl = pull
+    pll = pull
     ps = push
     psh = push
     shinratensei = push # The almighty
@@ -102,3 +103,8 @@
 	rebase = true
 [init]
 	defaultBranch = master
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
