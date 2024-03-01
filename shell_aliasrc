@@ -111,6 +111,7 @@ alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 alias g='git'
 alias gi='git'
 alias v='vim'
+alias nv='nvim'
 alias s='source'
 
 alias pdb='python -m pdb'
