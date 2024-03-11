@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # Call the script either by piping in text or by passing in a filename
-# - echo "some text" | getTokenCount
-# - getTokenCount <<< "some text"
-# - getTokenCount /dir/dir/pathToFile.thing
+# - echo "some text" | get_token_count
+# - get_token_count <<< "some text"
+# - get_token_count /dir/dir/pathToFile.thing
 
 import tiktoken
 import sys
