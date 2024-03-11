@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+# Call the script either by piping in text or by passing in a filename
+# - echo "some text" | getTokenCount
+# - getTokenCount <<< "some text"
+# - getTokenCount /dir/dir/pathToFile.thing
+
+import tiktoken
+import sys
+
+def num_tokens_from_string(string: str, encoding_name: str) -> int:
+    encoding = tiktoken.encoding_for_model(encoding_name)
+    num_tokens = len(encoding.encode(string))
+    return num_tokens
+
+
+if not sys.stdin.isatty():
+    file_data = sys.stdin.read()
+else:
+    file_path = sys.argv[1]
+    with open(file_path, 'r', encoding='utf-8') as file:
+        file_data = file.read()
+
+print("Num tokens: ", num_tokens_from_string(file_data, "gpt-4-turbo"))

@@ -13,7 +13,7 @@ RED="\033[0;31m"
 
 all_files=($(ls))
 exclude_files=("README.md" "setup.sh" "eg-examples" "vim" "macos_shortcuts_setup.md" "iterm_my_light_theme.json" "setup_linux.sh" "setup_zsh.sh" "Brewfile" "Brewfile.lock.json" "setup_tmux.sh")
-additional_symlink_dirs_to_include=("vim")
+additional_symlink_dirs_to_include=("vim", "scripts_global")
 
 # Get list of all dotfiles without the excluded files
 for f_ind in "${!all_files[@]}"; do
@@ -27,21 +27,28 @@ done
 dotfiles=("${all_files[@]}")
 
 files_to_link=("$@")
+dirs_to_link=("${additional_symlink_dirs_to_include[@]}")
 
 # Determine which files are not linked yet 
 # Specifically checks if they aren't linked to the dotfiles in this dir since
 #   they could be linked to some other files elsewhere
 function get_unlinked_files {
     unlinked_files=()
+    unlinked_dirs=()
     
     for file in "${dotfiles[@]}"; do
-        # File doesn't exist at all
-        if [ ! -f ~/".${file}" ]; then 
+
+        # If the dotfile is a dir and it's not already created
+        if [ -d "$dir/$file" ] && [ ! -d ~/"$dir" ]; then 
+            unlinked_dirs+=("${file}")
+        # It's a file and the file doesn't exist at all
+        elif [ ! -f ~/".${file}" ]; then 
             unlinked_files+=("${file}")    
         # Check if existing file is not symlinked to the dotfile in this dir
         elif [ ! ~/".${file}" -ef "${file}" ]; then
             unlinked_files+=("${file}")
         fi
+
     done
 }
 
@@ -50,13 +57,16 @@ function ask_for_files {
 
     echo -e "\n"
     echo "Write a space separated list of all dotfiles you want linked (press Enter without typing anything for all files to be used)"
+    echo "OR exit and re-run this script with the 'unlinked_only' or 'all' params to choose automatically"
     echo "Found these possible dotfiles: ${dotfiles[@]}"
     echo "Found these dotfiles that are not linked yet: ${unlinked_files[@]}"
+    echo "Found these dotfile dirs that are not linked yet (these will be linked automatically in addition to whichever files you choose): ${unlinked_dirs[@]}" # later can make this not auto link dirs without explicit choice if we want
 
     read -p "> " -a files_to_link
 
     if [ "${files_to_link}" == "" ]; then
         files_to_link=("${dotfiles[@]}")
+        dirs_to_link=("${unlinked_dirs[@]}")
     fi
 }
 
@@ -79,6 +89,15 @@ function print_gitconfig_info {
 # If no args given, then ask user what files they want to sync
 if [ "$#" -eq 0 ]; then 
     ask_for_files
+# If "unlinked_only" is given, then link only the unlinked ones
+elif [[ "$#" == 1 && "$1" == "unlinked_only" ]]; then 
+    if [[ -f "./unlinked_only" ]]; then
+        echo -e "${RED}Can't use the _unlinked_only_ argument and have a dotfile named _unlinked_only_"
+        exit
+    fi
+    get_unlinked_files
+    files_to_link=("${unlinked_files[@]}")
+    dirs_to_link=("${unlinked_dirs[@]}")
 # If "all" is given, then use all files
 elif [[ "$#" == 1 && "$1" == "all" ]]; then 
     if [[ -f "./all" ]]; then
@@ -90,6 +109,7 @@ fi
 
 # Confirm these files
 echo "These dotfiles will be linked: ${files_to_link[@]}"
+echo "These dotfile dirs will be linked: ${dirs_to_link[@]}"
 read -p "Confirm (enter y): " choice 
 if [ "${choice}" != "y" ]; then
     echo -e "\n${RED}CANCELLING\n"
@@ -123,6 +143,11 @@ mkdir "$backupdir"
 echo ""
 # Performing the copying and symlinking
 for file in "${files_to_link[@]}"; do
+    # Skip any dirs
+    if [[ ! -d "./${file}" ]]; then
+        continue
+    fi
+
     if [[ -f ~/.$file ]]; then
         echo "!Moving existing dotfile to backup dir: ~/.$file"
         mv ~/.$file $backupdir/$file
@@ -134,7 +159,14 @@ done
 
 # Also auto links all the files in the additional_symlink_dirs_to_include
 # NOTE: we assume that the dir itself is a hidden .dir but the files inside are not hidden (don't have a dot prefix)
-for add_dir in "${additional_symlink_dirs_to_include[@]}"; do
+for add_dir in "${dirs_to_link[@]}"; do
+
+    # create if not exists
+    if [ ! -d ".$add_dir" ]; then
+        echo "Creating dir ~/.$add_dir"
+        mkdir ~/".$add_dir"
+    fi
+
     for file_with_dir in "${add_dir}/"*; do
         if [[ -f ~/.$file_with_dir ]]; then
             echo "!Moving existing dotfile to backup dir: ~/.$file_with_dir"

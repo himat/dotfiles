@@ -20,6 +20,7 @@ brew "ncdu" # better disk used util that's actually interactive so reduces time 
 brew "diff-so-fancy" # better diff UI
 brew "jq"
 brew "moreutils" # only for the 'vipe' utility for editing text in the middle of a pipe sequence
+brew "aichat" # LLM QA
 
 # GNU utils
 brew "coreutils"
@@ -31,3 +32,4 @@ brew "gawk"
 # Note, gnu coreutils commands are all prefixed with a 'g' like 'gls' for the GNU ls command. If you want to use the commands with the normal names and overwrite the mac ones, then add gnubin to your PATH. Run `brew info coreutils` for the path. They should all be in the form: export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
 # Same thing for the other GNU ones: coreutils, findutils, gnu-tar, gnu-sed, grep
 # Add a line for each one to your ~/.shellrc.extra
+
