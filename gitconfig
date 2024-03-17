@@ -58,6 +58,7 @@
     bra = branch -av
 
     ress = restore --staged 
+    rests = restore --staged 
     rs = ress
 
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
