@@ -1,4 +1,5 @@
 # Install ohmyzsh
+# For some reason, this official install script command puts you into the ohmyzsh subshell. Press ctrl-D to escape out of it to continue installing.
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install ohmyzsh plugins
