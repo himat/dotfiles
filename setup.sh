@@ -141,10 +141,11 @@ echo "Creating backup directory $backupdir to store any already existing dotfile
 mkdir "$backupdir"
 
 echo ""
+echo "Processing files_to_link"
 # Performing the copying and symlinking
 for file in "${files_to_link[@]}"; do
     # Skip any dirs
-    if [[ ! -d "./${file}" ]]; then
+    if [[ -d "./${file}" ]]; then
         continue
     fi
 
@@ -156,6 +157,10 @@ for file in "${files_to_link[@]}"; do
     echo "-Symlinking $file"
     ln -s $dir/$file ~/.$file
 done
+
+
+echo ""
+echo "Processing dirs_to_link"
 
 # Also auto links all the files in the additional_symlink_dirs_to_include
 # NOTE: we assume that the dir itself is a hidden .dir but the files inside are not hidden (don't have a dot prefix)
