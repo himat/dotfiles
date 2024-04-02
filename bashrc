@@ -45,7 +45,7 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # Type a directory name by itself to auto cd into it 
-shopt -s autocd
+# shopt -s autocd
 
 # Enable recursive file/directory expansion
 shopt -s globstar
