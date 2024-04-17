@@ -33,3 +33,5 @@ brew "gawk"
 # Same thing for the other GNU ones: coreutils, findutils, gnu-tar, gnu-sed, grep
 # Add a line for each one to your ~/.shellrc.extra
 
+# Other linux utils 
+brew "telnet"
