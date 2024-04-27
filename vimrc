@@ -329,6 +329,7 @@ Plug 'tomtom/tcomment_vim' " For code commenting
 Plug 'haya14busa/incsearch.vim' " Better jump to search as you type
 Plug 'haya14busa/incsearch-fuzzy.vim' " Fuzzy search as you type
 Plug 'unblevable/quick-scope' " Highlights characters on current line when using seek motions
+Plug 'mg979/vim-visual-multi', {'branch': 'master'} " For multiple cursor support
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -418,6 +419,27 @@ lua << EOF
     })
 EOF
 endif
+
+" vim-visual-multi cursors settings ----------------
+" cheatsheet
+" Start matching on word under cursor - <alt+ctrl+d>
+"   Then hit 'n' to select the current one and go to next  ('N' to go back)
+"   And hit 'q' to skip the current one and go to next 
+"   Then enter insert mode and make your edits that you want on all the
+"     cursors
+" Visual mode, select some text/lines
+"   Hit <leader-m>+/ and then search for the text you want to match on, and
+"   the enter insert mode again to make your edits
+" Use <C-leftMouseClick> to select multiple disparate locations to edit
+
+let g:VM_leader = " m"
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<M-C-d>'           " 
+" Enable mouse mappings 
+nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor) " Create a cursor at the left clicked position
+nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word) " Select the entire clicked word 
+nmap   <M-C-RightMouse>      <Plug>(VM-Mouse-Column) " Create a column of cursors from where the cursor is now to the line where you click
+
 
 "
 "" quick scope settings --------------------
@@ -715,7 +737,7 @@ nnoremap <leader>H :History:<CR>
 " Search through all vim commands with fzf
 nnoremap <leader>: :Commands<CR>
 " Search through marks pane with fzf
-nnoremap <leader>m :Marks<CR>
+" nnoremap <leader>m :Marks<CR>
 " Search for tags (in current buffer) with fzf
 nnoremap <leader>> :BTags<cr>
 " Search for tags (globally) with fzf
