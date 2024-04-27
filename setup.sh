@@ -21,6 +21,11 @@ for f_ind in "${!all_files[@]}"; do
         if [[ "${all_files[f_ind]}" == "$ex_file" ]]; then
             unset 'all_files[f_ind]'
         fi
+
+        # Remove dirs from the files list
+        if [[ -d "${all_files[f_ind]}" ]]; then
+            unset 'all_files[f_ind]'
+        fi
     done
 done
 
