@@ -232,3 +232,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # [mine] Load aliases and such
 [ -f ~/.shell_aliasrc ] && source ~/.shell_aliasrc
 
+# Load wezterm shell integration to enable things like awareness of shell command blocks to make the terminal smarter
+[ -f ~/.wezterm_shell_integration.sh ] && . ~/.wezterm_shell_integration.sh
+
