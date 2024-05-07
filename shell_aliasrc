@@ -172,6 +172,9 @@ j() {
     cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' |  fzf --height 40% --reverse --inline-info)" 
 }
 
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
+
 # fzf + $PATH
 # Search for things in your $PATH
 # list directories in $PATH, press [enter] on an entry to list the executables inside.
@@ -206,12 +209,20 @@ if type rg &> /dev/null; then
 fi
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# Make default up arrow key in terminal auto-open fzf history window
+# Make ctrl-k in terminal auto-open fzf history window
 #   This is really good since you might know that the cmd you want is 2 up 
 #   arrows away normally, but this lets you *visually* see that which is 
 #   just very nice
-# Doesn't work for some reason, the up key doesn't do anything besides the normal history up
-#bindkey '^[[A' fzf-history-widget
+# bindkey "$terminfo[kcuu1]" fzf-history-widget
+bindkey "^k" fzf-history-widget
+
+
+# Default ctrl-L just scrolls down instead of actually clearing the past terminal lines
+# This makes it clear everything
+clear-terminal() { tput reset; zle redisplay; }
+zle -N clear-terminal
+bindkey '^L' clear-terminal
+
 
 # This function does an adb logcat and only shows you the logs printed from your specific app's PID
 # Call this function with the package name of your app: e.g. com.converge.com
