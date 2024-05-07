@@ -26,6 +26,15 @@ config.keys = {
     { key = 'DownArrow', mods = 'SHIFT', action = wezterm.action.ScrollToPrompt(1) },
 }
 
+config.mouse_bindings = {
+  -- Quadruple click to select the entire command output (semantic zone) at once
+  {
+    event = { Down = { streak = 4, button = 'Left' } },
+    action = wezterm.action.SelectTextAtMouseCursor 'SemanticZone',
+    mods = 'NONE',
+  },
+}
+
 
 -- and finally, return the configuration to wezterm
 return config
