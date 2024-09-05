@@ -7,20 +7,26 @@ brew "fzf"
 brew "ripgrep"
 brew "autojump"
 
-brew "thefuck"
-brew "htop"
+# terminal general utils 
 brew "wget"
-brew "bat"
 brew "tree"
-brew "watch"
-brew "md5sha1sum"
+brew "htop"
+brew "bat" # better cat
+brew "eza" # better ls
 brew "duf" # better disk free util
 brew "dust" # better disk used util
 brew "ncdu" # better disk used util that's actually interactive so reduces time spent looking at various folders to see what's taking up space
-brew "diff-so-fancy" # better diff UI
-brew "jq"
+
+# other
+brew "thefuck"
+brew "watch"
 brew "moreutils" # only for the 'vipe' utility for editing text in the middle of a pipe sequence
 brew "aichat" # LLM QA
+
+# data processing 
+brew "diff-so-fancy" # better diff UI
+brew "jq"
+brew "md5sha1sum"
 
 # GNU utils
 brew "coreutils"
