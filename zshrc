@@ -100,8 +100,23 @@ alias "cd"="logged_cd" # keep track of most recent directory
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # NOTE: zsh-syntax-highlighting needs to be the last plugin apparently (https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#with-a-plugin-manager)
-# And fzf-tab should also be the last plugin almost but before zsh-autosuggestions (https://github.com/Aloxaf/fzf-tab#compatibility-with-other-plugins)
-plugins=(git colorize autojump aws nvm poetry fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
+# And fzf-tab should also be the last plugin that binds tab ("^I") (https://github.com/Aloxaf/fzf-tab#compatibility-with-other-plugins)
+plugins=(git colorize autojump aws nvm poetry zsh-autosuggestions fzf-tab zsh-syntax-highlighting)
+
+### fzf-tab settings
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix -- not sure what this actually does, just recced config
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
+# use tmux popup feature to show fzf-tab window
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+### /end fzf-tab settings
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
