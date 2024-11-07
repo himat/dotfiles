@@ -10,7 +10,7 @@ brew "autojump"
 # terminal general utils 
 brew "wget"
 brew "tree"
-brew "htop"
+brew "btop"
 brew "bat" # better cat
 brew "eza" # better ls
 brew "duf" # better disk free util
