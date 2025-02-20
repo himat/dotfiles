@@ -16,6 +16,7 @@ brew "eza" # better ls
 brew "duf" # better disk free util
 brew "dust" # better disk used util
 brew "ncdu" # better disk used util that's actually interactive so reduces time spent looking at various folders to see what's taking up space
+brew "delta" # git diff UI
 
 # other
 brew "thefuck"

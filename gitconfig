@@ -6,6 +6,12 @@
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
+    pager = delta --navigate-regex '^(commit|added:|removed:|renamed:|Δ)'
+
+[interactive]
+    diffFilter = delta --color-only --navigate-regex '^(commit|added:|removed:|renamed:|Δ)'
+
+
 
 [alias]
     main-branch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4 # auto determines master vs main based on the current repo
@@ -87,6 +93,8 @@
     # Ignores diffing the outputs of cells since it makes doing a 'git diff' 
     #   very long (multiple minutes) if there are a lot of outputs
 	command = git-nbdiffdriver diff --ignore-outputs
+[merge]
+	conflictstyle = zdiff3
 [merge "jupyternotebook"]
 	driver = git-nbmergedriver merge %O %A %B %L %P
 	name = jupyter notebook merge driver
@@ -109,3 +117,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    light = true      # or light = true, or omit for auto-detection
