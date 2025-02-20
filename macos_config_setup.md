@@ -15,3 +15,7 @@ If using logitech mouse or a mouse without a compatible software on your mac, th
 ## Misc
 
 Show full path bar in Finder. Open a Finder window. Choose View > Show Path Bar.
+
+## Control 
+
+Install MonitorControl to be able to adjust the brightness of a connected external monitor via the brightness keyboard keys https://github.com/MonitorControl/MonitorControl
