@@ -45,3 +45,4 @@ brew "telnet"
 
 # GUI apps (casks)
 cask "sloth" # better GUI version of lsof to see all your open files and sockets in use by which processes
+cask "betterdisplay" # Control external monitor brightness and such
