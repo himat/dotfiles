@@ -28,6 +28,7 @@ brew "aichat" # LLM QA
 brew "diff-so-fancy" # better diff UI
 brew "jq"
 brew "md5sha1sum"
+brew "jless" # interactive json explorer viewer in terminal
 
 # GNU utils
 brew "coreutils"
