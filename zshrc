@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-unsetopt autocd
-unsetopt AUTO_CD
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
@@ -103,21 +100,6 @@ alias "cd"="logged_cd" # keep track of most recent directory
 # And fzf-tab should also be the last plugin that binds tab ("^I") (https://github.com/Aloxaf/fzf-tab#compatibility-with-other-plugins)
 plugins=(git colorize autojump aws nvm poetry zsh-autosuggestions fzf-tab zsh-syntax-highlighting)
 
-### fzf-tab settings
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix -- not sure what this actually does, just recced config
-zstyle ':completion:*' menu no
-# preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-
-# use tmux popup feature to show fzf-tab window
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-
-### /end fzf-tab settings
-
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
 
@@ -175,6 +157,21 @@ prompt_context(){} # For agnoster zsh theme, don't show hostname when you're on 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ##
+
+### fzf-tab settings
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix -- not sure what this actually does, just recced config
+# zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
+# use tmux popup feature to show fzf-tab window
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+### /end fzf-tab settings
 
 
 # Binds Ctrl-Enter to use and execute the shown zsh autosuggestion
@@ -242,6 +239,10 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Disable auto-cd feature of zsh which automatically cds into a directory if you just type its name
+unsetopt autocd
+unsetopt AUTO_CD
 
 
 # [mine] Load aliases and such
