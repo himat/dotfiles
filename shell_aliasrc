@@ -162,6 +162,9 @@ alias tb='tensorboard --logdir'
 alias ai="aichat"
 alias aic="aichat -c" # ai code
 alias aiq="aichat" # ai question
+alias llm="aichat"
+alias llmc="aichat -c"
+alias llmq="aichat"
 
 # fzf + autojump 
 # Like normal autojump when used with arguments, but displays an fzf prompt when used without
