@@ -182,18 +182,20 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Binds Ctrl-Enter to use and execute the shown zsh autosuggestion
 # Note that for this to work you first need to send the escape sequence 
-#   [[CE when Ctrl-Enter is pressed in yur iterm settings
+#   [[CE when Ctrl-Enter is pressed in your iterm settings
 bindkey '^[[[CE' autosuggest-execute
 
 # Use tab for autosuggest history completion, and shift+tab for regular completion
 # Note: I was using these segment of commands before I added fzf-tab below
 # (make sure to disable auto-completion import in ~/.fzf.zsh so that we can bind the tab-key here)
 # bindkey '^I'      autosuggest-accept # C-I === tab key
+# bindkey '^I'      end-of-line # C-I === tab key
+bindkey '^E'      autosuggest-accept # C-I === tab key
 # bindkey '^E'     forward-word
 # bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
 
 # For use with fzf-tab
-bindkey "^I" autosuggest-accept # Tab
+# bindkey "^I" autosuggest-accept # Tab
 bindkey "^[[Z" fzf-tab-complete # Shift-tab activates the fzf-tab window to search
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty bracketed-paste accept-line push-line-or-edit)
@@ -257,3 +259,5 @@ unsetopt AUTO_CD
 # Load wezterm shell integration to enable things like awareness of shell command blocks to make the terminal smarter
 [ -f ~/.wezterm_shell_integration.sh ] && . ~/.wezterm_shell_integration.sh
 
+# Homebrew will auto-update all other packages when you do a 'brew install x' otherwise...
+export HOMEBREW_NO_AUTO_UPDATE=1
