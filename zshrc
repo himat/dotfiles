@@ -95,11 +95,16 @@ alias "cd"="logged_cd" # keep track of most recent directory
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# nvm plugin makes shell startup insanely slow, so lazy load it only
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:aws' lazy yes
+zstyle ':omz:plugins:poetry' lazy yes
+
 # NOTE: zsh-syntax-highlighting needs to be the last plugin apparently (https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#with-a-plugin-manager)
 # And fzf-tab should also be the last plugin that binds tab ("^I") (https://github.com/Aloxaf/fzf-tab#compatibility-with-other-plugins)
-# Removed 'aws' and 'poetry' plugins - they're rarely needed and slow down startup
-plugins=(git colorize nvm autojump zsh-autosuggestions fzf-tab zsh-syntax-highlighting)
+# Removed aws, and poetry plugins - they're rarely needed and slow down startup
+plugins=(git colorize nvm aws poetry autojump zsh-autosuggestions fzf-tab zsh-syntax-highlighting)
+
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
