@@ -118,6 +118,8 @@ alias pdb='python -m pdb'
 alias jup='jupyter'
 alias jupnb='jupyter notebook'
 
+alias tree='tre'
+
 # Open github url for current repo's remote
 alias gh_open="git remote -v | awk '/fetch/{print \$2}' | sed -Ee 's#(git@|git://)#https://#' -e 's@com:@com/@' | head -n1 | xargs open"
 
@@ -478,6 +480,18 @@ function pbvipe() {
 function pb_python_dict_to_json() {
      pbpaste | python -c "import json; import sys; import ast; string = sys.stdin.read(); d = ast.literal_eval(string); out = json.dumps(d); print(out)" | pbcopy
 }
+
+# yazi config so it can CD to the directory you navved to upon exit
+# Q to exit without CDing still. q to exit as normal and CD.
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}
+alias yazi="y"
+
 
 # ----- local configuration ----------------------------------------------------
 # Put settings that should be there for each local machine in ~/.shellrc.extra

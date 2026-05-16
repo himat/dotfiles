@@ -1,4 +1,4 @@
-# Run 'brew bundle' in this dir to install all the packages in this file
+# Run 'brew bundle install --no-upgrade' in this dir to install all the packages in this file (and not upgrade existing ones)
 
 brew "tmux"
 brew "vim"
@@ -17,6 +17,8 @@ brew "duf" # better disk free util
 brew "dust" # better disk used util
 brew "ncdu" # better disk used util that's actually interactive so reduces time spent looking at various folders to see what's taking up space
 brew "delta" # git diff UI
+brew "tre-command" # better tree command - ignores gitignored files
+brew "yazi" # terminal file manager
 
 # other
 brew "thefuck"
@@ -44,6 +46,9 @@ brew "gawk"
 # Other linux utils 
 brew "telnet"
 
+
+# Mac tools
 # GUI apps (casks)
 cask "sloth" # better GUI version of lsof to see all your open files and sockets in use by which processes
 cask "betterdisplay" # Control external monitor brightness and such
+cask "thaw" # better oss bartender app for hiding menubar items

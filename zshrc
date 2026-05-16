@@ -98,7 +98,8 @@ alias "cd"="logged_cd" # keep track of most recent directory
 # Add wisely, as too many plugins slow down shell startup.
 # NOTE: zsh-syntax-highlighting needs to be the last plugin apparently (https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#with-a-plugin-manager)
 # And fzf-tab should also be the last plugin that binds tab ("^I") (https://github.com/Aloxaf/fzf-tab#compatibility-with-other-plugins)
-plugins=(git colorize autojump aws nvm poetry zsh-autosuggestions fzf-tab zsh-syntax-highlighting)
+# Removed 'aws' and 'poetry' plugins - they're rarely needed and slow down startup
+plugins=(git colorize nvm autojump zsh-autosuggestions fzf-tab zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.bash_profile
