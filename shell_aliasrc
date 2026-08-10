@@ -35,9 +35,6 @@ alias rgf="rg --files | rg" # For searching through only filenames in current di
 alias df="duf" # A better df alternative
 alias du="dust -d 1" # A better du alternative - shows the sizes of all subdirs in this current dir
 
-alias gpsh="git push"
-alias gpl="git pull"
-
 # Make a dir and immediately cd into it
 function mkdircd(){
     mkdir "$1" && cd "$1"
@@ -113,6 +110,12 @@ alias gi='git'
 alias v='vim'
 alias nv='nvim'
 alias s='source'
+
+alias lg='lazygit'
+
+alias gpsh="git push"
+alias gpl="git pull"
+
 
 alias pdb='python -m pdb'
 alias jup='jupyter'
