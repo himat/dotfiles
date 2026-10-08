@@ -1,20 +1,25 @@
 
 # ----- Start in the last directory you were in ------------------------------
 
-# Move to the last saved working directory if one exists
-if [ -e ~/.last_cd ]
-then
-    cd "$(cat ~/.last_cd)"
-fi
+# Only in terminals I use by hand, so IDE/agent shells (Orca etc.) keep their own cwd
+case "$TERM_PROGRAM" in
+ghostty|Apple_Terminal|WarpTerminal|WezTerm)
+    # Move to the last saved working directory if one exists
+    if [ -e ~/.last_cd ]
+    then
+        cd "$(cat ~/.last_cd)"
+    fi
 
-# Saves current directory between sessions
-unalias cd 2>/dev/null # Prevent infinite loops if sourcing this file again in the same session
-logged_cd() {
-    cd "$@"
-    pwd > ~/.last_cd
-}
+    # Saves current directory between sessions
+    unalias cd 2>/dev/null # Prevent infinite loops if sourcing this file again in the same session
+    logged_cd() {
+        builtin cd "$@"
+        pwd > ~/.last_cd
+    }
 
-alias "cd"="logged_cd" # keep track of most recent directory 
+    alias "cd"="logged_cd" # keep track of most recent directory
+    ;;
+esac
 alias "cdb"="cd ~-" # cd to previous directory
 alias ..="cd .."
 alias ...="cd ../.."

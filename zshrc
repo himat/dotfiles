@@ -83,13 +83,18 @@ DISABLE_AUTO_UPDATE="true"
 #   sourcing oh-my-zsh.sh alter overwrites some of the aliases like 'l'
 #   So I just had to duplicate this single one here
 # Saves current directory between sessions
-unalias cd 2>/dev/null # Prevent infinite loops if sourcing this file again in the same session
-logged_cd() {
-    # return 1
-    cd "$@" && pwd > ~/.last_cd || return 1
-}
+# Only in terminals I use by hand; keep this list in sync with ~/.shell_aliasrc
+case "$TERM_PROGRAM" in
+ghostty|Apple_Terminal|WarpTerminal|WezTerm)
+    unalias cd 2>/dev/null # Prevent infinite loops if sourcing this file again in the same session
+    logged_cd() {
+        # return 1
+        builtin cd "$@" && pwd > ~/.last_cd || return 1
+    }
 
-alias "cd"="logged_cd" # keep track of most recent directory 
+    alias "cd"="logged_cd" # keep track of most recent directory
+    ;;
+esac
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
@@ -261,3 +266,4 @@ unsetopt AUTO_CD
 
 # Homebrew will auto-update all other packages when you do a 'brew install x' otherwise...
 export HOMEBREW_NO_AUTO_UPDATE=1
+eval "$(mise activate zsh)"
